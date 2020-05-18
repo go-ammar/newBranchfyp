@@ -1,8 +1,10 @@
-package com.electrosoft.Electrosoftnew;
+package com.electrosoft.Electrosoftnew.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.electrosoft.Electrosoftnew.R;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashScreen"
-        android:name="com.electrosoft.Electrosoftnew.ui.SplashScreen"
+        android:name="com.electrosoft.Electrosoftnew.ui.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
@@ -22,5 +22,14 @@
         android:id="@+id/loginFragment"
         android:name="com.electrosoft.Electrosoftnew.ui.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_forgotpass"
+            app:destination="@id/forgotpass" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotpass"
+        android:name="com.electrosoft.Electrosoftnew.ui.ForgotPassFragment"
+        android:label="fragment_forgotpass"
+        tools:layout="@layout/fragment_forgotpass" />
 </navigation>

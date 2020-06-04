@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.electrosoft.Electrosoftnew.R;
 
-public class SplashScreen extends Fragment {
+public class SplashScreenFragment extends Fragment {
 
 
     NavController navController;

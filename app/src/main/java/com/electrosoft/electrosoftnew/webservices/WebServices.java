@@ -1,4 +1,4 @@
-package com.electrosoft.Electrosoftnew.webservices;
+package com.electrosoft.electrosoftnew.webservices;
 
 public class WebServices {
 

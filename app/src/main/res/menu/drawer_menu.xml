@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+
+        <item
+            android:id="@+id/nav_dashboard"
+            android:title="@string/text_dashboard" />
+
+        <item
+            android:id="@+id/nav_get_rooms"
+            android:title="@string/text_get_rooms" />
+<!--        <item-->
+<!--            android:iconTint="@color/black"-->
+<!--            android:id="@+id/nav_intake"-->
+<!--            android:icon="@drawable/ic_store_mall_directory_black_24dp"-->
+<!--            android:title="@string/intake" />-->
+<!--        <item-->
+<!--            android:id="@+id/nav_fulfilment"-->
+<!--            android:icon="@drawable/ic_local_florist_black_24dp"-->
+<!--            android:title="@string/fulfilment" />-->
+
+
+    </group>
+
+
+</menu>

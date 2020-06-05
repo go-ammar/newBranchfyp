@@ -1,4 +1,4 @@
-package com.electrosoft.Electrosoftnew;
+package com.electrosoft.electrosoftnew;
 
 import android.content.Context;
 

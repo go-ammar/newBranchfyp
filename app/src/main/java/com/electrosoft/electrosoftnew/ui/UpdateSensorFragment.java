@@ -1,4 +1,4 @@
-package com.electrosoft.Electrosoftnew.ui;
+package com.electrosoft.electrosoftnew.ui;
 
 
 import android.os.Bundle;
@@ -9,15 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.electrosoft.Electrosoftnew.R;
+import com.electrosoft.electrosoftnew.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UpdateRoomFragment extends Fragment {
+public class UpdateSensorFragment extends Fragment {
 
 
-    public UpdateRoomFragment() {
+    public UpdateSensorFragment() {
         // Required empty public constructor
     }
 
@@ -26,7 +26,7 @@ public class UpdateRoomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate( R.layout.fragment_update_room, container, false );
+        return inflater.inflate( R.layout.fragment_update_sensor, container, false );
     }
 
 }

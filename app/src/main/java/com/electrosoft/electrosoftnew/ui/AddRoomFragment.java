@@ -1,4 +1,4 @@
-package com.electrosoft.Electrosoftnew.ui;
+package com.electrosoft.electrosoftnew.ui;
 
 
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.electrosoft.Electrosoftnew.R;
+import com.electrosoft.electrosoftnew.R;
 
 /**
  * A simple {@link Fragment} subclass.

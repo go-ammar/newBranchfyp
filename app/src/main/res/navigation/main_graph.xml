@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashScreen"
-        android:name="com.electrosoft.Electrosoftnew.ui.SplashScreenFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
@@ -20,16 +20,31 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.electrosoft.Electrosoftnew.ui.LoginFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_forgotpass"
             app:destination="@id/forgotpass" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeLandingActivity"
+            app:destination="@id/homeLandingActivity" />
     </fragment>
     <fragment
         android:id="@+id/forgotpass"
-        android:name="com.electrosoft.Electrosoftnew.ui.ForgotPassFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.ForgotPassFragment"
         android:label="fragment_forgotpass"
         tools:layout="@layout/fragment_forgotpass" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <activity
+        android:id="@+id/homeLandingActivity"
+        android:name="com.electrosoft.electrosoftnew.ui.HomeLandingActivity"
+        android:label="HomeLandingActivity" />
 </navigation>

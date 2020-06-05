@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_graph"
+    android:label="nav_dashboard"
+    app:startDestination="@id/dashBoardFragment">
+    <fragment
+        android:id="@+id/dashBoardFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.DashBoardFragment"
+        android:label="fragment_dash_board"
+        tools:layout="@layout/fragment_dash_board" />
+    <fragment
+        android:id="@+id/getRoomsFragment2"
+        android:name="com.electrosoft.electrosoftnew.ui.GetRoomsFragment"
+        android:label="nav_get_rooms"
+        tools:layout="@layout/fragment_get_rooms" />
+</navigation>

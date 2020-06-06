@@ -5,21 +5,23 @@
 
 
         <item
+            android:icon="@drawable/ic_baseline_home_24"
             android:id="@+id/nav_dashboard"
             android:title="@string/text_dashboard" />
 
         <item
-            android:id="@+id/nav_get_rooms"
-            android:title="@string/text_get_rooms" />
-<!--        <item-->
-<!--            android:iconTint="@color/black"-->
-<!--            android:id="@+id/nav_intake"-->
-<!--            android:icon="@drawable/ic_store_mall_directory_black_24dp"-->
-<!--            android:title="@string/intake" />-->
-<!--        <item-->
-<!--            android:id="@+id/nav_fulfilment"-->
-<!--            android:icon="@drawable/ic_local_florist_black_24dp"-->
-<!--            android:title="@string/fulfilment" />-->
+            android:icon="@drawable/ic_baseline_notifications_24"
+            android:id="@+id/nav_notifications"
+            android:title="@string/notifications" />
+
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_baseline_contacts_24"
+            android:title="@string/contact" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_baseline_info_24"
+            android:title="@string/about" />
 
 
     </group>

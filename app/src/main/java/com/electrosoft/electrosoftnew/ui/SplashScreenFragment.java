@@ -42,13 +42,7 @@ public class SplashScreenFragment extends Fragment {
     void actionViews(){
 
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                navController.navigate(R.id.action_splashScreen_to_loginFragment);
-            }
-        },1000);
+        handler.postDelayed(() -> navController.navigate(R.id.action_splashScreen_to_loginFragment),1000);
     }
 
 }

@@ -26,5 +26,8 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_landing">LandingActivity</string>
+    <string name="notifications">Notifications</string>
+    <string name="contact">Contact</string>
+    <string name="about">About</string>
 
 </resources>

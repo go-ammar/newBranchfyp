@@ -57,6 +57,12 @@ public class LoginFragment extends Fragment {
             navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
 
         });
+        binding.forgotPassTv.setOnClickListener( v -> {
+
+            navController.navigate(R.id.action_loginFragment_to_forgotpass);
+        });
+
+        
 
     }
 

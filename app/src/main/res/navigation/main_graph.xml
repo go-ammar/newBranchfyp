@@ -37,14 +37,53 @@
         android:id="@+id/forgotpass"
         android:name="com.electrosoft.electrosoftnew.ui.ForgotPassFragment"
         android:label="fragment_forgotpass"
-        tools:layout="@layout/fragment_forgotpass" />
+        tools:layout="@layout/fragment_forgotpass" >
+        <action
+            android:id="@+id/action_forgotpass_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.electrosoft.electrosoftnew.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addRoomFragment"
+            app:destination="@id/addRoomFragment" />
+    </fragment>
     <activity
         android:id="@+id/homeLandingActivity"
         android:name="com.electrosoft.electrosoftnew.ui.HomeLandingActivity"
         android:label="HomeLandingActivity" />
+    <fragment
+        android:id="@+id/addRoomFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.AddRoomFragment"
+        android:label="fragment_add_room"
+        tools:layout="@layout/fragment_add_room" >
+        <action
+            android:id="@+id/action_addRoomFragment_to_updateRoomFragment"
+            app:destination="@id/updateRoomFragment" />
+        <action
+            android:id="@+id/action_addRoomFragment_to_addSensorFragment"
+            app:destination="@id/addSensorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSensorFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.AddSensorFragment"
+        android:label="fragment_add_sensor"
+        tools:layout="@layout/fragment_add_sensor" >
+        <action
+            android:id="@+id/action_addSensorFragment_to_updateSensorFragment"
+            app:destination="@id/updateSensorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateRoomFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.UpdateRoomFragment"
+        android:label="fragment_update_room"
+        tools:layout="@layout/fragment_update_room" />
+    <fragment
+        android:id="@+id/updateSensorFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.UpdateSensorFragment"
+        android:label="fragment_update_sensor"
+        tools:layout="@layout/fragment_update_sensor" />
 </navigation>

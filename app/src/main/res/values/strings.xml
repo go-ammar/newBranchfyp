@@ -26,5 +26,18 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_landing">LandingActivity</string>
+    <string name="text_enter_email_fp">Enter Email</string>
+    <string name="hint_enter_cpass">Conform Password</string>
+    <string name="hint_enter_password">Enter Password</string>
+    <string name="hint_room_id">Room ID</string>
+    <string name="hint_room_name">Room Name</string>
+    <string name="hint_room_description">Room Description</string>
+    <string name="text_add_rooms">ADD Rooms</string>
+    <string name="hint_sensor_name">Sensor_Name</string>
+    <string name="hint_sensor_status">Sensor_Status</string>
+    <string name="hint_sensor_description">Sensor Description</string>
+    <string name="hint_max_temp">Max Temp</string>
+    <string name="text_update_room">Update Room</string>
+    <string name="text_update_sensor">Update Sensor</string>
 
 </resources>

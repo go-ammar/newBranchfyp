@@ -38,7 +38,10 @@ public class HomeLandingActivity extends AppCompatActivity {
 
 
          appBarConfiguration =
-                new AppBarConfiguration.Builder(R.id.nav_dashboard, R.id.nav_notifications,R.id.nav_contact,R.id.nav_about)
+                new AppBarConfiguration.Builder(
+                        R.id.nav_dashboard,
+                        R.id.nav_notifications,
+                        R.id.nav_contact,R.id.nav_about)
                         .setDrawerLayout(binding.drawerLayout)
                         .build();
 

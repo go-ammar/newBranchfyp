@@ -10,13 +10,25 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.electrosoft.electrosoftnew.R;
 import com.electrosoft.electrosoftnew.databinding.FragmentAddRoomBinding;
 import com.electrosoft.electrosoftnew.databinding.FragmentUpdateSensorBinding;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +36,7 @@ import com.electrosoft.electrosoftnew.databinding.FragmentUpdateSensorBinding;
 public class UpdateSensorFragment extends Fragment {
 
 
+    private String URL;
     private static final String TAG = "AddSensorFragment";
     NavController navController;
 
@@ -49,5 +62,43 @@ public class UpdateSensorFragment extends Fragment {
 
 
     private void actionViews(){}
+
+    private void UpdateSensor() {
+        StringRequest stringRequest = new StringRequest( Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("Response",response);
+                Toast.makeText(requireContext(), "Sucessfully Registered", Toast.LENGTH_SHORT).show();
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(requireContext(), error+" Try Again", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<String, String>();
+               // params.put("",String.valueOf(sid));
+                //params.put("",);
+                //params.put("",);
+                //params.put("",);
+                //params.put("",);
+
+
+                return params;
+            }
+
+
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        requestQueue.add(stringRequest);
+
+
+    }
 
 }

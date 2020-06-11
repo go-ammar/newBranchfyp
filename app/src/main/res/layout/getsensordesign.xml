@@ -1,102 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/gradiant_main"
-    android:orientation="vertical"
-    android:padding="3dp">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="sensormodel"
+            type="com.electrosoft.electrosoftnew.Models.SensorModel"/>
+
+
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        >
+        android:background="@drawable/gradiant_main"
+        android:orientation="vertical"
+        android:padding="3dp">
 
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="1dp"
-            android:clickable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            tools:ignore="MissingConstraints">
+            android:layout_gravity="center">
 
-            <LinearLayout
-                android:id="@+id/viewr"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/gradiant_part"
-                android:gravity="start"
-                android:padding="20dp"
-                android:orientation="vertical">
+            <androidx.cardview.widget.CardView
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:clickable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                tools:ignore="MissingConstraints">
 
-
-                    <TextView
-                        android:id="@+id/S1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"
-                        android:text="Sensor Name"
-                        />
-
-                    <TextView
-                        android:id="@+id/S2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginTop="5dp"
-                        android:textColor="@color/white"
-                        android:text="TMP"
-
-                        android:layout_alignParentRight="true" />
-
-
-                </RelativeLayout>
-                <View
+                <LinearLayout
+                    android:id="@+id/viewr"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_margin="10dp"
-                    android:background="@color/like" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/gradiant_part"
+                    android:gravity="start"
+                    android:padding="20dp"
+                    android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-
-                    >
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/viewhistory"
+                    <RelativeLayout
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:id="@+id/S1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/white"
+                            android:text="Sensor Name" />
+
+                        <TextView
+                            android:id="@+id/S2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/white"
+                            android:text="TMP"
+
+                            android:layout_alignParentRight="true" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="10dp"
+                        android:background="@color/like" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:padding="@dimen/_16sdp"
-                        android:text="View Histry"
+                        android:orientation="horizontal"
 
-                        />
+                        >
 
-                    <com.google.android.material.button.MaterialButton
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/viewhistory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:padding="@dimen/_16sdp"
+                            android:text="View Histry"
+
+                            />
+
+                        <com.google.android.material.button.MaterialButton
 
 
-                        android:id="@+id/updatesensor"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:padding="@dimen/_16sdp"
-                        android:text="Update Sensor"
-                        />
-                </RelativeLayout>
+                            android:id="@+id/updatesensor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentRight="true"
+                            android:padding="@dimen/_16sdp"
+                            android:text="Update Sensor" />
+                    </RelativeLayout>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

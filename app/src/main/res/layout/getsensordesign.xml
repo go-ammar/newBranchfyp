@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="sensormodel"
-            type="com.electrosoft.electrosoftnew.Models.SensorModel"/>
 
+        <variable
+            name="sensorModel"
+            type="com.electrosoft.electrosoftnew.models.SensorModel" />
 
     </data>
 

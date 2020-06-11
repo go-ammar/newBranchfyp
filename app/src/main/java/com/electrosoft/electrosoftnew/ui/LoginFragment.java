@@ -96,7 +96,7 @@ public class LoginFragment extends Fragment {
                     String[] parts = b.split( "&" );
                     String part1 = parts[0];
                     String part2 = parts[1];
-                    //SharedPreferences sharedPreferences = getSharedPreferences( "mypreference", MODE_PRIVATE );
+                   // SharedPreferences sharedPreferences = getSharedPreferences( "mypreference", MODE_PRIVATE );
                     //SharedPreferences.Editor editor = sharedPreferences.edit();
                     //editor.putString( "value", part2 );
                     //editor.apply();

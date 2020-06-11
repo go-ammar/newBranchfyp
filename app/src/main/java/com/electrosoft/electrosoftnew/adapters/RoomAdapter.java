@@ -1,4 +1,4 @@
-package com.electrosoft.electrosoftnew.Adapters;
+package com.electrosoft.electrosoftnew.adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.electrosoft.electrosoftnew.Models.RoomModel;
+import com.electrosoft.electrosoftnew.models.RoomModel;
 import com.electrosoft.electrosoftnew.databinding.FragmentGetRoomsBinding;
 
 import java.util.List;

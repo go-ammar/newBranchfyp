@@ -1,4 +1,4 @@
-package com.electrosoft.electrosoftnew.Models;
+package com.electrosoft.electrosoftnew.models;
 
 public class SensorModel {
 

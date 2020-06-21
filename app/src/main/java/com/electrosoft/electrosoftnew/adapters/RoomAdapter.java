@@ -2,7 +2,6 @@ package com.electrosoft.electrosoftnew.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.electrosoft.electrosoftnew.R;
 import com.electrosoft.electrosoftnew.databinding.GetroomdesignBinding;
-import com.electrosoft.electrosoftnew.models.RoomModel;
-import com.electrosoft.electrosoftnew.databinding.FragmentGetRoomsBinding;
+import com.electrosoft.electrosoftnew.models.Room;
 
 import java.util.List;
 
@@ -20,9 +18,9 @@ public class RoomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private Context mContext;
-    private List<RoomModel> mdata;
+    private List<Room> mdata;
 
-    public RoomAdapter(Context mContext, List<RoomModel> mdata) {
+    public RoomAdapter(Context mContext, List<Room> mdata) {
         this.mContext = mContext;
         this.mdata = mdata;
     }
@@ -38,8 +36,8 @@ public class RoomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        RoomModel roomModel = mdata.get(position);
-        ((RoomViewHolder)holder).setBinding(roomModel);
+        Room room = mdata.get(position);
+        ((RoomViewHolder)holder).setBinding(room);
 
         ((RoomViewHolder) holder).binding.updateroom.setOnClickListener( v -> {
 
@@ -61,7 +59,7 @@ public class RoomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return 0;
     }
 
-    public class RoomViewHolder extends RecyclerView.ViewHolder{
+    public static class RoomViewHolder extends RecyclerView.ViewHolder{
 
         GetroomdesignBinding binding;
 
@@ -72,8 +70,8 @@ public class RoomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             this.binding = binding;
         }
 
-        void setBinding(RoomModel roomModel){
-            binding.setRoommodel(roomModel);
+        void setBinding(Room room){
+            binding.setRoom(room);
             binding.executePendingBindings();
         }
 

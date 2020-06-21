@@ -52,7 +52,7 @@
                             android:background="@drawable/gradiant_part"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
-                            android:id="@+id/v"
+                            android:id="@+id/addRoomsCardView"
                             android:layout_height="130dp"
                             android:layout_margin="10dp"
                             android:layout_width="match_parent">
@@ -118,7 +118,7 @@
                             android:background="@drawable/gradiant_part"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
-                            android:id="@+id/r"
+                            android:id="@+id/notificationsCardView"
                             android:layout_height="130dp"
                             android:layout_margin="10dp"
                             android:layout_width="match_parent">
@@ -181,7 +181,7 @@
                             android:background="@drawable/gradiant_part"
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
-                            android:id="@+id/s"
+                            android:id="@+id/viewRoomsCardView"
                             android:layout_height="130dp"
                             android:layout_margin="10dp"
                             android:layout_width="match_parent">

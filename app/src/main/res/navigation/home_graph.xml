@@ -9,12 +9,23 @@
         android:id="@+id/nav_dashboard"
         android:name="com.electrosoft.electrosoftnew.ui.DashBoardFragment"
         android:label="@string/text_dashboard"
-        tools:layout="@layout/fragment_dash_board" />
+        tools:layout="@layout/fragment_dash_board" >
+        <action
+            android:id="@+id/action_nav_dashboard_to_nav_get_rooms"
+            app:destination="@id/nav_get_rooms" />
+        <action
+            android:id="@+id/action_nav_dashboard_to_addRoomFragment2"
+            app:destination="@id/addRoomFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/nav_get_rooms"
         android:name="com.electrosoft.electrosoftnew.ui.GetRoomsFragment"
         android:label="Rooms"
-        tools:layout="@layout/fragment_get_rooms" />
+        tools:layout="@layout/fragment_get_rooms" >
+        <argument
+            android:name="testValue"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/nav_about"
         android:name="com.electrosoft.electrosoftnew.ui.AboutFragment"
@@ -30,4 +41,8 @@
         android:name="com.electrosoft.electrosoftnew.ui.NotificationsFragment"
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/addRoomFragment2"
+        android:name="com.electrosoft.electrosoftnew.ui.AddRoomFragment"
+        android:label="AddRoomFragment" />
 </navigation>

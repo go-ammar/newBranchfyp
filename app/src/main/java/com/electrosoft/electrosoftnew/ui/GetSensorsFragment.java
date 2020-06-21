@@ -1,7 +1,6 @@
 package com.electrosoft.electrosoftnew.ui;
 
 
-import android.hardware.Sensor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,7 +28,7 @@ import com.android.volley.toolbox.Volley;
 import com.electrosoft.electrosoftnew.R;
 import com.electrosoft.electrosoftnew.adapters.SensorAdapter;
 import com.electrosoft.electrosoftnew.databinding.FragmentGetSensorsBinding;
-import com.electrosoft.electrosoftnew.models.SensorModel;
+import com.electrosoft.electrosoftnew.models.Sensor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,7 +49,7 @@ public class GetSensorsFragment extends Fragment {
     private String URL;
     private SensorAdapter sensorAdapter;
     private RecyclerView recycle;
-    private List<SensorModel> lst_sens;
+    private List<Sensor> lst_sens;
     NavController navController;
     FragmentGetSensorsBinding binding;
 
@@ -100,10 +99,10 @@ public class GetSensorsFragment extends Fragment {
                                 JSONArray jsonArray = new JSONArray(response);
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    SensorModel s = new SensorModel();
-                                    s.Sensor_id=jsonObject.getInt("ID");
-                                    s.Sensor_name=jsonObject.getString("name");
-                                    s.Sensor_maxvalue=jsonObject.getInt("avg");
+                                    Sensor s = new Sensor();
+                                    s.id =jsonObject.getInt("ID");
+                                    s.name =jsonObject.getString("name");
+                                    s.maxValue =jsonObject.getInt("avg");
                                     lst_sens.add(s);
 
                                 }

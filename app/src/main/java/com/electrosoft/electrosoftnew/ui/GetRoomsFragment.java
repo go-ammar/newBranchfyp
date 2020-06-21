@@ -25,8 +25,7 @@ import com.android.volley.toolbox.Volley;
 import com.electrosoft.electrosoftnew.R;
 import com.electrosoft.electrosoftnew.adapters.RoomAdapter;
 import com.electrosoft.electrosoftnew.databinding.FragmentGetRoomsBinding;
-import com.electrosoft.electrosoftnew.databinding.FragmentUpdateRoomBinding;
-import com.electrosoft.electrosoftnew.models.RoomModel;
+import com.electrosoft.electrosoftnew.models.Room;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +42,7 @@ public class GetRoomsFragment extends Fragment {
 
     private static final String TAG = "GetRoomsFragment";
     private String URL;
-    private List<RoomModel> lst;
+    private List<Room> lst;
     NavController navController;
     private RecyclerView recycle;
     private RoomAdapter padapter;
@@ -88,9 +87,9 @@ public class GetRoomsFragment extends Fragment {
                     {
 
                         jsonObject = response.getJSONObject(i) ;
-                        RoomModel r = new RoomModel();
-                        r.Room_name = jsonObject.getString("room_name");
-                        r.Room_id = jsonObject.getInt("ID");
+                        Room r = new Room();
+                        r.name = jsonObject.getString("room_name");
+                        r.id = jsonObject.getInt("ID");
                         lst.add(r);
                     }
 

@@ -39,11 +39,11 @@
     <string name="hint_sensor_description">Sensor Description</string>
     <string name="hint_max_temp">Max Temp</string>
     <string name="text_update_room">Update Room</string>
-    <string name="text_update_sensor">Update Sensor</string>
-=======
     <string name="notifications">Notifications</string>
     <string name="contact">Contact</string>
     <string name="about">About</string>
->>>>>>> d977e9cc2209e794ef12a9c596c2a101f82f1051
+    <string name="text_add_sensors">Add Sensors</string>
+    <string name="text_view_history">View History</string>
+    <string name="text_update_sensor">Update Sensor</string>
 
 </resources>

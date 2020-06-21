@@ -7,7 +7,7 @@
 
         <variable
             name="sensormodel"
-            type="com.electrosoft.electrosoftnew.models.SensorModel" />
+            type="com.electrosoft.electrosoftnew.models.Sensor" />
 
     </data>
 
@@ -30,7 +30,8 @@
                 android:layout_margin="1dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
-                tools:ignore="MissingConstraints">
+                tools:ignore="MissingConstraints"
+                android:focusable="true">
 
                 <LinearLayout
                     android:id="@+id/viewr"
@@ -52,7 +53,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/white"
-                            android:text="@{sensormodel.Sensor_name}" />
+                            android:text="@{sensormodel.name}" />
 
                         <TextView
                             android:id="@+id/S2"
@@ -61,9 +62,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/white"
-                            android:text="@{sensormodel.Sensor_maxvalue}"
-
-                            android:layout_alignParentRight="true" />
+                            android:text="@{``+sensormodel.maxValue}" />
 
 
                     </RelativeLayout>
@@ -88,20 +87,17 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             android:padding="@dimen/_16sdp"
-                            android:text="View Histry"
+                            android:text="@string/text_view_history"
 
                             />
 
                         <com.google.android.material.button.MaterialButton
-
-
                             android:id="@+id/updatesensor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:layout_alignParentRight="true"
                             android:padding="@dimen/_16sdp"
-                            android:text="Update Sensor" />
+                            android:text="@string/text_update_sensor" />
                     </RelativeLayout>
 
                 </LinearLayout>

@@ -2,7 +2,6 @@ package com.electrosoft.electrosoftnew.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.electrosoft.electrosoftnew.R;
 import com.electrosoft.electrosoftnew.databinding.GetsensordesignBinding;
-import com.electrosoft.electrosoftnew.models.SensorModel;
+import com.electrosoft.electrosoftnew.models.Sensor;
 
 import java.util.List;
 
@@ -20,10 +19,10 @@ public class SensorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
     private Context mContext;
-    private List<SensorModel> mdata;
+    private List<Sensor> mdata;
 
 
-    public SensorAdapter(Context mContext, List<SensorModel> mdata) {
+    public SensorAdapter(Context mContext, List<Sensor> mdata) {
         this.mContext = mContext;
         this.mdata = mdata;
     }
@@ -41,7 +40,7 @@ public class SensorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        SensorModel sensorModel = mdata.get(position);
+        Sensor sensorModel = mdata.get(position);
         ((SensorViewHolder)holder).setBinding(sensorModel);
 
         ((SensorViewHolder) holder).binding.viewhistory.setOnClickListener( v -> {
@@ -68,8 +67,8 @@ public class SensorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         }
 
-        void setBinding(SensorModel sensorModel){
-            binding.setSensormodel(sensorModel);
+        void setBinding(Sensor sensor){
+            binding.setSensormodel(sensor);
             binding.executePendingBindings();
         }
 

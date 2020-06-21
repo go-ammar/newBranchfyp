@@ -44,6 +44,13 @@ public class SensorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         SensorModel sensorModel = mdata.get(position);
         ((SensorViewHolder)holder).setBinding(sensorModel);
 
+        ((SensorViewHolder) holder).binding.viewhistory.setOnClickListener( v -> {
+
+        } );
+        ((SensorViewHolder) holder).binding.updatesensor.setOnClickListener(v -> {
+
+                });
+
     }
 
 
@@ -62,7 +69,7 @@ public class SensorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
         void setBinding(SensorModel sensorModel){
-            binding.setSensorModel(sensorModel);
+            binding.setSensormodel(sensorModel);
             binding.executePendingBindings();
         }
 

@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +23,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.electrosoft.electrosoftnew.R;
+import com.electrosoft.electrosoftnew.adapters.RoomAdapter;
 import com.electrosoft.electrosoftnew.databinding.FragmentGetRoomsBinding;
 import com.electrosoft.electrosoftnew.databinding.FragmentUpdateRoomBinding;
+import com.electrosoft.electrosoftnew.models.RoomModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +43,10 @@ public class GetRoomsFragment extends Fragment {
 
     private static final String TAG = "GetRoomsFragment";
     private String URL;
+    private List<RoomModel> lst;
     NavController navController;
+    private RecyclerView recycle;
+    private RoomAdapter padapter;
     FragmentGetRoomsBinding binding;
 
 
@@ -54,7 +64,11 @@ public class GetRoomsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
+        recycle = binding.programmingList;
+        recycle.setHasFixedSize( true );
+        recycle.setLayoutManager(new LinearLayoutManager(requireContext()) );
 
+        lst = new ArrayList<>();
         actionViews();
     }
 
@@ -74,10 +88,10 @@ public class GetRoomsFragment extends Fragment {
                     {
 
                         jsonObject = response.getJSONObject(i) ;
-                        //room r = new room();
-                        //r.setRoom_name(jsonObject.getString("room_name"));
-                        //r.setRoom_id(jsonObject.getInt("ID"));
-                        //lst.add(r);
+                        RoomModel r = new RoomModel();
+                        r.Room_name = jsonObject.getString("room_name");
+                        r.Room_id = jsonObject.getInt("ID");
+                        lst.add(r);
                     }
 
                 } catch (JSONException e)
@@ -86,8 +100,9 @@ public class GetRoomsFragment extends Fragment {
                 }
 
 
-                //padapter = new ProgrammingAdapter(Rooms.this,lst);
-                //recycle.setAdapter(padapter);
+                padapter = new RoomAdapter(requireContext(),lst);
+                recycle.setAdapter( padapter );
+
             }
         }, new Response.ErrorListener() {
             @Override

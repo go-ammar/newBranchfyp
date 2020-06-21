@@ -1,6 +1,7 @@
 package com.electrosoft.electrosoftnew.ui;
 
 
+import android.hardware.Sensor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,13 +27,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.electrosoft.electrosoftnew.R;
+import com.electrosoft.electrosoftnew.adapters.SensorAdapter;
 import com.electrosoft.electrosoftnew.databinding.FragmentGetSensorsBinding;
+import com.electrosoft.electrosoftnew.models.SensorModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,6 +48,9 @@ public class GetSensorsFragment extends Fragment {
 
     private static final String TAG = "GetSensorsFragment";
     private String URL;
+    private SensorAdapter sensorAdapter;
+    private RecyclerView recycle;
+    private List<SensorModel> lst_sens;
     NavController navController;
     FragmentGetSensorsBinding binding;
 
@@ -58,7 +68,10 @@ public class GetSensorsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
-
+        recycle = binding.sensorlist;
+        recycle.setHasFixedSize( true );
+        recycle.setLayoutManager(new  LinearLayoutManager(requireContext()) );
+        lst_sens = new ArrayList<>();
         actionViews();
     }
 
@@ -87,18 +100,18 @@ public class GetSensorsFragment extends Fragment {
                                 JSONArray jsonArray = new JSONArray(response);
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                   // modelsensor s = new modelsensor();
-                                    //s.setSensor_id(jsonObject.getInt("ID"));
-                                    //s.setSensor_name(jsonObject.getString("name"));
-                                    //s.setSensor_maxvalue(jsonObject.getInt("avg"));
-                                    //lst_sens.add(s);
+                                    SensorModel s = new SensorModel();
+                                    s.Sensor_id=jsonObject.getInt("ID");
+                                    s.Sensor_name=jsonObject.getString("name");
+                                    s.Sensor_maxvalue=jsonObject.getInt("avg");
+                                    lst_sens.add(s);
 
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                            //sadapter = new sensoradapter(Sensors.this, lst_sens);
-                            //recyclerV.setAdapter(sadapter);
+                            sensorAdapter = new SensorAdapter(requireContext(), lst_sens);
+                            recycle.setAdapter( sensorAdapter );
                         }
 
                     }

@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="sensorModel"
+            name="sensormodel"
             type="com.electrosoft.electrosoftnew.models.SensorModel" />
 
     </data>
@@ -52,7 +52,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/white"
-                            android:text="Sensor Name" />
+                            android:text="@{sensormodel.Sensor_name}" />
 
                         <TextView
                             android:id="@+id/S2"
@@ -61,7 +61,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/white"
-                            android:text="TMP"
+                            android:text="@{sensormodel.Sensor_maxvalue}"
 
                             android:layout_alignParentRight="true" />
 

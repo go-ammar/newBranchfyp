@@ -65,8 +65,8 @@ public class LoginFragment extends Fragment {
 
 
         binding.loginBtn.setOnClickListener(v -> {
-//            if(validations())
-//            Toast.makeText(requireContext(), "Login btn clicked", Toast.LENGTH_SHORT).show();
+           if(validations())
+            Toast.makeText(requireContext(), "Login btn clicked", Toast.LENGTH_SHORT).show();
             navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
 
         });
@@ -96,7 +96,7 @@ public class LoginFragment extends Fragment {
                     String[] parts = b.split( "&" );
                     String part1 = parts[0];
                     String part2 = parts[1];
-                   // SharedPreferences sharedPreferences = getSharedPreferences( "mypreference", MODE_PRIVATE );
+                    //SharedPreferences sharedPreferences = getSharedPreferences( "mypreference", MODE_PRIVATE );
                     //SharedPreferences.Editor editor = sharedPreferences.edit();
                     //editor.putString( "value", part2 );
                     //editor.apply();

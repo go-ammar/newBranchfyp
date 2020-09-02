@@ -30,10 +30,11 @@ public class DashBoardFragment extends Fragment {
     SharedPrefs sharedPrefs;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_dash_board, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dash_board, container, false);
+
         return binding.getRoot();
     }
 
@@ -52,10 +53,11 @@ public class DashBoardFragment extends Fragment {
     private void actionViews(){
 
 
-        sharedPrefs = new SharedPrefs(requireContext());
-        sharedPrefs.putString("Sample","Sample");
+        //sharedPrefs = new SharedPrefs(requireContext());
+        //sharedPrefs.putString("Sample","Sample");
+         //String a = sharedPrefs.getStrings( "Sample" );
 
-        Log.d(TAG, "actionViews: "+sharedPrefs.getStrings("Sample"));
+        //Log.d(TAG, "actionViews: "+sharedPrefs.getStrings("Sample"));
 
         binding.addRoomsCardView.setOnClickListener(v ->  {
 
@@ -68,7 +70,7 @@ public class DashBoardFragment extends Fragment {
 
         binding.viewRoomsCardView.setOnClickListener(v ->  {
 
-//            navController.navigate(R.id.action_nav_dashboard_to_nav_get_rooms);
+           navController.navigate(R.id.action_nav_dashboard_to_nav_get_rooms);
 
 //            NotificationFragmentDirections.ActionNotificationFragmentNavToNotificationDetailsFragment action = NotificationFragmentDirections.actionNotificationFragmentNavToNotificationDetailsFragment("notification");
 //            navController.navigate(action);

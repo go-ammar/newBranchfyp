@@ -23,8 +23,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/gradiant_main"
                 android:id="@+id/sensorlist"
-                tools:ignore="MissingConstraints"></androidx.recyclerview.widget.RecyclerView>
-
+                tools:ignore="MissingConstraints"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

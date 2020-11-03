@@ -28,12 +28,12 @@
     <string name="title_activity_landing">LandingActivity</string>
 
     <string name="text_enter_email_fp">Enter Email</string>
-    <string name="hint_enter_cpass">Conform Password</string>
+    <string name="hint_enter_cpass">Confirm Password</string>
     <string name="hint_enter_pass">Enter Password</string>
-    <string name="hint_room_id">Room ID</string>
+    <string name="hint_room_id">Enter Room ID</string>
     <string name="hint_room_name">Room Name</string>
     <string name="hint_room_description">Room Description</string>
-    <string name="text_add_rooms">ADD Rooms</string>
+    <string name="text_add_rooms">Add Room</string>
     <string name="hint_sensor_name">Sensor_Name</string>
     <string name="hint_sensor_status">Sensor_Status</string>
     <string name="hint_sensor_description">Sensor Description</string>
@@ -45,5 +45,8 @@
     <string name="text_add_sensors">Add Sensors</string>
     <string name="text_view_history">View History</string>
     <string name="text_update_sensor">Update Sensor</string>
+    <string name="text_reset_password">Reset Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="iccbs_technology_park_and_technology_incubation_center_industrial_linkages_building_international_center_for_chemical_and_biological_sciences_university_of_karachi_4_794_21_mi_karachi">ICCBS Technology Park and Technology Incubation Center, Industrial Linkages Building, International Center for Chemical and Biological Sciences, University Of Karachi, (4,794.21 mi) Karachi</string>
 
 </resources>

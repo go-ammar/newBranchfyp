@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
+    <domain-config>
+        <domain includeSubdomains="true">143.110.176.86</domain>
+        <!--        <domain includeSubdomains="true">shoe-app.herokuapp.com</domain>-->
+    </domain-config>
+
+</network-security-config>

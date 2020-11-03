@@ -54,7 +54,7 @@ public class SensorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
     public int getItemCount() {
-        return 0;
+        return mdata.size();
     }
 
     public class SensorViewHolder extends RecyclerView.ViewHolder{

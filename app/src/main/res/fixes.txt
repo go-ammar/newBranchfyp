@@ -1,0 +1,4 @@
+passwords - done
+main screen -done
+add rooms (bring it lower)
+remove notifications from sidebar

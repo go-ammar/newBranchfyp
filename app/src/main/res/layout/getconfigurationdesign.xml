@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="config"
+            type="com.electrosoft.electrosoftnew.models.Devices" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/rm1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <!--            <androidx.cardview.widget.CardView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                app:cardCornerRadius="@dimen/_8sdp"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:background="@drawable/gradiant_part"-->
+            <!--                android:clickable="true"-->
+            <!--                android:foreground="?android:attr/selectableItemBackground"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                tools:ignore="MissingConstraints">-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/viewr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradiant_part"
+                android:gravity="start"
+                android:orientation="vertical"
+                android:padding="@dimen/_4sdp">
+
+
+                <TextView
+                    android:id="@+id/device_name_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:text="Device Name:"
+
+                    android:textColor="@color/white"
+
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+
+                    android:id="@+id/room_name_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/_6sdp"
+                    android:paddingTop="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintBottom_toTopOf="@+id/description_textview"
+                    app:layout_constraintStart_toEndOf="@+id/device_name_textview"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:hint="@tools:sample/lorem/random" />
+
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/device_description_tv"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:paddingEnd="@dimen/_12sdp"-->
+                <!--                        android:paddingLeft="@dimen/_12sdp"-->
+                <!--                        android:paddingRight="@dimen/_12sdp"-->
+                <!--                        android:paddingTop="@dimen/_12sdp"-->
+                <!--                        android:text="Device Description:"-->
+                <!--                        android:textColor="@color/white"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+
+                <!--                        app:layout_constraintTop_toBottomOf="@id/room_name_textview" />-->
+
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:text="Device Description:"
+
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13sdp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/device_name_textview" />
+
+
+                <TextView
+                    android:id="@+id/description_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:paddingStart="@dimen/_8sdp"
+
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingBottom="@dimen/_6sdp"
+                    android:singleLine="false"
+                    android:text="Device Description"
+                    android:maxLines="2"
+
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_13sdp"
+                    app:layout_constraintStart_toEndOf="@+id/description"
+                    app:layout_constraintTop_toBottomOf="@id/device_name_textview" />
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/present_in"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:paddingTop="@dimen/_12sdp"-->
+                <!--                        android:paddingBottom="@dimen/_12sdp"-->
+                <!--                        android:text="Device Present In:"-->
+                <!--                        android:textColor="@color/white"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+
+                <!--                        app:layout_constraintTop_toBottomOf="@id/description_textview" />-->
+
+                <!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name_text_input"
+
+                    style="@style/ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#808080"
+                    android:gravity="center"
+                    android:hint="Change Device Room"
+
+
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:paddingBottom="@dimen/_8sdp"
+                    android:textColor="@color/white"
+                    android:textColorHighlight="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/_16sdp"
+
+                    app:boxStrokeColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description_textview"
+
+                    >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/viewrooms"
+                        style="@style/ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="@dimen/_16sdp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--                    <AutoCompleteTextView-->
+                <!--                        android:backgroundTint="#808080"-->
+                <!--                        android:textColorHighlight="@color/white"-->
+                <!--                        android:id="@+id/viewrooms"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:hint="Assign Device To Room"-->
+                <!--                        android:paddingTop="@dimen/_6sdp"-->
+                <!--                        android:paddingStart="@dimen/_8sdp"-->
+                <!--                        android:paddingEnd="@dimen/_8sdp"-->
+                <!--                        android:paddingBottom="@dimen/_8sdp"-->
+                <!--                        android:textColor="@color/white"-->
+                <!--                        android:textColorHint="@color/white"-->
+                <!--                        android:textSize="@dimen/_16sdp"-->
+                <!--                        android:gravity="center"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@id/description_textview" />-->
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--            </androidx.cardview.widget.CardView>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

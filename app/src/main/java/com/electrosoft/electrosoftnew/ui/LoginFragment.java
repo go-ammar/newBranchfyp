@@ -1,7 +1,12 @@
 package com.electrosoft.electrosoftnew.ui;
 
-import android.content.SharedPreferences;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,22 +15,28 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.electrosoft.electrosoftnew.R;
 import com.electrosoft.electrosoftnew.databinding.FragmentLoginBinding;
+import com.electrosoft.electrosoftnew.models.Login;
+import com.electrosoft.electrosoftnew.sharedprefs.SharedPrefs;
+import com.electrosoft.electrosoftnew.webservices.VolleySingleton;
+import com.electrosoft.electrosoftnew.webservices.WebServices;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,43 +68,48 @@ public class LoginFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
-        actionViews();
+        try {
+            actionViews();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
-    private void actionViews(){
+    private void actionViews() throws JSONException {
 
 
         binding.loginBtn.setOnClickListener(v -> {
-           if(validations())
-            Toast.makeText(requireContext(), "Login btn clicked", Toast.LENGTH_SHORT).show();
-            navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
+            if (validations()){
+
+            }
+
+
+
+//                navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
 
         });
-        binding.forgotPassTv.setOnClickListener( v -> {
+        binding.forgotPassTv.setOnClickListener(v -> {
 
-            navController.navigate(R.id.action_loginFragment_to_forgotpass);
+            navController.navigate(R.id.action_loginFragment_to_enterEmailFragment);
+
         });
 
-        
 
     }
 
 
-    private void Login()
-    {
-        StringRequest stringRequest = new StringRequest( Request.Method.POST, URL, new Response.Listener<String>() {
+    private void Login() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Response",response);
-                if (response.equals("0"))
-                {
+                Log.d("Response", response);
+                if (response.equals("0")) {
 
-                    Toast.makeText(requireContext(), response+"sorry", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                    Toast.makeText(requireContext(), response + "sorry", Toast.LENGTH_SHORT).show();
+                } else {
                     String b = response;
-                    String[] parts = b.split( "&" );
+                    String[] parts = b.split("&");
                     String part1 = parts[0];
                     String part2 = parts[1];
                     //SharedPreferences sharedPreferences = getSharedPreferences( "mypreference", MODE_PRIVATE );
@@ -101,14 +117,11 @@ public class LoginFragment extends Fragment {
                     //editor.putString( "value", part2 );
                     //editor.apply();
 
-                    if (part1.equals("1"))
-                    {
+                    if (part1.equals("1")) {
                         //loginl();
-                        Toast.makeText(requireContext(), response+"", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), response + "", Toast.LENGTH_SHORT).show();
                     }
                 }
-
-
 
 
             }
@@ -135,19 +148,81 @@ public class LoginFragment extends Fragment {
     }
 
 
+    private boolean validations() {
 
-    private boolean validations(){
 
-        if(binding.emailEt.getText()!=null && !binding.emailEt.getText().toString().isEmpty()){
-        if(binding.passwordEt.getText()!=null && !binding.passwordEt.getText().toString().isEmpty()) {
-            return true;
-        }else
-            binding.textInputLayout.setError(getString(R.string.error_empty_fields));
+        if (binding.emailEt.getText() != null && !binding.emailEt.getText().toString().isEmpty()) {
+            if (binding.passwordEt.getText() != null && !binding.passwordEt.getText().toString().isEmpty()) {
+                ProgressDialog progressDialog = new ProgressDialog(getContext());
+                progressDialog.setMessage("Please wait...");
+                progressDialog.show();
 
-        }else
+                JSONObject params = new JSONObject();
+
+                try {
+
+                    // BODY
+                    params.put("email", binding.emailEt.getText().toString());
+                    params.put("password", binding.passwordEt.getText().toString());
+                    //        Log.d(TAG, "validations: email is:  " + binding.emailEt.getText().toString());
+                } catch (Exception e) {
+                    Log.e(TAG, "_apiLogin: ", e);
+                }
+
+
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_LOGIN, params, response -> {
+
+                    Log.d(TAG, "_apiLogin: res " + response);
+
+                    Moshi moshi = new Moshi.Builder().build();
+                    JsonAdapter<Login> jsonAdapter = moshi.adapter(Login.class);
+
+                    String message = response.toString();
+
+                    Login login = new Login();
+                    try {
+                        login = jsonAdapter.fromJson(message);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //INITIALIZE SHARED PREFS TOKEN HERE USING login.data.accessToken.
+                    Log.d(TAG, "validations: token set with new class " + login.data.accessToken);
+                    SharedPrefs sharedPrefs = new SharedPrefs(requireContext());
+                    sharedPrefs.setKey(login.data.accessToken);
+
+
+
+                    progressDialog.dismiss();
+                    navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
+
+
+                }, error -> {
+
+                    Log.d(TAG, "validations: " + WebServices.API_LOGIN + " params: " + binding.emailEt.getText().toString() +
+                            " " + binding.passwordEt.getText().toString());
+                    progressDialog.dismiss();
+                    Toast toast = Toast.makeText(getContext(), "Incorrect email or password", Toast.LENGTH_SHORT);
+                    toast.show();
+                    Log.d(TAG, "_apiLogin: error " + error);
+
+
+
+                });
+
+                jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+                VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+
+            } else
+                binding.textInputLayout.setError(getString(R.string.error_empty_fields));
+
+        } else
             binding.textEmail.setError(getString(R.string.error_empty_fields));
 
         return false;
     }
+
 
 }

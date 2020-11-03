@@ -6,13 +6,6 @@ import android.content.SharedPreferences;
 import com.electrosoft.electrosoftnew.models.User;
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.util.HashMap;
-import java.util.List;
-
 public class SharedPrefs {
 
 
@@ -24,6 +17,15 @@ public class SharedPrefs {
 
 
 
+
+    public String getKey(){
+        return sharedPreferences.getString("key", null);
+    }
+
+    public void setKey(String key){
+        sharedPreferences.edit().putString("key", key).apply();
+
+    }
 
 
     public SharedPrefs(Context context) {

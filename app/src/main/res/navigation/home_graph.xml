@@ -12,13 +12,26 @@
         tools:layout="@layout/fragment_dash_board" >
         <action
             android:id="@+id/action_nav_dashboard_to_nav_get_rooms"
-            app:destination="@id/nav_get_rooms" />
-        <action
-            android:id="@+id/action_nav_dashboard_to_addRoomFragment2"
-            app:destination="@id/addRoomFragment2" />
+            app:destination="@id/nav_get_rooms"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            />
         <action
             android:id="@+id/action_nav_dashboard_to_nav_notifications"
-            app:destination="@id/nav_notifications" />
+            app:destination="@id/nav_notifications"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_nav_dashboard_to_deviceConfigurationFragment"
+            app:destination="@id/deviceConfigurationFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/nav_get_rooms"
@@ -26,17 +39,37 @@
         android:label="Rooms"
         tools:layout="@layout/fragment_get_rooms" >
         <argument
-            android:name="testValue"
-            app:argType="string" />
+            android:name="JsonResponseString"
+            app:argType="string"
+            android:defaultValue="null" />
         <action
             android:id="@+id/action_nav_get_rooms_to_addSensorFragment"
-            app:destination="@id/addSensorFragment" />
+            app:destination="@id/addSensorFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_nav_get_rooms_to_getSensorsFragment"
-            app:destination="@id/getSensorsFragment" />
+            app:destination="@id/getSensorsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
         <action
             android:id="@+id/action_nav_get_rooms_to_updateRoomFragment"
-            app:destination="@id/updateRoomFragment" />
+            app:destination="@id/updateRoomFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <action
+            android:id="@+id/action_nav_get_rooms_to_sensorPerRoomFragment"
+            app:destination="@id/sensorPerRoomFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/nav_about"
@@ -56,7 +89,7 @@
     <fragment
         android:id="@+id/addRoomFragment2"
         android:name="com.electrosoft.electrosoftnew.ui.AddRoomFragment"
-        android:label="AddRoomFragment" />
+        android:label="Add Room" />
     <fragment
         android:id="@+id/addSensorFragment"
         android:name="com.electrosoft.electrosoftnew.ui.AddSensorFragment"
@@ -69,7 +102,11 @@
         tools:layout="@layout/fragment_get_sensors" >
         <action
             android:id="@+id/action_getSensorsFragment_to_updateSensorFragment"
-            app:destination="@id/updateSensorFragment" />
+            app:destination="@id/updateSensorFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
     </fragment>
     <fragment
         android:id="@+id/updateSensorFragment"
@@ -81,4 +118,39 @@
         android:name="com.electrosoft.electrosoftnew.ui.UpdateRoomFragment"
         android:label="fragment_update_room"
         tools:layout="@layout/fragment_update_room" />
+    <fragment
+        android:id="@+id/deviceConfigurationFragment"
+
+        android:name="com.electrosoft.electrosoftnew.ui.DeviceConfigurationFragment"
+        android:label="Configuration" />
+    <fragment
+        android:id="@+id/sensorPerRoomFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.SensorPerRoomFragment"
+        android:label="Devices in the room" >
+        <action
+            android:id="@+id/action_sensorPerRoomFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"/>
+        <argument
+            android:name="_id"
+            app:argType="string"
+            android:defaultValue="default" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.StatisticsFragment"
+        android:label="Statistics"
+        tools:layout="@layout/fragment_statistics" >
+        <argument
+            android:name="SensorDevice"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="id"
+            app:argType="string"
+            android:defaultValue="id" />
+    </fragment>
 </navigation>

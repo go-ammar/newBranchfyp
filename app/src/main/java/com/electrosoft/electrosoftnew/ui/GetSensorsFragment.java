@@ -58,7 +58,7 @@ public class GetSensorsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_get_sensors, container, false );
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_get_sensors, container, false);
         return binding.getRoot();
     }
 
@@ -68,67 +68,68 @@ public class GetSensorsFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
         recycle = binding.sensorlist;
-        recycle.setHasFixedSize( true );
-        recycle.setLayoutManager(new  LinearLayoutManager(requireContext()) );
+        recycle.setHasFixedSize(true);
+        recycle.setLayoutManager(new LinearLayoutManager(requireContext()));
         lst_sens = new ArrayList<>();
         actionViews();
     }
 
-    private void actionViews(){}
+    private void actionViews() {
+        getsensor();
+    }
 
-    private void getsensor (){
-        StringRequest stringRequest = new StringRequest( Request.Method.POST, URL,
+    private void getsensor() {
+
+        Log.d(TAG, "getsensor: ");
+        String url = "http://localhost:8080/system/services/";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+
+
+
                         Log.d("Response", response);
                         Toast.makeText(requireContext(), response, Toast.LENGTH_SHORT).show();
 
-                        if (response.equals("[]"))
-                        {
+                        if (response.equals("[]")) {
 
                             Toast.makeText(requireContext(), " access wali", Toast.LENGTH_SHORT).show();
                             //a.setVisibility(View.VISIBLE);
                             //neww();
                             //builder.setTitle("sorry");
                             //displayAlert("there is no data");
-                        }
-                        else {
+                        } else {
                             //a.setVisibility(View.INVISIBLE);
                             try {
                                 JSONArray jsonArray = new JSONArray(response);
                                 for (int i = 0; i < response.length(); i++) {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                    Sensor s = new Sensor();
-                                    s.id =jsonObject.getInt("ID");
-                                    s.name =jsonObject.getString("name");
-                                    s.maxValue =jsonObject.getInt("avg");
-                                    lst_sens.add(s);
+//                                    Sensor s = new Sensor();
+//                                    s.id = jsonObject.getInt("ID");
+//                                    s.name = jsonObject.getString("name");
+//                                    s.maxValue = jsonObject.getInt("avg");
+//                                    lst_sens.add(s);
 
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                             sensorAdapter = new SensorAdapter(requireContext(), lst_sens);
-                            recycle.setAdapter( sensorAdapter );
+                            recycle.setAdapter(sensorAdapter);
                         }
 
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(requireContext(), error+"not access", Toast.LENGTH_SHORT).show();
-
-
-            }
-        }){
+                }, error -> Toast.makeText(requireContext(), error + "not access", Toast.LENGTH_SHORT).show()) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<String, String>();
 
-               // params.put("roomno",String.valueOf(getid));
+                // params.put("roomno",String.valueOf(getid));
+
+
 
                 return params;
             }

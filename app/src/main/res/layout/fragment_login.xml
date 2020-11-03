@@ -33,6 +33,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+
                 android:id="@+id/textEmail"
                 style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
@@ -50,8 +51,13 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/white"
+                    android:text="testing@testing.com"
 
                     />
+
+<!--                android:fontFamily="serif-monospace"-->
+
+
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -65,13 +71,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textEmail"
-                app:passwordToggleEnabled="true">
+
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:textColor="@color/white"
+                    android:text="123456"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
@@ -79,14 +89,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_16sdp"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_12sdp"
+
                 android:text="@string/text_login"
+                android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
             <TextView
                 android:id="@+id/forgotPassTv"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -95,7 +108,7 @@
                 android:text="@string/text_forgot_password"
                 android:textAlignment="center"
                 android:textColor="@color/lightgray"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/loginBtn"

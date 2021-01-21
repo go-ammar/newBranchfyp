@@ -24,7 +24,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.electrosoft.electrosoftnew.R;
-import com.electrosoft.electrosoftnew.databinding.FragmentAddRoomBinding;
 import com.electrosoft.electrosoftnew.databinding.FragmentUpdateRoomBinding;
 
 import java.util.HashMap;

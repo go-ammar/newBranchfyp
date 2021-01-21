@@ -1,5 +1,7 @@
 package com.electrosoft.electrosoftnew.ui;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.electrosoft.electrosoftnew.R;
+import com.electrosoft.electrosoftnew.sharedprefs.SharedPrefs;
 
 public class SplashScreenFragment extends Fragment {
 
@@ -39,10 +42,18 @@ public class SplashScreenFragment extends Fragment {
         actionViews();
     }
 
-    void actionViews(){
+    void actionViews() {
 
         Handler handler = new Handler();
-        handler.postDelayed(() -> navController.navigate(R.id.action_splashScreen_to_loginFragment),1000);
+
+        SharedPrefs sharedPrefs = new SharedPrefs(requireContext());
+
+        if (sharedPrefs.getKey() == null) {
+            handler.postDelayed(() -> navController.navigate(R.id.action_splashScreen_to_loginFragment), 1000);
+        } else {
+            handler.postDelayed(() -> navController.navigate(R.id.action_splashScreen_to_homeLandingActivity), 1000);
+        }
     }
+
 
 }

@@ -5,152 +5,198 @@
     android:id="@+id/home_graph"
     android:label="nav_dashboard"
     app:startDestination="@id/nav_dashboard">
+
     <fragment
         android:id="@+id/nav_dashboard"
         android:name="com.electrosoft.electrosoftnew.ui.DashBoardFragment"
         android:label="@string/text_dashboard"
-        tools:layout="@layout/fragment_dash_board" >
+        tools:layout="@layout/fragment_dash_board">
         <action
             android:id="@+id/action_nav_dashboard_to_nav_get_rooms"
             app:destination="@id/nav_get_rooms"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_dashboard_to_nav_notifications"
             app:destination="@id/nav_notifications"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_dashboard_to_deviceConfigurationFragment"
             app:destination="@id/deviceConfigurationFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_get_rooms"
         android:name="com.electrosoft.electrosoftnew.ui.GetRoomsFragment"
         android:label="Rooms"
-        tools:layout="@layout/fragment_get_rooms" >
+        tools:layout="@layout/fragment_get_rooms">
         <argument
             android:name="JsonResponseString"
-            app:argType="string"
-            android:defaultValue="null" />
+            android:defaultValue="null"
+            app:argType="string" />
         <action
             android:id="@+id/action_nav_get_rooms_to_addSensorFragment"
             app:destination="@id/addSensorFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_get_rooms_to_getSensorsFragment"
             app:destination="@id/getSensorsFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_get_rooms_to_updateRoomFragment"
             app:destination="@id/updateRoomFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_nav_get_rooms_to_sensorPerRoomFragment"
-            app:destination="@id/sensorPerRoomFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/devicePerRoomFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_about"
         android:name="com.electrosoft.electrosoftnew.ui.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
+
     <fragment
         android:id="@+id/nav_contact"
         android:name="com.electrosoft.electrosoftnew.ui.ContactFragment"
         android:label="Contact"
         tools:layout="@layout/fragment_contact" />
+
     <fragment
         android:id="@+id/nav_notifications"
         android:name="com.electrosoft.electrosoftnew.ui.NotificationsFragment"
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
+
     <fragment
-        android:id="@+id/addRoomFragment2"
-        android:name="com.electrosoft.electrosoftnew.ui.AddRoomFragment"
-        android:label="Add Room" />
+        android:id="@+id/sensorPerDevice"
+        android:name="com.electrosoft.electrosoftnew.ui.SensorsPerDeviceFragment"
+        android:label="Sensors in Device" />
+
     <fragment
         android:id="@+id/addSensorFragment"
         android:name="com.electrosoft.electrosoftnew.ui.AddSensorFragment"
         android:label="fragment_add_sensor"
         tools:layout="@layout/fragment_add_sensor" />
+
     <fragment
         android:id="@+id/getSensorsFragment"
         android:name="com.electrosoft.electrosoftnew.ui.GetSensorsFragment"
         android:label="fragment_get_sensors"
-        tools:layout="@layout/fragment_get_sensors" >
+        tools:layout="@layout/fragment_get_sensors">
         <action
             android:id="@+id/action_getSensorsFragment_to_updateSensorFragment"
             app:destination="@id/updateSensorFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/updateSensorFragment"
         android:name="com.electrosoft.electrosoftnew.ui.UpdateSensorFragment"
         android:label="fragment_update_sensor"
         tools:layout="@layout/fragment_update_sensor" />
+
     <fragment
         android:id="@+id/updateRoomFragment"
         android:name="com.electrosoft.electrosoftnew.ui.UpdateRoomFragment"
         android:label="fragment_update_room"
         tools:layout="@layout/fragment_update_room" />
+
     <fragment
         android:id="@+id/deviceConfigurationFragment"
-
         android:name="com.electrosoft.electrosoftnew.ui.DeviceConfigurationFragment"
         android:label="Configuration" />
+
     <fragment
-        android:id="@+id/sensorPerRoomFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.SensorPerRoomFragment"
-        android:label="Devices in the room" >
-        <action
-            android:id="@+id/action_sensorPerRoomFragment_to_statisticsFragment"
-            app:destination="@id/statisticsFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+        android:id="@+id/devicePerRoomFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.DevicePerRoomFragment"
+        android:label="{roomName}">
         <argument
             android:name="_id"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_devicePerRoomFragment_to_sensorPerDevice"
+            app:destination="@id/sensorPerDevice"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_devicePerRoomFragment_to_sensorsFragment"
+            app:destination="@id/sensorsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="roomName"
+            android:defaultValue="null"
+            app:argType="string" />
     </fragment>
+
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.electrosoft.electrosoftnew.ui.StatisticsFragment"
         android:label="Statistics"
-        tools:layout="@layout/fragment_statistics" >
+        tools:layout="@layout/fragment_statistics">
         <argument
-            android:name="SensorDevice"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:name="sensor_id"
+            android:defaultValue="id"
+            app:argType="string" />
         <argument
-            android:name="id"
-            app:argType="string"
-            android:defaultValue="id" />
+            android:name="sensor_name"
+            android:defaultValue="null"
+            app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/sensorsFragment"
+        android:name="com.electrosoft.electrosoftnew.ui.SensorsFragment"
+        android:label="{device_name}"
+        tools:layout="@layout/fragment_sensors">
+        <action
+            android:id="@+id/action_sensorsFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+        <argument
+            android:name="device_id"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="device_name"
+            android:defaultValue="null"
+            app:argType="string" />
+    </fragment>
+
+
+
+
+
+
+
 </navigation>

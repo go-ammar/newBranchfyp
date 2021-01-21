@@ -53,7 +53,7 @@
             android:layout_weight="1"
 
             android:padding="@dimen/_8sdp"
-            android:text="Update"
+            android:text="@string/update"
 
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,20 +63,20 @@
 
         <Button
             android:id="@+id/Cancel_btn"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_16sdp"
             android:layout_weight="1"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:strokeColor="#808080"
             android:padding="@dimen/_8sdp"
             android:text="@string/cancel"
             android:textAllCaps="false"
-
             app:layout_constraintBottom_toBottomOf="parent"
+
             app:layout_constraintEnd_toStartOf="@+id/updateRoom_btn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/romno" />
+            app:layout_constraintTop_toBottomOf="@+id/romno"
+            app:strokeColor="#808080" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

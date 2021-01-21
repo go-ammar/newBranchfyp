@@ -1,5 +1,6 @@
 package com.electrosoft.electrosoftnew.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,50 +23,40 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.electrosoft.electrosoftnew.R;
-import com.electrosoft.electrosoftnew.adapters.RoomAdapter;
-import com.electrosoft.electrosoftnew.adapters.SensorPerRoomAdapter;
-import com.electrosoft.electrosoftnew.databinding.FragmentSensorPerRoomBinding;
-import com.electrosoft.electrosoftnew.models.GetRoom;
-import com.electrosoft.electrosoftnew.models.Sensor;
+import com.electrosoft.electrosoftnew.adapters.SensorsPerDeviceAdapter;
+import com.electrosoft.electrosoftnew.databinding.FragmentSensorsBinding;
 import com.electrosoft.electrosoftnew.models.Sensors;
-import com.electrosoft.electrosoftnew.models.SensorsPerRoom;
 import com.electrosoft.electrosoftnew.sharedprefs.SharedPrefs;
 import com.electrosoft.electrosoftnew.webservices.VolleySingleton;
 import com.electrosoft.electrosoftnew.webservices.WebServices;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.squareup.moshi.Moshi;
-import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter;
 
 import org.json.JSONObject;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class SensorPerRoomFragment extends Fragment {
+public class SensorsFragment extends Fragment {
 
-
-    ArrayList<SensorsPerRoom> list;
-    ArrayList<Sensors> sensorList = new ArrayList<>();
-
+    private Context mContext;
+    FragmentSensorsBinding binding;
+    private static final String TAG = "SensorsFragment";
     NavController navController;
-    private String URL;
-    FragmentSensorPerRoomBinding binding;
     private RecyclerView recycle;
-    private SensorPerRoomAdapter adapter;
-    String TAG = "SensorPerRoomFragment";
+    ArrayList<Sensors> sensorList = new ArrayList<>();
+    SensorsPerDeviceAdapter adapter;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sensor_per_room, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sensors, container, false);
+        mContext = getContext();
         return binding.getRoot();
-
     }
 
     @Override
@@ -76,7 +67,6 @@ public class SensorPerRoomFragment extends Fragment {
         recycle.setHasFixedSize(true);
         recycle.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        list = new ArrayList<>();
 
         actionViews();
 
@@ -84,32 +74,19 @@ public class SensorPerRoomFragment extends Fragment {
 
     private void actionViews() {
 
-        SensorsPerRoom spr = new SensorsPerRoom();
-        spr.description = "des";
-        spr.name = "name";
-        list.add(spr);
-        SensorsPerRoom spr2 = new SensorsPerRoom();
-        spr2.description = "des2";
-        spr2.name = "name2";
-        list.add(spr2);
+        //TODO get deviceId from prev screen
+        String deviceid = "5fc61460e4540cc13901fa7e";
 
-//        adapter = new SensorPerRoomAdapter(list, getContext());
-//        recycle.setAdapter(adapter);
-
-        //ID for API
-        SensorPerRoomFragmentArgs id = SensorPerRoomFragmentArgs.fromBundle(getArguments());
-
+        SensorsFragmentArgs sensorsFragmentArgs = SensorsFragmentArgs.fromBundle(getArguments());
+        String id = sensorsFragmentArgs.getDeviceId();
 
         SharedPrefs sharedPrefs = new SharedPrefs(getContext());
         JSONObject params = new JSONObject();
 
-        //TODO remove this test id and add id.getId() in its place
-//        String testId = "5f637ce0784173069b60c9c9";
-
-        Log.d(TAG, "actionViews: get sensors api " + id.getId());
+        sensorList.clear();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                WebServices.API_GET_SENSORS + id.getId(), params, response -> {
+                WebServices.API_GET_SENSORS + id, params, response -> {
 
             Log.d(TAG, "_apigetSensors: res " + response);
 
@@ -123,8 +100,11 @@ public class SensorPerRoomFragment extends Fragment {
 
             binding.progress.setVisibility(View.GONE);
 
+            if (sensorList.size() == 0){
+                binding.tv2.setVisibility(View.VISIBLE);
+            }
 
-            adapter = new SensorPerRoomAdapter(sensorList, getContext(), id.getId());
+            adapter = new SensorsPerDeviceAdapter(sensorList, getContext());
             recycle.setAdapter(adapter);
 
         }, error -> {
@@ -150,5 +130,8 @@ public class SensorPerRoomFragment extends Fragment {
         VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
 
+
+
     }
+
 }

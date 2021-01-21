@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,66 +60,34 @@ public class ContactFragment extends Fragment {
     private void actionViews() {
         binding.fab1.setOnClickListener(view -> {
 
-            makeCall();
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:03402211539"));
+            startActivity(intent);
+
+        });
+
+        binding.link.setMovementMethod(LinkMovementMethod.getInstance());
+
+        binding.fab.setOnClickListener(v -> {
+
+
+            Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+
+            String[] aEmailList = {"electrosoft.tech@gmail.com"};
+
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, aEmailList);
+
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Query/Information");
+
+            emailIntent.setType("plain/text");
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "");
+
+            startActivity(emailIntent);
 
         });
 
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 1){
-            if (grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                makeCall();
-            }else {
-                Toast.makeText(getContext(), "Permission not granted", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
-    private void makeCall(){
-
-        String no = "+923085700715";
-
-
-        if (ContextCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.CALL_PHONE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions((Activity) requireContext(),
-                    new String[]{Manifest.permission.CALL_PHONE},
-                    1);
-
-
-
-        }
-        else {
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + no));
-            startActivity(callIntent);
-        }
-
-    }
-
-    //@Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        LatLng ICCBS = new LatLng(24.9418, 67.1207);
-        mMap.addMarker(new MarkerOptions().position(ICCBS).title("karachi univercity"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(ICCBS));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ICCBS, 15));
-        //mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-        //  @Override
-        //public void onMapClick(LatLng latLng) {
-        //  MarkerOptions markerOptions = new MarkerOptions();
-        //markerOptions.position(latLng);
-        //markerOptions.title(latLng.latitude+ ":" + latLng.longitude);
-        //mMap.clear();
-        //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
-        //mMap.addMarker(markerOptions);
-        //}
-        //});
-
-    }
 }

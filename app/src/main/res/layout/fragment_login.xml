@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/white"
-                    android:text="testing@testing.com"
+                    android:text="test@test.com"
 
                     />
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ConfigurationInterface {
 
-    void itemChange(int position, String room_id, ArrayList<GetRoom> getRoomList, String room_name);
+    boolean itemChange(int position, String room_id, ArrayList<GetRoom> getRoomList, String room_name);
 
     void getDevices();
 }

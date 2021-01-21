@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Are you sure you want to delete the room?"
+            android:text="@string/are_you_sure_you_want_to_delete_the_room"
             android:textColor="@color/white"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_16sdp"
             android:padding="@dimen/_8sdp"
-            android:text="Delete"
+            android:text="@string/delete"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
 

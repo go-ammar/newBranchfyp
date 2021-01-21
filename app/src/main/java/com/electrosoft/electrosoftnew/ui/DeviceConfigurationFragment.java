@@ -14,14 +14,11 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,7 +28,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.electrosoft.electrosoftnew.Interfaces.ConfigurationInterface;
 import com.electrosoft.electrosoftnew.R;
 import com.electrosoft.electrosoftnew.adapters.ConfigurationAdapter;
-import com.electrosoft.electrosoftnew.databinding.DeleteRoomDialogBinding;
+import com.electrosoft.electrosoftnew.databinding.ChangeRoomDialogBinding;
 import com.electrosoft.electrosoftnew.databinding.FragmentDeviceConfigurationBinding;
 import com.electrosoft.electrosoftnew.databinding.GetconfigurationdesignBinding;
 import com.electrosoft.electrosoftnew.models.Devices;
@@ -47,9 +44,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class DeviceConfigurationFragment extends Fragment implements ConfigurationInterface {
@@ -62,7 +58,7 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
     NavController navController;
     private RecyclerView recycle;
     private ConfigurationAdapter adapter;
-    private Context context = getContext();
+    private Context context;
     private ArrayList<GetRoom> getRoomList = new ArrayList<>();
 
 
@@ -73,6 +69,7 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
 
         context = getContext();
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_device_configuration, container, false);
+        context = getContext();
         return binding.getRoot();
     }
 
@@ -84,23 +81,26 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
         navController = Navigation.findNavController(view);
         recycle = binding.configurationList;
         recycle.setHasFixedSize(true);
-        recycle.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recycle.setLayoutManager(new LinearLayoutManager(context));
 
         binding.pullToRefresh.setOnRefreshListener(() -> {
             binding.progress.setVisibility(View.VISIBLE);
             devicesList.clear();
-            actionViews();
+            actionViews(false);
             binding.pullToRefresh.setRefreshing(false);
         });
-        actionViews();
+        actionViews(false);
 
     }
 
-    private void actionViews() {
+    private void actionViews(boolean check) {
 
         JSONObject params = new JSONObject();
 
-        SharedPrefs sharedPrefs = new SharedPrefs(requireContext());
+        if (check){
+            binding.progress.setVisibility(View.GONE);
+        }
+        SharedPrefs sharedPrefs = new SharedPrefs(context);
         Log.d(TAG, "access token is: in Config" + sharedPrefs.getKey());
         try {
 
@@ -131,21 +131,15 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
             Log.d(TAG, "actionViews: get room is " + devicesList.get(0).toString());
 
             binding.progress.setVisibility(View.GONE);
-            adapter = new ConfigurationAdapter(requireContext(), devicesList, this);
+            adapter = new ConfigurationAdapter(context, devicesList, this);
             recycle.setAdapter(adapter);
 
-//            try {
-//                getRoom = jsonAdapter.fromJson(response.toString());
-//                Log.d(TAG, "actionViews  get room is: " + getRoom);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
             Log.d(TAG, "actionViews: List is " + devicesList.toString());
 
         }, error -> {
             binding.progress.setVisibility(View.GONE);
 
-            Toast toast = Toast.makeText(getContext(), "Could not get devices", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(context, "Could not get devices", Toast.LENGTH_SHORT);
             toast.show();
             Log.d(TAG, "_apiGetDevices: error " + error);
 
@@ -163,20 +157,21 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
 
     }
 
 
     @Override
-    public void itemChange(int position, String room_id, ArrayList<GetRoom> getRoomList, String room_name) {
+    public boolean itemChange(int position, String room_id, ArrayList<GetRoom> getRoomList, String room_name) {
 
-        DeleteRoomDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.change_room_dialog,
+        AtomicBoolean check = new AtomicBoolean(false);
+        ChangeRoomDialogBinding binding2 = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.change_room_dialog,
                 null, false);
 
         AlertDialog dialog = new AlertDialog.Builder(context)
-                .setView(binding.getRoot())
+                .setView(binding2.getRoot())
                 .create();
         if (dialog.getWindow() != null)
             dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
@@ -189,13 +184,14 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
         JSONObject params = new JSONObject();
         SharedPrefs sharedPrefs = new SharedPrefs(context);
 
-        if (!room_id.equals(binding1.viewrooms.getText().toString()))
+        Log.d(TAG, "roomsString: " + binding1.viewrooms.getText().toString());
+        if (!room_name.equals(""))
             dialog.show();
 
 
         //Doing this to get RoomID and send to params
         for (int i = 0; i < getRoomList.get(0).data.size(); i++) {
-            Log.d(TAG, "itemChange: size " + binding1.viewrooms.getText().toString());
+            Log.d(TAG, "itemChange: size " + room_name);
             if (room_name.
                     equals(getRoomList.get(0).data.get(i).name)) {
                 Log.d(TAG, "itemChange: params is " + getRoomList.get(0).data.get(i).id);
@@ -213,13 +209,14 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
         Log.d(TAG, "itemChange: params is " + params);
 
 
-        binding.cancelButton.setOnClickListener(v -> {
+        binding2.cancelButton.setOnClickListener(v -> {
 //                    ((ConfigViewHolder) holder).binding.viewrooms.setText(finalRoom_id);
             dialog.dismiss();
-            actionViews();
+            actionViews(false);
         });
 
-        binding.confirmButton.setOnClickListener(v -> {
+        binding2.confirmButton.setOnClickListener(v -> {
+
 
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
                             WebServices.API__UPDATE_CONFIG_DEVICE + devicesList.get(0).data.get(position).id + "/assignRoom",
@@ -227,6 +224,12 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
 
                         Toast toast = Toast.makeText(context, "Device location Updated", Toast.LENGTH_SHORT);
                         toast.show();
+
+                        binding.progress.setVisibility(View.VISIBLE);
+                        devicesList.clear();
+                        actionViews(true);
+
+                        check.set(true);
 
 
                     }, error -> {
@@ -254,8 +257,11 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
 
                 }
 
+
+
         );
 
+        return check.get();
 
     }
 

@@ -15,7 +15,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,12 +25,7 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.electrosoft.electrosoftnew.Interfaces.RoomInterface;
 import com.electrosoft.electrosoftnew.R;
 import com.electrosoft.electrosoftnew.adapters.RoomAdapter;
@@ -47,15 +41,12 @@ import com.electrosoft.electrosoftnew.webservices.WebServices;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 
 public class GetRoomsFragment extends Fragment implements RoomInterface {
@@ -68,7 +59,7 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
     private RecyclerView recycle;
     private RoomAdapter roomAdapter;
     FragmentGetRoomsBinding binding;
-    private ArrayList<GetRoom> getRoomList = new ArrayList<>();
+    private final ArrayList<GetRoom> getRoomList = new ArrayList<>();
     Context mContext = getContext();
 
 
@@ -77,7 +68,14 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_get_rooms, container, false);
+        mContext = getContext();
         return binding.getRoot();
+
+
+
+
+
+
     }
 
 
@@ -89,7 +87,8 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
         navController = Navigation.findNavController(view);
         recycle = binding.programmingList;
         recycle.setHasFixedSize(true);
-        recycle.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recycle.setLayoutManager(new LinearLayoutManager(mContext));
+
 
         lst = new ArrayList<>();
 
@@ -97,14 +96,11 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
 //        GetRoomsFragmentArgs args = GetRoomsFragmentArgs.fromBundle(getArguments());
 
 
-        binding.pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                binding.progress.setVisibility(View.VISIBLE);
-                getRoomList.clear();
-                actionViews();
-                binding.pullToRefresh.setRefreshing(false);
-            }
+        binding.pullToRefresh.setOnRefreshListener(() -> {
+            binding.progress.setVisibility(View.VISIBLE);
+            getRoomList.clear();
+            actionViews();
+            binding.pullToRefresh.setRefreshing(false);
         });
 
         actionViews();
@@ -120,67 +116,11 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
 
         _apiGetRooms();
 
-        //        JSONObject params = new JSONObject();
-//
-//        SharedPrefs sharedPrefs = new SharedPrefs(getContext());
-//        Log.d(TAG, "access token is: in getroom" + sharedPrefs.getKey());
-//        try {
-//
-//            // BODY
-////            params.put("Authorization", sharedPrefs.getKey());
-//            Log.d(TAG, "actionViews: in getroom " + sharedPrefs.getKey());
-//
-//            //        Log.d(TAG, "validations: email is:  " + binding.emailEt.getText().toString());
-//        } catch (Exception e) {
-//            Log.e(TAG, "_apiLogin: ", e);
-//        }
-//
-//
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_ROOMS, params, response -> {
-//
-//
-////            JsonAdapter<GetRoom> jsonAdapter = moshi.adapter(GetRoom.class);
-//
-//
-//            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
-//                    .create();
-//            GetRoom getRoom1 = gson.fromJson(response.toString(), GetRoom.class);
-//            getRoomList.add(getRoom1);
-//
-//
-//            binding.progress.setVisibility(View.GONE);
-//            roomAdapter = new RoomAdapter(requireContext(), getRoomList, this);
-//            Log.d(TAG, "actionViews: adapter called ");
-//            recycle.setAdapter(roomAdapter);
-//
-//
-//        }, error -> {
-//            binding.progress.setVisibility(View.GONE);
-//            Toast toast = Toast.makeText(getContext(), "Could not get rooms", Toast.LENGTH_SHORT);
-//            toast.show();
-//            Log.d(TAG, "_apiGetRoom: error " + error);
-//
-//        }) {
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                HashMap header = new HashMap<>();
-//                header.put("Authorization", sharedPrefs.getKey());
-//                Log.d(TAG, "getHeaders: " + header.toString());
-//                return header;
-//            }
-//        };
-//
-//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//
-//        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
-
 
     }
 
 
-    void _apiGetRooms(){
+    void _apiGetRooms() {
 
 
         binding.progress.setVisibility(View.VISIBLE);
@@ -189,7 +129,7 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
 
         JSONObject params = new JSONObject();
 
-        SharedPrefs sharedPrefs = new SharedPrefs(getContext());
+        SharedPrefs sharedPrefs = new SharedPrefs(mContext);
         Log.d(TAG, "access token is: in getroom" + sharedPrefs.getKey());
         try {
 
@@ -207,27 +147,27 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
                 response -> {
 
 
-//            JsonAdapter<GetRoom> jsonAdapter = moshi.adapter(GetRoom.class);
+                    Log.d(TAG, "_apiGetRooms: " + response);
 
-
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
-                    .create();
-            GetRoom getRoom1 = gson.fromJson(response.toString(), GetRoom.class);
+                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+                            .create();
+                    GetRoom getRoom1 = gson.fromJson(response.toString(), GetRoom.class);
 
                     getRoomList.clear();
 
                     getRoomList.add(getRoom1);
 
 
-            binding.progress.setVisibility(View.GONE);
-            roomAdapter = new RoomAdapter(requireContext(), getRoomList, this);
-            Log.d(TAG, "actionViews: adapter called "+ getRoomList.get(0).data.size());
-            recycle.setAdapter(roomAdapter);
+
+                    binding.progress.setVisibility(View.GONE);
+                    roomAdapter = new RoomAdapter(mContext, getRoomList, this);
+                    Log.d(TAG, "actionViews: adapter called " + getRoomList.get(0).data.size());
+                    recycle.setAdapter(roomAdapter);
 
 
-        }, error -> {
+                }, error -> {
             binding.progress.setVisibility(View.GONE);
-            Toast toast = Toast.makeText(getContext(), "Could not get rooms", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(mContext, "Could not get rooms", Toast.LENGTH_SHORT);
             toast.show();
             Log.d(TAG, "_apiGetRoom: error " + error);
 
@@ -245,13 +185,13 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+        VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
 
     }
 
     void addRoomsDialog() {
 
-        AddRoomDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.add_room_dialog,
+        AddRoomDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.add_room_dialog,
                 null, false);
 
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
@@ -275,7 +215,7 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
                 Log.e(TAG, "_apiLogin: ", e);
             }
 
-            SharedPrefs sharedPrefs = new SharedPrefs(getContext());
+            SharedPrefs sharedPrefs = new SharedPrefs(mContext);
             Log.d(TAG, "access token is: in getroom" + sharedPrefs.getKey());
             try {
 
@@ -289,7 +229,7 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_ADD_ROOM, params, response -> {
 
                 Log.d(TAG, "_apigetRoom: res " + response);
-                Toast toast = Toast.makeText(getContext(), "Room added", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(mContext, "Room added", Toast.LENGTH_SHORT);
 
 
                 toast.show();
@@ -297,9 +237,8 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
                 actionViews();
 
 
-
             }, error -> {
-                Toast toast = Toast.makeText(getContext(), "Could not add room", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(mContext, "Could not add room", Toast.LENGTH_SHORT);
                 toast.show();
                 Log.d(TAG, "_apiGetRoom: error " + error);
                 alertDialog.dismiss();
@@ -319,7 +258,7 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
                     DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-            VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+            VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
 
 
         });
@@ -341,13 +280,13 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
     @Override
     public void updateDialog(int position) {
 
-        mContext = getContext();
 
         UpdateRoomDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.update_room_dialog,
                 null, false);
         AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setView(binding.getRoot())
                 .create();
+
 
         if (dialog.getWindow() != null)
             dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
@@ -420,7 +359,6 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
     @Override
     public void deleteDialog(int position) {
 
-        mContext = getContext();
         DeleteRoomDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.delete_room_dialog,
                 null, false);
 
@@ -437,7 +375,6 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
         });
 
         binding.confirmButton.setOnClickListener(view -> {
-//            dialog.dismiss();
 
 
             JSONObject params = new JSONObject();
@@ -452,8 +389,6 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
                 Log.d("TAG", "_apigetRoom: res " + response);
 
 
-                Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
-                        .create();
                 Toast toast = Toast.makeText(mContext, "Room deleted successfully", Toast.LENGTH_SHORT);
                 toast.show();
 
@@ -466,7 +401,7 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
 
             }) {
                 @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
+                public Map<String, String> getHeaders() {
                     HashMap header = new HashMap<>();
                     header.put("Authorization", sharedPrefs.getKey());
                     Log.d("TAG", "getHeaders: " + header.toString());
@@ -479,7 +414,6 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
                     DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
             VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
-
 
         });
     }

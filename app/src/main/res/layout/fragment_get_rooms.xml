@@ -12,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/gradiant_main"
-
         >
 
         <FrameLayout
@@ -38,7 +37,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:srcCompat="@drawable/ic_add_black_24dp"
-                    app:tint="@null" />
+                    app:tint="@null"
+                    android:contentDescription="@string/add_room" />
 
                 <ProgressBar
                     android:id="@+id/progress"

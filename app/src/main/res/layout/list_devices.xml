@@ -4,9 +4,6 @@
 
     <data>
 
-        <variable
-            name="sensor"
-            type="com.electrosoft.electrosoftnew.models.Sensors" />
     </data>
 
     <FrameLayout
@@ -22,19 +19,6 @@
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
-
-<!--            <androidx.cardview.widget.CardView-->
-<!--                app:cardCornerRadius="@dimen/_8sdp"-->
-
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="5dp"-->
-<!--                android:clickable="true"-->
-<!--                android:foreground="?android:attr/selectableItemBackground"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent">-->
 
                 <LinearLayout
                     android:id="@+id/viewr"
@@ -57,7 +41,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
-                            android:text="sensor name"
+                            android:text="@string/device_name_"
                             android:textColor="@color/white"
 
                             android:textSize="@dimen/_16sdp"
@@ -66,22 +50,6 @@
 
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/description_textview"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_alignParentEnd="true"-->
-<!--                            android:layout_alignParentRight="true"-->
-<!--                            android:text="sensor description"-->
-<!--                            android:textColor="@color/white"-->
-
-<!--                            android:textSize="@dimen/_16sdp"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintHorizontal_bias="0.5"-->
-<!--                            app:layout_constraintStart_toEndOf="@+id/room_name_textview"-->
-<!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -110,7 +78,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             android:textAllCaps="false"
-                            android:text="See Statistics"
+                            android:text="@string/see_statistics"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
 

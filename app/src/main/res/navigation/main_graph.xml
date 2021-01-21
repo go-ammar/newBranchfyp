@@ -9,37 +9,40 @@
         android:id="@+id/splashScreen"
         android:name="com.electrosoft.electrosoftnew.ui.SplashScreenFragment"
         android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" >
+        tools:layout="@layout/fragment_splash_screen">
         <action
             android:id="@+id/action_splashScreen_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/main_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashScreen_to_homeLandingActivity"
+            app:destination="@id/homeLandingActivity" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.electrosoft.electrosoftnew.ui.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_homeLandingActivity"
             app:destination="@id/homeLandingActivity"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_loginFragment_to_enterEmailFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/enterEmailFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            app:destination="@id/enterEmailFragment" />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
 
     </fragment>
@@ -47,65 +50,63 @@
         android:id="@+id/forgotpass"
         android:name="com.electrosoft.electrosoftnew.ui.ForgotPassFragment"
         android:label="fragment_forgotpass"
-        tools:layout="@layout/fragment_forgotpass" >
+        tools:layout="@layout/fragment_forgotpass">
         <action
             android:id="@+id/action_forgotpass_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:popUpTo="@id/forgotpass"
-            app:popUpToInclusive="true"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/forgotpass"
+            app:popUpToInclusive="true" />
         <argument
             android:name="email"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
     </fragment>
     <activity
         android:id="@+id/homeLandingActivity"
         android:name="com.electrosoft.electrosoftnew.ui.HomeLandingActivity"
         android:label="HomeLandingActivity"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right"
         app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left">
-    <argument
-        android:name="clearBackStack"
-        app:argType="boolean"
-        android:defaultValue="true" />
-</activity>
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right">
+        <argument
+            android:name="clearBackStack"
+            android:defaultValue="true"
+            app:argType="boolean" />
+    </activity>
     <fragment
         android:id="@+id/pinFragment"
         android:name="com.electrosoft.electrosoftnew.ui.PinFragment"
-        android:label="PinFragment" >
+        android:label="PinFragment">
         <action
             android:id="@+id/action_pinFragment_to_forgotpass"
             app:destination="@id/forgotpass"
-            app:popUpTo="@id/pinFragment"
-            app:popUpToInclusive="true"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
-            />
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/pinFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="email"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/enterEmailFragment"
         android:name="com.electrosoft.electrosoftnew.ui.EnterEmailFragment"
-        android:label="EnterEmailFragment" >
+        android:label="EnterEmailFragment">
         <action
             android:id="@+id/action_enterEmailFragment_to_pinFragment"
             app:destination="@id/pinFragment"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"/>
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
 

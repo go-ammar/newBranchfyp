@@ -1,6 +1,7 @@
 package com.electrosoft.electrosoftnew.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,11 +45,9 @@ public class LoginFragment extends Fragment {
 
 
     private static final String TAG = "LoginFragment";
-    private String URL;
     NavController navController;
-
     FragmentLoginBinding binding;
-
+    private String URL;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -60,7 +59,6 @@ public class LoginFragment extends Fragment {
 
 
     }
-    // CTRL + o
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -80,10 +78,7 @@ public class LoginFragment extends Fragment {
 
 
         binding.loginBtn.setOnClickListener(v -> {
-            if (validations()){
-
-            }
-
+            validations();
 
 
 //                navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
@@ -190,10 +185,16 @@ public class LoginFragment extends Fragment {
                     SharedPrefs sharedPrefs = new SharedPrefs(requireContext());
                     sharedPrefs.setKey(login.data.accessToken);
 
+//                    sharedPrefs.putUser(login, "user");
+
+//                    Log.d(TAG, "validations: " + sharedPrefs.getUser("user").data.id);
 
 
                     progressDialog.dismiss();
-                    navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
+
+                    Intent intent = new Intent(requireContext(), HomeLandingActivity.class);
+                    startActivity(intent);
+//                    navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
 
 
                 }, error -> {
@@ -204,7 +205,6 @@ public class LoginFragment extends Fragment {
                     Toast toast = Toast.makeText(getContext(), "Incorrect email or password", Toast.LENGTH_SHORT);
                     toast.show();
                     Log.d(TAG, "_apiLogin: error " + error);
-
 
 
                 });

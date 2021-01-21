@@ -47,6 +47,44 @@
     <string name="text_update_sensor">Update Sensor</string>
     <string name="text_reset_password">Reset Password</string>
     <string name="cancel">Cancel</string>
-    <string name="iccbs_technology_park_and_technology_incubation_center_industrial_linkages_building_international_center_for_chemical_and_biological_sciences_university_of_karachi_4_794_21_mi_karachi">ICCBS Technology Park and Technology Incubation Center, Industrial Linkages Building, International Center for Chemical and Biological Sciences, University Of Karachi, (4,794.21 mi) Karachi</string>
+    <string name="address">ICCBS Technology Park and Technology Incubation Center, Industrial Linkages Building,
+         International Center for Chemical and Biological Sciences, University Of Karachi, Karachi
+    </string>
+    <string name="link"><a href="http://electrosofttechnologies.com">Visit our Website</a></string>
+    <string name="version_1_0_0">Version 1.0.0</string>
+    <string name="add_room">Add Room</string>
+    <string name="enter_room_name">Enter Room Name</string>
+    <string name="are_you_sure_you_want_to_delete_the_room">Are you sure you want to delete the room?</string>
+    <string name="delete">Delete</string>
+    <string name="address_hint">Address</string>
+    <string name="configuration">Configuration</string>
+    <string name="view_your_configurations">View Your Configurations</string>
+    <string name="view_rooms">View Rooms</string>
+    <string name="view_all_rooms">View All Rooms</string>
+    <string name="powered_by_electrosoft">Powered By Electrosoft</string>
+    <string name="your_devices">Your Devices</string>
+    <string name="no_data_available">No Data Available</string>
+    <string name="electrosoft">Electrosoft</string>
+    <string name="electrosoft_tech_gmail_com">electrosoft.tech@gmail.com</string>
+    <string name="_92_340_2211539">+92 340-2211539</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="submit">Submit</string>
+    <string name="enter_6_digit_pin_sent_to_your_email">Enter 6 digit Pin sent to your email</string>
+    <string name="enter_pin">Enter Pin</string>
+    <string name="sensor">SENSOR</string>
+    <string name="device_name">Device Name:</string>
+    <string name="device_description">Device Description:</string>
+    <string name="device_description_">Device Description</string>
+    <string name="change_device_room">Change Device Room</string>
+    <string name="device_name_">Device name</string>
+    <string name="see_statistics">See Statistics</string>
+    <string name="room_name">Room name</string>
+    <string name="update_room">Update Room</string>
+    <string name="view_devices">View Devices</string>
+    <string name="devices_present_in_room">Devices present in room</string>
+    <string name="update">Update</string>
+    <string name="room_not_assigned">Room not Assigned</string>
+    <string name="logout">Logout</string>
+    <string name="logout_text">Are you sure you want to log out?</string>
 
 </resources>

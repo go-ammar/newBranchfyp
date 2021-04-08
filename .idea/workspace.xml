@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="actionviews" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="612c2949-c3e3-46f4-8be7-25a7d30c5c00" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/issues.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/fypapplication/fypapp/ExampleInstrumentedTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/Interfaces/ConfigurationInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/Interfaces/RoomInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/ConfigurationAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/DevicesPerRoomAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/RoomAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/SensorAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/SensorsPerDeviceAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/ServicesAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/YourMarkerView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/helper/Global.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/AssignedTo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/DeviceAssignedTo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/DeviceModelClass.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/Devices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/DevicesData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/LoginData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/Room.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/RoomData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/RoomDevices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/Sensor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/SensorData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/SensorReading.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/Sensors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/Services.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/sharedprefs/SharedPrefs.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/AddSensorFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/DashBoardFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/DeviceConfigurationFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/EnterEmailFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/ForgotPassFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/GetRoomsFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/GetSensorsFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/LoginFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/MainActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/NotificationsFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SensorsFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SensorsPerDeviceFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/ServicesFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SigninFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SplashScreenFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/StatisticsFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/UpdateRoomFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/UpdateSensorFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/webservices/WebServices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_services.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_signin.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_service.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/electrosoft/electrosoftnew/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/Interfaces/ConfigurationInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/Interfaces/RoomInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/adapters/ConfigurationAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/adapters/DevicesPerRoomAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/adapters/RoomAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/adapters/SensorAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/adapters/SensorsPerDeviceAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/adapters/YourMarkerView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/AssignedTo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/AuthorizationToken.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/Configuration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/DeviceAssignedTo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/DeviceModelClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/Devices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/DevicesData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/GetRoom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/Login.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/LoginData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/LoginResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/PresentIn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/Room.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/RoomData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/RoomDevices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/Sensor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/SensorData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/SensorReading.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/Sensors.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/models/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/sharedprefs/SharedPrefs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/AboutFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/AddSensorFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/ContactFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/DashBoardFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/DeviceConfigurationFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/DevicePerRoomFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/EnterEmailFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/ForgotPassFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/GetRoomsFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/GetSensorsFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/HomeLandingActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/LoginFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/NotificationsFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/PinFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/SensorsFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/SensorsPerDeviceFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/SplashScreenFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/StatisticsFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/UpdateRoomFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/ui/UpdateSensorFragment.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/webservices/VolleySingleton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/electrosoft/electrosoftnew/webservices/WebServices.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dash_board.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dash_board.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_enter_email.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_enter_email.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forgotpass.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_forgotpass.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_splash_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_splash_screen.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/getconfigurationdesign.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/getconfigurationdesign.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/getsensordesign.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/getsensordesign.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/nav_header.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/nav_header.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/home_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/home_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/main_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/main_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/electrosoft/electrosoftnew/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Electrosoftnew" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Electrosoftnew" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Electrosoftnew" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="resourceFile" />
+        <option value="Interface" />
+        <option value="layoutResourceFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="demoBranch" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1hE4eoM1n1Bn7yH2TaaCDEKfDWC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="jvl75xkzyhjv6tr4" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-12-11T17:06:39.453Z" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android-custom-viewC:/Users/go_am/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED" value="RecyclerView" />
+    <property name="android-custom-viewC:/Users/go_am/AppData/Local/Android/Sdk/sources/android-29/android/view/View.java_SELECTED" value="View" />
+    <property name="android-custom-viewC:/Users/go_am/AppData/Local/Android/Sdk/sources/android-29/android/widget/AutoCompleteTextView.java_SELECTED" value="AutoCompleteTextView" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="multi-representation-previewC:/Users/go_am/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_selected" value="Custom views" />
+    <property name="multi-representation-previewC:/Users/go_am/AppData/Local/Android/Sdk/sources/android-29/android/view/View.java_selected" value="Custom views" />
+    <property name="multi-representation-previewC:/Users/go_am/AppData/Local/Android/Sdk/sources/android-29/android/widget/AutoCompleteTextView.java_selected" value="Custom views" />
+    <property name="project.structure.last.edited" value="SDK Location" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.23978414">
+      <recent name="com.electrosoft.electrosoftnew" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Android Projects\electrosoft-android\app\src\main\res\drawable-v24" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.fypapplication.fypapp.ui" />
+      <recent name="com.electrosoft.electrosoftnew.ui" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.electrosoft.electrosoftnew.models" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Android Projects\electrosoft-android\app\src\main\res\drawable" />
+      <recent name="C:\Android Projects\electrosoft-android\app\src\main\res\layout" />
+      <recent name="C:\Android Projects\electrosoft-android\app\src\main\res\anim" />
+      <recent name="C:\Android Projects\electrosoft-android\app\src\main\res" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="toast" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Android App.app">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="Electrosoftnew.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="electrosoft-android [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.electrosoft-android [build]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_PROPERTIES" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="612c2949-c3e3-46f4-8be7-25a7d30c5c00" name="Default Changelist" comment="" />
+      <created>1599563015330</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599563015330</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1617793955509">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1617793955509" />
+    <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1616580778482">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.728@0.0.1366.728" timestamp="1616580778482" />
+    <state x="466" y="233" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1617345878685">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="466" y="233" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1617345878685" />
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617348003086">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1617348003086" />
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1617796777733">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1617796777733" />
+    <state x="539" y="91" key="FileChooserDialogImpl" timestamp="1614113453386">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="539" y="91" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1614113453386" />
+    <state width="1323" height="226" key="GridCell.Tab.0.bottom" timestamp="1617796445572">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="226" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1617796445572" />
+    <state width="1323" height="226" key="GridCell.Tab.0.center" timestamp="1617796445572">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="226" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1617796445572" />
+    <state width="1323" height="226" key="GridCell.Tab.0.left" timestamp="1617796445571">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="226" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1617796445571" />
+    <state width="1323" height="226" key="GridCell.Tab.0.right" timestamp="1617796445572">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="226" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1617796445572" />
+    <state x="390" y="97" width="771" height="534" key="find.popup" timestamp="1617105577138">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="390" y="97" width="771" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1617105577138" />
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1617795572580">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1617795572580" />
+    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup" timestamp="1617796911031">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1617796911031" />
+  </component>
+</project>

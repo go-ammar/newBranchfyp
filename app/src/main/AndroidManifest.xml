@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.electrosoft.electrosoftnew">
+    package="com.fypapplication.fypapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,9 +16,9 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_config"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.HomeLandingActivity" />
+        <activity android:name="com.fypapplication.fypapp.ui.HomeLandingActivity" />
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name="com.fypapplication.fypapp.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

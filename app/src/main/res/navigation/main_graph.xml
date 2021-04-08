@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashScreen"
-        android:name="com.electrosoft.electrosoftnew.ui.SplashScreenFragment"
+        android:name="com.fypapplication.fypapp.ui.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen">
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.LoginFragment"
+        android:name="com.fypapplication.fypapp.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgotpass"
-        android:name="com.electrosoft.electrosoftnew.ui.ForgotPassFragment"
+        android:name="com.fypapplication.fypapp.ui.ForgotPassFragment"
         android:label="fragment_forgotpass"
         tools:layout="@layout/fragment_forgotpass">
         <action
@@ -67,7 +67,7 @@
     </fragment>
     <activity
         android:id="@+id/homeLandingActivity"
-        android:name="com.electrosoft.electrosoftnew.ui.HomeLandingActivity"
+        android:name="com.fypapplication.fypapp.ui.HomeLandingActivity"
         android:label="HomeLandingActivity"
         app:enterAnim="@anim/slide_in_right"
         app:exitAnim="@anim/slide_out_left"
@@ -80,7 +80,7 @@
     </activity>
     <fragment
         android:id="@+id/pinFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.PinFragment"
+        android:name="com.fypapplication.fypapp.ui.PinFragment"
         android:label="PinFragment">
         <action
             android:id="@+id/action_pinFragment_to_forgotpass"
@@ -98,7 +98,7 @@
     </fragment>
     <fragment
         android:id="@+id/enterEmailFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.EnterEmailFragment"
+        android:name="com.fypapplication.fypapp.ui.EnterEmailFragment"
         android:label="EnterEmailFragment">
         <action
             android:id="@+id/action_enterEmailFragment_to_pinFragment"

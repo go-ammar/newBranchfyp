@@ -7,7 +7,7 @@
 
         <variable
             name="config"
-            type="com.electrosoft.electrosoftnew.models.Devices" />
+            type="com.fypapplication.fypapp.models.Devices" />
     </data>
 
     <FrameLayout
@@ -122,13 +122,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:paddingStart="@dimen/_8sdp"
+                    android:maxLines="2"
 
+                    android:paddingStart="@dimen/_8sdp"
                     android:paddingTop="@dimen/_6sdp"
                     android:paddingBottom="@dimen/_6sdp"
                     android:singleLine="false"
                     android:text="@string/device_description_"
-                    android:maxLines="2"
 
                     android:textColor="@color/white"
                     android:textSize="@dimen/_13sdp"
@@ -151,15 +151,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/name_text_input"
-
                     style="@style/ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="#808080"
                     android:gravity="center"
                     android:hint="@string/change_device_room"
-
-
                     android:paddingStart="@dimen/_8sdp"
                     android:paddingTop="@dimen/_6sdp"
                     android:paddingEnd="@dimen/_8sdp"
@@ -168,13 +165,10 @@
                     android:textColorHighlight="@color/white"
                     android:textColorHint="@color/white"
                     android:textSize="@dimen/_16sdp"
-
                     app:boxStrokeColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/description_textview"
-
-                    >
+                    app:layout_constraintTop_toBottomOf="@id/description_textview">
 
                     <AutoCompleteTextView
                         android:id="@+id/viewrooms"

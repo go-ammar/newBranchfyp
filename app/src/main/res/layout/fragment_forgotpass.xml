@@ -10,14 +10,26 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradiant_main"
+        android:background="@color/backgroundcolor"
         tools:context=".ui.ForgotPassFragment">
 
         <!-- TODO: Update blank fragment layout -->
+
+        <WebView
+            android:visibility="gone"
+            android:id="@+id/webView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            >
 
 
             <ImageView
@@ -25,11 +37,10 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:background="@drawable/ic_e"
+                app:layout_constraintBottom_toTopOf="@id/Passw"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/Passw"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
 
@@ -68,8 +79,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
-
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/Passw"
                 style="@style/LoginTextInputLayoutStyle"
@@ -79,16 +88,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/number"
-                app:passwordToggleTint="@color/white"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/PasswordET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:hint="@string/hint_enter_password"
                     android:inputType="textPassword"
-                    android:hint="@string/hint_enter_password" />
+                    android:textColor="@color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -98,18 +107,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_16sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:passwordToggleTint="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/Passw"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/CPasswordET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_enter_cpass"
-                    android:textColor="@color/white"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:textColor="@color/white" />
 
 
             </com.google.android.material.textfield.TextInputLayout>

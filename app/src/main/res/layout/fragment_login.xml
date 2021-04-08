@@ -10,7 +10,6 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradiant_main"
         tools:context=".ui.LoginFragment">
 
 
@@ -18,101 +17,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"
-                android:layout_marginTop="16dp"
-                android:paddingTop="10dp"
-                android:src="@drawable/ic_e"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                app:tabTextColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
-
-
-            <com.google.android.material.textfield.TextInputLayout
-
-                android:id="@+id/textEmail"
-                style="@style/LoginTextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_16sdp"
-                android:hint="@string/hint_enter_email"
-                android:textColorHint="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:tabMode="fixed"
+                app:tabIndicatorHeight="3dp"
+                app:tabGravity="fill"
+                />
+
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/emailEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/white"
-                    android:text="test@test.com"
-
-                    />
-
-<!--                android:fontFamily="serif-monospace"-->
-
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
-                style="@style/LoginTextInputLayoutStyle"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_16sdp"
-                android:hint="@string/hint_enter_password"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textEmail"
-
-                app:passwordToggleEnabled="true"
-                app:passwordToggleTint="@color/white">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:textColor="@color/white"
-                    android:text="123456"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/loginBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_16sdp"
-                android:padding="@dimen/_12sdp"
-
-                android:text="@string/text_login"
-                android:textAllCaps="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
-            <TextView
-                android:id="@+id/forgotPassTv"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_margin="@dimen/_16sdp"
-                android:gravity="center"
-                android:text="@string/text_forgot_password"
-                android:textAlignment="center"
-                android:textColor="@color/lightgray"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-                tools:ignore="MissingConstraints" />
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+                />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

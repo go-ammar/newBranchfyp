@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/nav_dashboard"
-        android:name="com.electrosoft.electrosoftnew.ui.DashBoardFragment"
+        android:name="com.fypapplication.fypapp.ui.DashBoardFragment"
         android:label="@string/text_dashboard"
         tools:layout="@layout/fragment_dash_board">
         <action
@@ -32,11 +32,18 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_dashboard_to_servicesFragment"
+            app:destination="@id/servicesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
         android:id="@+id/nav_get_rooms"
-        android:name="com.electrosoft.electrosoftnew.ui.GetRoomsFragment"
+        android:name="com.fypapplication.fypapp.ui.GetRoomsFragment"
         android:label="Rooms"
         tools:layout="@layout/fragment_get_rooms">
         <argument
@@ -75,36 +82,36 @@
 
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.electrosoft.electrosoftnew.ui.AboutFragment"
+        android:name="com.fypapplication.fypapp.ui.AboutFragment"
         android:label="About"
         tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/nav_contact"
-        android:name="com.electrosoft.electrosoftnew.ui.ContactFragment"
+        android:name="com.fypapplication.fypapp.ui.ContactFragment"
         android:label="Contact"
         tools:layout="@layout/fragment_contact" />
 
     <fragment
         android:id="@+id/nav_notifications"
-        android:name="com.electrosoft.electrosoftnew.ui.NotificationsFragment"
+        android:name="com.fypapplication.fypapp.ui.NotificationsFragment"
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/sensorPerDevice"
-        android:name="com.electrosoft.electrosoftnew.ui.SensorsPerDeviceFragment"
+        android:name="com.fypapplication.fypapp.ui.SensorsPerDeviceFragment"
         android:label="Sensors in Device" />
 
     <fragment
         android:id="@+id/addSensorFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.AddSensorFragment"
+        android:name="com.fypapplication.fypapp.ui.AddSensorFragment"
         android:label="fragment_add_sensor"
         tools:layout="@layout/fragment_add_sensor" />
 
     <fragment
         android:id="@+id/getSensorsFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.GetSensorsFragment"
+        android:name="com.fypapplication.fypapp.ui.GetSensorsFragment"
         android:label="fragment_get_sensors"
         tools:layout="@layout/fragment_get_sensors">
         <action
@@ -118,29 +125,30 @@
 
     <fragment
         android:id="@+id/updateSensorFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.UpdateSensorFragment"
+        android:name="com.fypapplication.fypapp.ui.UpdateSensorFragment"
         android:label="fragment_update_sensor"
         tools:layout="@layout/fragment_update_sensor" />
 
     <fragment
         android:id="@+id/updateRoomFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.UpdateRoomFragment"
+        android:name="com.fypapplication.fypapp.ui.UpdateRoomFragment"
         android:label="fragment_update_room"
         tools:layout="@layout/fragment_update_room" />
 
     <fragment
         android:id="@+id/deviceConfigurationFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.DeviceConfigurationFragment"
+        android:name="com.fypapplication.fypapp.ui.DeviceConfigurationFragment"
         android:label="Configuration" />
 
     <fragment
         android:id="@+id/devicePerRoomFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.DevicePerRoomFragment"
+        android:name="com.fypapplication.fypapp.ui.DevicePerRoomFragment"
         android:label="{roomName}">
         <argument
             android:name="_id"
             android:defaultValue="default"
-            app:argType="string" />
+            app:argType="string"
+            />
         <action
             android:id="@+id/action_devicePerRoomFragment_to_sensorPerDevice"
             app:destination="@id/sensorPerDevice"
@@ -163,7 +171,7 @@
 
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.StatisticsFragment"
+        android:name="com.fypapplication.fypapp.ui.StatisticsFragment"
         android:label="Statistics"
         tools:layout="@layout/fragment_statistics">
         <argument
@@ -177,7 +185,7 @@
     </fragment>
     <fragment
         android:id="@+id/sensorsFragment"
-        android:name="com.electrosoft.electrosoftnew.ui.SensorsFragment"
+        android:name="com.fypapplication.fypapp.ui.SensorsFragment"
         android:label="{device_name}"
         tools:layout="@layout/fragment_sensors">
         <action
@@ -192,11 +200,15 @@
             android:defaultValue="null"
             app:argType="string" />
     </fragment>
-
-
-
-
-
+    <fragment
+        android:id="@+id/servicesFragment"
+        android:name="com.fypapplication.fypapp.ui.ServicesFragment"
+        android:label="ServicesFragment" >
+        <argument
+            android:name="vehicleType"
+            app:argType="string"
+            android:defaultValue="null" />
+    </fragment>
 
 
 </navigation>

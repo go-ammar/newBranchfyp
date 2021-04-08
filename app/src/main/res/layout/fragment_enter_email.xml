@@ -9,13 +9,21 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:background="@drawable/gradiant_main"
         android:layout_height="match_parent"
         tools:context=".ui.EnterEmailFragment">
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- TODO: Update blank fragment layout -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="match_parent">
 
 

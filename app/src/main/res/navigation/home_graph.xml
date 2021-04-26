@@ -190,7 +190,8 @@
         tools:layout="@layout/fragment_sensors">
         <action
             android:id="@+id/action_sensorsFragment_to_statisticsFragment"
-            app:destination="@id/statisticsFragment" />
+            app:destination="@id/statisticsFragment"
+            />
         <argument
             android:name="device_id"
             android:defaultValue="null"
@@ -200,6 +201,9 @@
             android:defaultValue="null"
             app:argType="string" />
     </fragment>
+
+
+
     <fragment
         android:id="@+id/servicesFragment"
         android:name="com.fypapplication.fypapp.ui.ServicesFragment"
@@ -208,6 +212,27 @@
             android:name="vehicleType"
             app:argType="string"
             android:defaultValue="null" />
+        <action
+            android:id="@+id/action_servicesFragment_to_scheduleBookingFragment"
+            app:destination="@id/scheduleBookingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleBookingFragment"
+        android:name="com.fypapplication.fypapp.ui.ScheduleBookingFragment"
+        android:label="ScheduleBookingFragment" >
+        <argument
+            android:name="vehicleType"
+            app:argType="string"
+            android:defaultValue="null" />
+        <argument
+            android:name="service"
+            app:argType="com.fypapplication.fypapp.models.Services[]"
+            />
     </fragment>
 
 

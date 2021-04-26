@@ -36,6 +36,7 @@ public class ServicesFragment extends Fragment {
     NavController navController;
     ServicesAdapter servicesAdapter;
     Context context;
+    String vehicleType;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class ServicesFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         ServicesFragmentArgs args = ServicesFragmentArgs.fromBundle(getArguments());
-        String vehicleType = args.getVehicleType();
+        vehicleType = args.getVehicleType();
 
         servicesArrayList.clear();
         switch (vehicleType) {
@@ -232,10 +233,20 @@ public class ServicesFragment extends Fragment {
 
 
         binding.nextBtn.setOnClickListener(v -> {
-            Log.d(TAG, "actionViews: " + servicesAdapter.getCheckedServicesArrayList());
-//            servicesAdapter.getCheckedServicesArrayList();
+            Log.d(TAG, "actionViews: "+servicesAdapter.getCheckedServicesArrayList().size());
 
+            Services[] x = new Services[servicesAdapter.getCheckedServicesArrayList().size()];
 
+            for (int i = 0; i<x.length; i++){
+                x[i] = servicesAdapter.getCheckedServicesArrayList().get(i);
+            }
+
+            ServicesFragmentDirections.ActionServicesFragmentToScheduleBookingFragment action =
+                    ServicesFragmentDirections.actionServicesFragmentToScheduleBookingFragment(x);
+
+            action.setVehicleType(vehicleType);
+
+            Navigation.createNavigateOnClickListener(action).onClick(binding.nextBtn);
 
         });
 

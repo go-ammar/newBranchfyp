@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.NotificationActivity">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/TilPickUpNotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:minLines="5"
+        android:padding="4dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="256"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pickUpNotesEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:gravity="start"
+            android:hint="Write Description"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:maxLength="256"
+            android:maxLines="5"
+            android:minLines="5"
+            android:singleLine="false"
+            android:text="@{notes.instructions}"
+            android:textAlignment="viewStart" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#665EFF"
+        android:backgroundTint="#665EFF"
+        android:padding="@dimen/margin_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TilPickUpNotes">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@color/green"
+            android:padding="@dimen/margin_medium"
+            android:text="Send Emergency Message!"
+            android:textColor="@color/white" />
+
+
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

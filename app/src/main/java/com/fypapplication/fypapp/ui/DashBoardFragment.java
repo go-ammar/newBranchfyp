@@ -9,13 +9,24 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.TimeoutError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.databinding.FragmentDashBoardBinding;
 import com.fypapplication.fypapp.helper.Global;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 
 public class DashBoardFragment extends Fragment {
@@ -93,5 +104,82 @@ public class DashBoardFragment extends Fragment {
 
     }
 
+    private void initFirebaseToken() {
+
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "getInstanceId failed", task.getException());
+                        return;
+                    }
+                    String token = Objects.requireNonNull(task.getResult()).getToken();
+//                    sharedPrefs.putString("devicetoken",token);
+//                    if (BuildConfig.DEBUG) Log.d(TAG, "initFirebaseToken: "+ token);
+                    _apiUpdateFirebaseToken(token);
+                });
+
+    }
+
+    public void _apiUpdateFirebaseToken(String token) {
+//
+//        JSONObject params = new JSONObject();
+//
+//        try {
+//            if (BuildConfig.DEBUG) Log.d(TAG, "_apiUpdateFirebaseToken: "+token);
+//            params.put("deviceToken", token);
+//            params.put("deviceType", "Android");
+//        } catch (Exception e) {
+//            Log.e(TAG, "_apiUpdateFirebaseToken: ", e);
+//        }
+//
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Webservices.API_IS_LOGGED_IN, params, response -> {
+//
+//            if (BuildConfig.DEBUG) Log.d(TAG, "_apiUpdateFirebaseToken: " + response);
+//
+//        }, error -> {
+//
+//            try {
+//
+//                if (error instanceof TimeoutError) {
+//                    global.showGenericErrorDialog(requireContext(), getString(R.string.error_internet));
+//                } else {
+//                    try {
+//
+//
+//                        global.showGenericErrorDialog(requireContext(), global.parseError(error.networkResponse.statusCode, error.networkResponse.data,requireContext()));
+//
+//
+//                    } catch (Exception e) {
+//                        Log.e(TAG, "_apiUpdateFirebaseToken: ", e);
+//                    }
+//
+//                }
+//
+//
+//            } catch (Exception e) {
+//                if (BuildConfig.DEBUG) Log.d(TAG, "_apiUpdateFirebaseToken: ", e);
+//            }
+//
+//
+//        }) {
+//
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> headers = new HashMap<>();
+//
+//                headers.put("Content-Type", "application/json");
+//                headers.put("Authorization", "Bearer " + user.token);
+//
+//
+//                return headers;
+//            }
+//        };
+//
+//
+//        VolleySingleton.getInstance(requireContext()).addToRequestQueue(jsonObjectRequest);
+//
+    }
+//
 
 }

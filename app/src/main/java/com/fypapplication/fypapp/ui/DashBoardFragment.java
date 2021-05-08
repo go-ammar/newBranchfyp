@@ -16,12 +16,14 @@ import android.view.ViewGroup;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.databinding.FragmentDashBoardBinding;
 import com.fypapplication.fypapp.helper.Global;
+import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 
 
 public class DashBoardFragment extends Fragment {
 
     NavController navController;
     FragmentDashBoardBinding binding;
+    SharedPrefs sharedPrefs;
 
 
     @Override
@@ -39,8 +41,20 @@ public class DashBoardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
+        sharedPrefs = new SharedPrefs(getContext());
 
+        setViews();
         actionViews();
+    }
+
+    private void setViews() {
+        if (sharedPrefs.getUser().type == Global.ADMIN_TYPE) {
+            binding.adminConstraint.setVisibility(View.VISIBLE);
+        } else if (sharedPrefs.getUser().type == Global.CUSTOMER_TYPE) {
+            binding.customerConstraint.setVisibility(View.VISIBLE);
+        } else if (sharedPrefs.getUser().type == Global.MECH_TYPE) {
+            binding.mechConstraint.setVisibility(View.VISIBLE);
+        }
     }
 
 

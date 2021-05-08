@@ -4,8 +4,10 @@ public class WebServices {
 
     public static String BASE_URL = "http://143.110.176.86:3000/";
 
-
+    public static String API_SIGNUP = BASE_URL + "api/users/register";
     public static String API_LOGIN = BASE_URL +"api/users/login";
+
+
     public static String API_PIN = BASE_URL +"api/users/verify_reset_password";
     public static String API_CHANGE_PASSWORD = BASE_URL +"api/users/change_password";
     public static String API_SEND_EMAIL = BASE_URL +"api/users/forget_password/";

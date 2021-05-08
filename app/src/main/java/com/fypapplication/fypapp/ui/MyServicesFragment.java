@@ -12,10 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.MechServicesAdapter;
 import com.fypapplication.fypapp.databinding.AddChangeDialogBinding;
@@ -23,8 +28,13 @@ import com.fypapplication.fypapp.databinding.AddServiceDialogBinding;
 import com.fypapplication.fypapp.databinding.FragmentMyServicesBinding;
 import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.ChangesDue;
+import com.fypapplication.fypapp.models.Login;
 import com.fypapplication.fypapp.models.MechServices;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
+import com.fypapplication.fypapp.webservices.VolleySingleton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -105,6 +115,7 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
                         adapter.notifyDataSetChanged();
 
                         //TODO CALL API TO CHANGE SERVICE IN BACKEND
+                        apiAddService(mechServices.service, mechServices.price, mechServices.vehicleType);
 
                         alertDialog.dismiss();
 
@@ -113,6 +124,38 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
 
             alertDialog.show();
         });
+
+    }
+
+    private void apiAddService(String service_name, int price, String vehicle_type) {
+        JSONObject params = new JSONObject();
+
+        try {
+            // BODY
+            params.put("service_name", service_name);
+            params.put("price", price);
+            params.put("vehicle_type", vehicle_type);
+            params.put("mechanic", sharedPrefs.getUser().id);
+        } catch (Exception e) {
+            Log.e(TAG, "_apiLogin: ", e);
+        }
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "LoginAPI", params, res -> {
+
+            Toast.makeText(mContext, "Service Added", Toast.LENGTH_SHORT).show();
+
+        }, error -> {
+
+            Log.e(TAG, "loginApi: ", error);
+
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
     }
 

@@ -34,7 +34,6 @@ public class SharedPrefs {
 
     public void setKey(String key) {
         sharedPreferences.edit().putString("key", key).apply();
-
     }
 
     public boolean getBoolean(String key) {
@@ -54,16 +53,15 @@ public class SharedPrefs {
         sharedPreferences.edit().putString(key, value).apply();
     }
 
-    public void putUser(Login user, String key) {
+    public void putUser(Login user) {
         Gson gson = new Gson();
         String json = gson.toJson(user);
-        sharedPreferences.edit().putString(key, json).apply();
-
+        sharedPreferences.edit().putString("userKey", json).apply();
     }
 
-    public Login getUser(String key) {
+    public Login getUser() {
         Gson gson = new Gson();
-        String json = sharedPreferences.getString(key, null);
+        String json = sharedPreferences.getString("userKey", null);
         return gson.fromJson(json, Login.class);
 
     }

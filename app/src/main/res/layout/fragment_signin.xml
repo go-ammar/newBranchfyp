@@ -88,6 +88,7 @@
 
         <TextView
             android:id="@+id/forgotPassTv"
+            android:visibility="gone"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,6 +112,7 @@
             android:padding="@dimen/margin_small"
             android:text="Skip"
             android:textAllCaps="false"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 

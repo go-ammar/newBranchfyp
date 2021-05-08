@@ -10,13 +10,13 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".ui.DashBoardFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/customerConstraint"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
             >
 
             <ImageView
@@ -80,6 +80,7 @@
                         android:id="@+id/carImage"
                         android:layout_width="match_parent"
                         android:layout_height="108dp"
+                        android:paddingTop="@dimen/margin_small"
                         android:src="@drawable/ic_car"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

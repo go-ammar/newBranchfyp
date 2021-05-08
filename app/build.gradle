@@ -69,6 +69,8 @@ dependencies {
     //implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
+    implementation platform('com.google.firebase:firebase-bom:27.1.0')
+    implementation 'com.google.firebase:firebase-analytics'
 
     //volley implementation
     implementation 'com.google.android.material:material:1.2.1'
@@ -86,5 +88,17 @@ dependencies {
     //MPChart (for line chart)
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+
+    implementation 'com.google.android.libraries.maps:maps:3.1.0-beta'
+
+    // If you are using Places, add all of the dependencies below
+//    implementation name:'places-maps-sdk-3.1.0-beta', ext:'aar'
+//    implementation 'com.google.android.gms:play-services-gcm:17.0.0'
+//    implementation 'com.google.auto.value:auto-value-annotations:1.6.2'
+//    implementation 'com.google.android.gms:play-services-places:9.2.0'
+
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
 
 }

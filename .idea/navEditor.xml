@@ -8,6 +8,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="addMechsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-61" />
+                            <option name="y" value="1483" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="addSensorFragment">
                     <value>
                       <LayoutPositions>
@@ -79,6 +91,30 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="myAccountFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="140" />
+                            <option name="y" value="1900" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="myServicesFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-35" />
+                            <option name="y" value="1039" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="nav_about">
                     <value>
                       <LayoutPositions>
@@ -108,13 +144,23 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="218" />
-                            <option name="y" value="642" />
+                            <option name="x" value="-1054" />
+                            <option name="y" value="739" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_nav_dashboard_to_addMechsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_nav_dashboard_to_deviceConfigurationFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_nav_dashboard_to_myServicesFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -125,6 +171,16 @@
                               </value>
                             </entry>
                             <entry key="action_nav_dashboard_to_nav_notifications">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_nav_dashboard_to_removeMechsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_nav_dashboard_to_servicesFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -182,6 +238,30 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="removeMechsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-738" />
+                            <option name="y" value="1476" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="scheduleBookingFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="742" />
+                            <option name="y" value="1473" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="sensorPerDevice">
                     <value>
                       <LayoutPositions>
@@ -220,9 +300,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="512" />
-                            <option name="y" value="966" />
+                            <option name="x" value="439" />
+                            <option name="y" value="1474" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_servicesFragment_to_scheduleBookingFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

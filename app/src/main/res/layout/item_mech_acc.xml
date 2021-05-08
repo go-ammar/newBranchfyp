@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="service"
+            type="com.fypapplication.fypapp.models.MechMyAccount" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/margin_small"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/deleteChangeDue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:src="@drawable/ic_baseline_delete_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/serviceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Customer Name: `+ service.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dateOfChangeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Date of change: `+ service.date}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/serviceTv" />
+
+        <TextView
+            android:id="@+id/durationOfChangeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Cost: `+ service.cost}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateOfChangeTv" />
+
+        <TextView
+            android:id="@+id/phoneNumberTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Phone number: `+ service.phoneNumber}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/durationOfChangeTv" />
+
+        <TextView
+            android:id="@+id/descriptionTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Description: `+ service.description}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phoneNumberTv" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

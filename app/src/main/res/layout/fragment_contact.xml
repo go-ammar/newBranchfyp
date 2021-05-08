@@ -16,67 +16,50 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/gradiant_main">
+            android:background="@color/white">
 
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
-                android:drawablePadding="10dp"
-                android:gravity="center_horizontal"
-                android:hint="@string/address_hint"
-                android:padding="16dp"
-                android:text="@string/address"
-                android:textColor="@color/white"
-                android:textIsSelectable="true"
-                android:textSize="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/margin_huge"
+                android:text="My Changes Due"
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
 
+                />
 
-            <TextView
-                android:id="@+id/link"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/changesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:text="@string/link"
-                android:gravity="center"
-                android:textSize="@dimen/_16sdp"
-                android:padding="@dimen/_6sdp"
+                android:paddingBottom="@dimen/_64sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/tv"
+
+                tools:listitem="@layout/item_changes" />
+
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
+                android:id="@+id/addChangebtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginBottom="32dp"
-                android:padding="@dimen/_16sdp"
-                app:backgroundTint="@color/colorAccent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@android:drawable/ic_dialog_email"
-                app:tint="@null"
-                tools:ignore="MissingConstraints" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
-                android:padding="@dimen/_16sdp"
-                android:src="@drawable/fa"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:contentDescription="@string/add_room"
+                android:tint="@color/white"
                 app:backgroundTint="@color/colorAccent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:tint="@null"
-                tools:ignore="MissingConstraints" />
+                app:srcCompat="@drawable/ic_add_black_24dp"
+                app:tint="@null" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

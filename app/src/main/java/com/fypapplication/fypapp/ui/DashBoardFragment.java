@@ -20,7 +20,6 @@ import com.fypapplication.fypapp.helper.Global;
 
 public class DashBoardFragment extends Fragment {
 
-    private static final String TAG = "DashBoardFragment";
     NavController navController;
     FragmentDashBoardBinding binding;
 
@@ -46,15 +45,6 @@ public class DashBoardFragment extends Fragment {
 
 
     private void actionViews() {
-
-        binding.addRoomsCardView.setOnClickListener(v -> {
-            navController.navigate(R.id.action_nav_dashboard_to_deviceConfigurationFragment);
-        });
-
-        binding.viewRoomsCardView.setOnClickListener(v -> {
-            navController.navigate(R.id.action_nav_dashboard_to_nav_get_rooms);
-        });
-
         binding.carMechanicCard.setOnClickListener(v -> {
             DashBoardFragmentDirections.ActionNavDashboardToServicesFragment action =
                     DashBoardFragmentDirections.actionNavDashboardToServicesFragment();
@@ -91,6 +81,38 @@ public class DashBoardFragment extends Fragment {
             Navigation.createNavigateOnClickListener(action).onClick(binding.truckMechanic);
         });
 
+        binding.myAccount.setOnClickListener(v -> {
+            DashBoardFragmentDirections.ActionNavDashboardToMyAccountFragment action =
+                    DashBoardFragmentDirections.actionNavDashboardToMyAccountFragment();
+
+            Navigation.createNavigateOnClickListener(action).onClick(binding.myAccount);
+
+        });
+
+        binding.myServices.setOnClickListener(v -> {
+
+            DashBoardFragmentDirections.ActionNavDashboardToMyServicesFragment action =
+                    DashBoardFragmentDirections.actionNavDashboardToMyServicesFragment();
+
+            Navigation.createNavigateOnClickListener(action).onClick(binding.myServices);
+        });
+
+
+        binding.addMechs.setOnClickListener(v -> {
+            DashBoardFragmentDirections.ActionNavDashboardToAddMechsFragment action =
+                    DashBoardFragmentDirections.actionNavDashboardToAddMechsFragment();
+
+            Navigation.createNavigateOnClickListener(action).onClick(binding.addMechs);
+
+        });
+
+        binding.removeMechs.setOnClickListener(v -> {
+            DashBoardFragmentDirections.ActionNavDashboardToRemoveMechsFragment action =
+                    DashBoardFragmentDirections.actionNavDashboardToRemoveMechsFragment();
+
+            Navigation.createNavigateOnClickListener(action).onClick(binding.removeMechs);
+
+        });
     }
 
 

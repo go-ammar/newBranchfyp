@@ -14,6 +14,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fypapplication.fypapp.R;
@@ -33,7 +34,6 @@ public class HomeLandingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if (getIntent().getBooleanExtra(EXTRA_LOGOUT, false)) {
             clearBackStack();
         } else {
@@ -43,9 +43,9 @@ public class HomeLandingActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
 
         if (item.getItemId() == R.id.logoutBtn) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

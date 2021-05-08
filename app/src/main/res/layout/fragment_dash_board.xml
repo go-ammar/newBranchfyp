@@ -17,14 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:visibility="gone">
+            >
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
-                android:src="@drawable/ic_launcher_foreground"
+                android:layout_height="128dp"
+                android:paddingBottom="@dimen/margin_small"
+                android:src="@drawable/ic_user"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -77,9 +78,9 @@
                     <ImageView
 
                         android:id="@+id/carImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_width="match_parent"
+                        android:layout_height="108dp"
+                        android:src="@drawable/ic_car"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -120,9 +121,10 @@
                     <ImageView
 
                         android:id="@+id/autoImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_width="match_parent"
+                        android:layout_height="108dp"
+                        android:padding="@dimen/margin_medium"
+                        android:src="@drawable/ic_rickshaw"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -165,9 +167,10 @@
                     <ImageView
 
                         android:id="@+id/bikeImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:layout_width="match_parent"
+                        android:padding="10dp"
+                        android:layout_height="108dp"
+                        android:src="@drawable/ic_motocross"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -210,8 +213,9 @@
 
                         android:id="@+id/truckImage"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:padding="@dimen/margin_small"
+                        android:layout_height="108dp"
+                        android:src="@drawable/ic_cargo_truck"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -259,6 +263,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/mechConstraint"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:background="@color/white">
 
@@ -266,9 +271,10 @@
             <ImageView
                 android:id="@+id/imageMech"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="128dp"
+                android:paddingBottom="@dimen/margin_small"
                 android:layout_marginTop="64dp"
-                android:src="@drawable/ic_launcher_foreground"
+                android:src="@drawable/ic_mechanic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -443,7 +449,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
-                android:src="@drawable/ic_launcher_foreground"
+                android:src="@drawable/ic_admin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -37,7 +37,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv"
-
+            android:clipToPadding="true"
+            android:layout_marginBottom="@dimen/margin_large"
             tools:listitem="@layout/item_mech_acc" />
 
 
@@ -55,6 +56,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_add_black_24dp"
             app:tint="@null" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/changesRecyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
 <!--name, description, cost, date, vehicle type-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>

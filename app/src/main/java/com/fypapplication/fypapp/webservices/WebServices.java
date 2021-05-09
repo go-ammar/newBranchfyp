@@ -6,7 +6,12 @@ public class WebServices {
 
     public static String API_SIGNUP = BASE_URL + "api/users/register";
     public static String API_LOGIN = BASE_URL +"api/users/login";
+    public static String API_REMOVE_MECH = BASE_URL +"api/users/";
 
+
+
+    public static String API_GET_SERVICES = BASE_URL + "/api/services";
+    public static String API_DELETE_SERVICES = BASE_URL + "/api/services/";
 
     public static String API_PIN = BASE_URL +"api/users/verify_reset_password";
     public static String API_CHANGE_PASSWORD = BASE_URL +"api/users/change_password";

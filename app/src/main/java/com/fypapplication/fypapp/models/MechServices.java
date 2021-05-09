@@ -7,10 +7,12 @@ public class MechServices implements Parcelable {
     public String service;
     public String vehicleType;
     public int price;
+    public String id;
 
     protected MechServices(Parcel in) {
         service = in.readString();
         vehicleType = in.readString();
+        id = in.readString();
         price = in.readInt();
     }
 
@@ -39,6 +41,7 @@ public class MechServices implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(service);
         dest.writeString(vehicleType);
+        dest.writeString(id);
         dest.writeInt(price);
     }
 }

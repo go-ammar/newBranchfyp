@@ -16,14 +16,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.databinding.FragmentAddMechsBinding;
+import com.fypapplication.fypapp.models.Login;
+import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
+import com.fypapplication.fypapp.webservices.VolleySingleton;
+import com.fypapplication.fypapp.webservices.WebServices;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -66,6 +77,50 @@ public class AddMechsFragment extends Fragment {
             setUpGoogleClient();
             Log.d(TAG, "actionViews: ");
         });
+
+        binding.addServiceBtn.setOnClickListener(v -> {
+
+            if (!binding.locationET.getText().toString().isEmpty() && !binding.nameET.getText().toString().isEmpty() &&
+                    !binding.emailET.getText().toString().isEmpty() && !binding.phoneET.getText().toString().isEmpty()) {
+                apiAddMech();
+            }
+
+        });
+    }
+
+    private void apiAddMech() {
+        JSONObject params = new JSONObject();
+
+        try {
+            // BODY
+            params.put("email", binding.emailET.getText().toString());
+            params.put("password", binding.passwordET.getText().toString());
+            params.put("latitude", Long.parseLong(latitude));
+            params.put("longitude", Long.parseLong(longitude));
+            params.put("type", 3);
+            params.put("phone", binding.phoneET.getText().toString());
+        } catch (Exception e) {
+            Log.e(TAG, "_apiLogin: ", e);
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_LOGIN, params, res -> {
+
+            Log.d(TAG, "_apiLogin: res " + res);
+
+            Toast.makeText(context, "Mechanic Added", Toast.LENGTH_SHORT).show();
+
+
+        }, error -> {
+
+            Log.e(TAG, "loginApi: ", error);
+
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
 
     private void setUpGoogleClient() {

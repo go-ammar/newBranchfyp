@@ -32,6 +32,7 @@ import com.fypapplication.fypapp.models.Login;
 import com.fypapplication.fypapp.models.MechServices;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
+import com.fypapplication.fypapp.webservices.WebServices;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,11 +109,6 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
                         mechServices.service = binding1.serviceNameET.getText().toString();
                         mechServices.vehicleType = binding1.vehicleTypeET.getText().toString();
 
-                        mechServicesArrayList.add(mechServices);
-
-                        sharedPrefs.putMechServicesList(mechServicesArrayList);
-
-                        adapter.notifyDataSetChanged();
 
                         //TODO CALL API TO CHANGE SERVICE IN BACKEND
                         apiAddService(mechServices.service, mechServices.price, mechServices.vehicleType);
@@ -141,9 +137,21 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
         }
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "LoginAPI", params, res -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_DELETE_SERVICES, params, res -> {
 
             Toast.makeText(mContext, "Service Added", Toast.LENGTH_SHORT).show();
+            MechServices mechServices = new MechServices();
+            mechServices.price = price;
+            mechServices.service = service_name;
+            mechServices.vehicleType = vehicle_type;
+            mechServices.id = res.optString("id");
+
+            mechServicesArrayList.add(mechServices);
+
+            sharedPrefs.putMechServicesList(mechServicesArrayList);
+
+            adapter.notifyDataSetChanged();
+
 
         }, error -> {
 
@@ -172,6 +180,21 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
 
         sharedPrefs.putMechServicesList(mechServicesArrayList);
 
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_DELETE_SERVICES + mechServices.id, null, res -> {
+
+            Toast.makeText(mContext, "Service Added", Toast.LENGTH_SHORT).show();
+
+        }, error -> {
+
+            Log.e(TAG, "loginApi: ", error);
+
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
         //TODO API WHERE DELETE STUFF HAPPENS IN DB
 

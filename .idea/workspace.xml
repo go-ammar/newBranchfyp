@@ -16,15 +16,14 @@
   <component name="ChangeListManager">
     <list default="true" id="612c2949-c3e3-46f4-8be7-25a7d30c5c00" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/helper/Global.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/helper/Global.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/sharedprefs/SharedPrefs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/sharedprefs/SharedPrefs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/DashBoardFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/DashBoardFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/RemoveMechsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/RemoveMechsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/MechServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/MechServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/AddMechsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/AddMechsFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/MyServicesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/MyServicesFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SigninFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SigninFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SignupFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SignupFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/webservices/WebServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/webservices/WebServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_signin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_signin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_mechs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_mechs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_account.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -383,10 +382,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1619431728100" />
-    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup" timestamp="1620507024550">
+    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup" timestamp="1620572961501">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1620507024550" />
+    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1620572961501" />
     <state x="405" y="275" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1620028845272">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

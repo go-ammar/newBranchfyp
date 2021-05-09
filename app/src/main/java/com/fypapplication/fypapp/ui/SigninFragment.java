@@ -69,7 +69,7 @@ public class SigninFragment extends Fragment {
 
 
             loginApi();
-            navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
+//            navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
 
         });
 
@@ -128,6 +128,7 @@ public class SigninFragment extends Fragment {
             }
 
             sharedPrefs.putUser(login);
+            navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
 
         }, error -> {
 

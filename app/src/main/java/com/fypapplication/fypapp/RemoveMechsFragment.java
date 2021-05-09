@@ -82,7 +82,7 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "test", params,
                 response -> {
 
-            //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
+                    //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
 
 
                 }, error -> {
@@ -109,19 +109,10 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
         String id = user.id;
 
         SharedPrefs sharedPrefs = new SharedPrefs(context);
-        try {
-
-//            params.put("Authorization", sharedPrefs.getKey());
-            Log.d(TAG, "actionViews: in getroom " + sharedPrefs.getKey());
-
-        } catch (Exception e) {
-            Log.e(TAG, "removeMech: ", e);
-        }
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, "test", params,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_REMOVE_MECH + id, params,
                 response -> {
-
 
                     Toast.makeText(context, "Mechanic Removed", Toast.LENGTH_SHORT).show();
 

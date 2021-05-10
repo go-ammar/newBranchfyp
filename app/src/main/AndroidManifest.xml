@@ -28,13 +28,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="your API key" />
-        <service
+        <servicegre
             android:name="com.fypapplication.fypapp.helper.FirebaseMessaging"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
+        </servicegre>
     </application>
 
 </manifest>

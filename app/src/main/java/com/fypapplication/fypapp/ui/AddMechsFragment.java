@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -37,8 +38,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class AddMechsFragment extends Fragment {
@@ -93,17 +96,20 @@ public class AddMechsFragment extends Fragment {
 
         try {
             // BODY
+
             params.put("email", binding.emailET.getText().toString());
             params.put("password", binding.passwordET.getText().toString());
-            params.put("latitude", Long.parseLong(latitude));
-            params.put("longitude", Long.parseLong(longitude));
+            params.put("latitude", String.valueOf(latitude));
+            params.put("longitude", String.valueOf(longitude));
+            params.put("name", binding.nameET.getText().toString());
             params.put("type", 3);
             params.put("phone", binding.phoneET.getText().toString());
+            Log.d(TAG, "apiAddMech: " + params);
         } catch (Exception e) {
             Log.e(TAG, "_apiLogin: ", e);
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_LOGIN, params, res -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_SIGNUP, params, res -> {
 
             Log.d(TAG, "_apiLogin: res " + res);
 
@@ -112,9 +118,17 @@ public class AddMechsFragment extends Fragment {
 
         }, error -> {
 
-            Log.e(TAG, "loginApi: ", error);
+            Log.e(TAG, "apiAddMech: ", error);
 
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+        };
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

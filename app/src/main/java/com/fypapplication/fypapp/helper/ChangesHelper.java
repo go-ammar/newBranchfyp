@@ -73,6 +73,7 @@ public class ChangesHelper {
             if (checkDays(sharedPrefs.getChangesList().get(i).dateOfChange) > sharedPrefs.getChangesList().get(i).duration) {
                 Log.d(TAG, "scheduler: chal beta chuti kr");
                 //set notification ke bhaia change krwa lo jo bhi hai
+                
             }
         }
     }

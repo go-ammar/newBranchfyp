@@ -105,57 +105,57 @@ public class ConfigurationAdapter extends RecyclerView.Adapter<RecyclerView.View
         JSONObject params = new JSONObject();
         SharedPrefs sharedPrefs = new SharedPrefs(context);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_ROOMS,
-                params, response -> {
-
-            Log.d("TAG", "_apigetRoomDropDwon: res " + response);
-
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
-                    .create();
-            getRoom1 = gson.fromJson(response.toString(), GetRoom.class);
-            getRoomList.add(getRoom1);
-
-            String[] data = new String[getRoomList.get(0).data.size()];
-
-
-            for (int i = 0; i < data.length; i++)
-                data[i] = getRoomList.get(0).data.get(i).name;
-
-
-            ArrayAdapter<String> dropDown = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, data);
-
-
-            ((ConfigViewHolder) holder).binding.viewrooms.setInputType(0);
-
-            ((ConfigViewHolder) holder).binding.viewrooms.setOnClickListener(v -> {
-
-                ((ConfigViewHolder) holder).binding.viewrooms.setAdapter(dropDown);
-                ((ConfigViewHolder) holder).binding.viewrooms.showDropDown();
-                ((ConfigViewHolder) holder).binding.viewrooms.requestFocus();
-
-            });
-
-
-        }, error -> {
-            Toast toast = Toast.makeText(context, "Could not get rooms", Toast.LENGTH_SHORT);
-            toast.show();
-            Log.d("TAG", "_apiGetRoom: error " + error);
-
-        }) {
-            @Override
-            public Map<String, String> getHeaders() {
-                HashMap header = new HashMap<>();
-                header.put("Authorization", sharedPrefs.getKey());
-                Log.d("TAG", "getHeaders: " + header.toString());
-                return header;
-            }
-        };
-
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_ROOMS,
+//                params, response -> {
+//
+//            Log.d("TAG", "_apigetRoomDropDwon: res " + response);
+//
+//            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+//                    .create();
+//            getRoom1 = gson.fromJson(response.toString(), GetRoom.class);
+//            getRoomList.add(getRoom1);
+//
+//            String[] data = new String[getRoomList.get(0).data.size()];
+//
+//
+//            for (int i = 0; i < data.length; i++)
+//                data[i] = getRoomList.get(0).data.get(i).name;
+//
+//
+//            ArrayAdapter<String> dropDown = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, data);
+//
+//
+//            ((ConfigViewHolder) holder).binding.viewrooms.setInputType(0);
+//
+//            ((ConfigViewHolder) holder).binding.viewrooms.setOnClickListener(v -> {
+//
+//                ((ConfigViewHolder) holder).binding.viewrooms.setAdapter(dropDown);
+//                ((ConfigViewHolder) holder).binding.viewrooms.showDropDown();
+//                ((ConfigViewHolder) holder).binding.viewrooms.requestFocus();
+//
+//            });
+//
+//
+//        }, error -> {
+//            Toast toast = Toast.makeText(context, "Could not get rooms", Toast.LENGTH_SHORT);
+//            toast.show();
+//            Log.d("TAG", "_apiGetRoom: error " + error);
+//
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                HashMap header = new HashMap<>();
+//                header.put("Authorization", sharedPrefs.getKey());
+//                Log.d("TAG", "getHeaders: " + header.toString());
+//                return header;
+//            }
+//        };
+//
+//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//        VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
 
         String finalRoom_id = room_id;

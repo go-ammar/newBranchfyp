@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -23,10 +24,13 @@ import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.Login;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
+import com.fypapplication.fypapp.webservices.WebServices;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class SigninFragment extends Fragment {
@@ -96,7 +100,7 @@ public class SigninFragment extends Fragment {
         }
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "LoginAPI", params, res -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_LOGIN, params, res -> {
 
             Log.d(TAG, "_apiLogin: res " + res);
 
@@ -134,7 +138,14 @@ public class SigninFragment extends Fragment {
 
             Log.e(TAG, "loginApi: ", error);
 
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

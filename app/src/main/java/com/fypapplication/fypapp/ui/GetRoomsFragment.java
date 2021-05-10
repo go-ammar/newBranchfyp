@@ -136,48 +136,48 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
         }
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_ROOMS, params,
-                response -> {
-
-
-                    Log.d(TAG, "_apiGetRooms: " + response);
-
-                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
-                            .create();
-                    GetRoom getRoom1 = gson.fromJson(response.toString(), GetRoom.class);
-
-                    getRoomList.clear();
-
-                    getRoomList.add(getRoom1);
-
-
-                    binding.progress.setVisibility(View.GONE);
-                    roomAdapter = new RoomAdapter(mContext, getRoomList, this);
-                    Log.d(TAG, "actionViews: adapter called " + getRoomList.get(0).data.size());
-                    recycle.setAdapter(roomAdapter);
-
-
-                }, error -> {
-            binding.progress.setVisibility(View.GONE);
-            Toast toast = Toast.makeText(mContext, "Could not get rooms", Toast.LENGTH_SHORT);
-            toast.show();
-            Log.d(TAG, "_apiGetRoom: error " + error);
-
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap header = new HashMap<>();
-                header.put("Authorization", sharedPrefs.getKey());
-                Log.d(TAG, "getHeaders: " + header.toString());
-                return header;
-            }
-        };
-
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_ROOMS, params,
+//                response -> {
+//
+//
+//                    Log.d(TAG, "_apiGetRooms: " + response);
+//
+//                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+//                            .create();
+//                    GetRoom getRoom1 = gson.fromJson(response.toString(), GetRoom.class);
+//
+//                    getRoomList.clear();
+//
+//                    getRoomList.add(getRoom1);
+//
+//
+//                    binding.progress.setVisibility(View.GONE);
+//                    roomAdapter = new RoomAdapter(mContext, getRoomList, this);
+//                    Log.d(TAG, "actionViews: adapter called " + getRoomList.get(0).data.size());
+//                    recycle.setAdapter(roomAdapter);
+//
+//
+//                }, error -> {
+//            binding.progress.setVisibility(View.GONE);
+//            Toast toast = Toast.makeText(mContext, "Could not get rooms", Toast.LENGTH_SHORT);
+//            toast.show();
+//            Log.d(TAG, "_apiGetRoom: error " + error);
+//
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap header = new HashMap<>();
+//                header.put("Authorization", sharedPrefs.getKey());
+//                Log.d(TAG, "getHeaders: " + header.toString());
+//                return header;
+//            }
+//        };
+//
+//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//        VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
 
     }
 
@@ -310,38 +310,38 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
             //TODO checking values for updates
 
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
-                    WebServices.API_UPDATE_ROOM + getRoomList.get(0).data.get(position).id,
-                    params, response -> {
-
-                getRoomList.get(0).data.get(position).name = binding.RoomIdET.getText().toString();
-                roomAdapter.notifyItemChanged(position);
-
-                Log.d("TAG", "_apiUpdateRoom: res " + response);
-                Toast toast = Toast.makeText(mContext, "Room updated", Toast.LENGTH_SHORT);
-                toast.show();
-
-
-            }, error -> {
-                Toast toast = Toast.makeText(mContext, "Could not update room", Toast.LENGTH_SHORT);
-                toast.show();
-                Log.d("TAG", "_apiUpdateRoom: error " + error);
-
-            }) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap header = new HashMap<>();
-                    header.put("Authorization", sharedPrefs.getKey());
-                    Log.d("TAG", "getHeaders: " + header.toString());
-                    return header;
-                }
-            };
-
-            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-            VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
+//            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
+//                    WebServices.API_UPDATE_ROOM + getRoomList.get(0).data.get(position).id,
+//                    params, response -> {
+//
+//                getRoomList.get(0).data.get(position).name = binding.RoomIdET.getText().toString();
+//                roomAdapter.notifyItemChanged(position);
+//
+//                Log.d("TAG", "_apiUpdateRoom: res " + response);
+//                Toast toast = Toast.makeText(mContext, "Room updated", Toast.LENGTH_SHORT);
+//                toast.show();
+//
+//
+//            }, error -> {
+//                Toast toast = Toast.makeText(mContext, "Could not update room", Toast.LENGTH_SHORT);
+//                toast.show();
+//                Log.d("TAG", "_apiUpdateRoom: error " + error);
+//
+//            }) {
+//                @Override
+//                public Map<String, String> getHeaders() throws AuthFailureError {
+//                    HashMap header = new HashMap<>();
+//                    header.put("Authorization", sharedPrefs.getKey());
+//                    Log.d("TAG", "getHeaders: " + header.toString());
+//                    return header;
+//                }
+//            };
+//
+//            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+//                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//            VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
 
 
         });
@@ -373,39 +373,39 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
             SharedPrefs sharedPrefs = new SharedPrefs(mContext);
 
 
-            Log.d("TAG", "showDeleteDialog: " + getRoomList.get(0).data.get(position).id);
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE,
-                    WebServices.API_DELETE_ROOM + getRoomList.get(0).data.get(position).id,
-                    params, response -> {
-
-                Log.d("TAG", "_apigetRoom: res " + response);
-
-
-                Toast toast = Toast.makeText(mContext, "Room deleted successfully", Toast.LENGTH_SHORT);
-                toast.show();
-
-
-            }, error -> {
-                Toast toast = Toast.makeText(mContext, "Room could not be deleted", Toast.LENGTH_SHORT);
-                toast.show();
-                dialog.dismiss();
-
-
-            }) {
-                @Override
-                public Map<String, String> getHeaders() {
-                    HashMap header = new HashMap<>();
-                    header.put("Authorization", sharedPrefs.getKey());
-                    Log.d("TAG", "getHeaders: " + header.toString());
-                    return header;
-                }
-            };
-
-            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-            VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
+//            Log.d("TAG", "showDeleteDialog: " + getRoomList.get(0).data.get(position).id);
+//            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE,
+//                    WebServices.API_DELETE_ROOM + getRoomList.get(0).data.get(position).id,
+//                    params, response -> {
+//
+//                Log.d("TAG", "_apigetRoom: res " + response);
+//
+//
+//                Toast toast = Toast.makeText(mContext, "Room deleted successfully", Toast.LENGTH_SHORT);
+//                toast.show();
+//
+//
+//            }, error -> {
+//                Toast toast = Toast.makeText(mContext, "Room could not be deleted", Toast.LENGTH_SHORT);
+//                toast.show();
+//                dialog.dismiss();
+//
+//
+//            }) {
+//                @Override
+//                public Map<String, String> getHeaders() {
+//                    HashMap header = new HashMap<>();
+//                    header.put("Authorization", sharedPrefs.getKey());
+//                    Log.d("TAG", "getHeaders: " + header.toString());
+//                    return header;
+//                }
+//            };
+//
+//            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+//                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//            VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
 
         });
     }

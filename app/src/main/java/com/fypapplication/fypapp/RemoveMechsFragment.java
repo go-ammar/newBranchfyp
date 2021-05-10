@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
 import com.fypapplication.fypapp.adapters.RoomAdapter;
@@ -30,6 +31,7 @@ import com.fypapplication.fypapp.webservices.WebServices;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -79,11 +81,37 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
         }
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "test", params,
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS, null,
                 response -> {
+
 
                     //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
 
+                    Log.d(TAG, "actionViews: " + response.length());
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject userObj = response.getJSONObject(i);
+                            Log.d(TAG, "actionViews: "+userObj.optInt("type"));
+
+                            if (userObj.optInt("type") == 3) {
+                                User user = new User();
+                                user.email = userObj.optString("email");
+                                user.phoneNumber = String.valueOf(userObj.optInt("phone"));
+                                user.id = userObj.optString("_id");
+                                user.lat = userObj.optString("latitude");
+                                user.lng = userObj.optString("longitude");
+                                user.name = userObj.optString("name");
+
+                                userArrayList.add(user);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    adapter = new RemoveMechAdapter(context, userArrayList, this);
+                    binding.serviceRecyclerView.setAdapter(adapter);
 
                 }, error -> {
 
@@ -96,7 +124,7 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
-        adapter = new RemoveMechAdapter(context, userArrayList, this);
+
 
     }
 
@@ -111,7 +139,8 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
         SharedPrefs sharedPrefs = new SharedPrefs(context);
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_REMOVE_MECH + id, params,
+        Log.d(TAG, "removeMech: "+WebServices.API_REMOVE_MECH + id);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_REMOVE_MECH + id, null,
                 response -> {
 
                     Toast.makeText(context, "Mechanic Removed", Toast.LENGTH_SHORT).show();

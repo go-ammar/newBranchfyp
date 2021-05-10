@@ -114,51 +114,51 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
         }
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_DEVICES, params, response -> {
-
-            devicesList.clear();
-            Log.d(TAG, "_apigetDevices: res " + response);
-
-
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
-                    .create();
-            Devices getDevices = gson.fromJson(response.toString(), Devices.class);
-
-            Log.d(TAG, "actionViews: " + getDevices.toString());
-            devicesList.add(getDevices);
-
-
-            Log.d(TAG, "actionViews: get room is " + devicesList.get(0).toString());
-
-            binding.progress.setVisibility(View.GONE);
-            adapter = new ConfigurationAdapter(context, devicesList, this);
-            recycle.setAdapter(adapter);
-
-            Log.d(TAG, "actionViews: List is " + devicesList.toString());
-
-        }, error -> {
-            binding.progress.setVisibility(View.GONE);
-
-            Toast toast = Toast.makeText(context, "Could not get devices", Toast.LENGTH_SHORT);
-            toast.show();
-            Log.d(TAG, "_apiGetDevices: error " + error);
-
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap header = new HashMap<>();
-                header.put("Authorization", sharedPrefs.getKey());
-                Log.d(TAG, "getHeaders: " + header.toString());
-                return header;
-            }
-        };
-
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
-
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_DEVICES, params, response -> {
+//
+//            devicesList.clear();
+//            Log.d(TAG, "_apigetDevices: res " + response);
+//
+//
+//            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+//                    .create();
+//            Devices getDevices = gson.fromJson(response.toString(), Devices.class);
+//
+//            Log.d(TAG, "actionViews: " + getDevices.toString());
+//            devicesList.add(getDevices);
+//
+//
+//            Log.d(TAG, "actionViews: get room is " + devicesList.get(0).toString());
+//
+//            binding.progress.setVisibility(View.GONE);
+//            adapter = new ConfigurationAdapter(context, devicesList, this);
+//            recycle.setAdapter(adapter);
+//
+//            Log.d(TAG, "actionViews: List is " + devicesList.toString());
+//
+//        }, error -> {
+//            binding.progress.setVisibility(View.GONE);
+//
+//            Toast toast = Toast.makeText(context, "Could not get devices", Toast.LENGTH_SHORT);
+//            toast.show();
+//            Log.d(TAG, "_apiGetDevices: error " + error);
+//
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap header = new HashMap<>();
+//                header.put("Authorization", sharedPrefs.getKey());
+//                Log.d(TAG, "getHeaders: " + header.toString());
+//                return header;
+//            }
+//        };
+//
+//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//        VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+//
 
     }
 
@@ -218,42 +218,42 @@ public class DeviceConfigurationFragment extends Fragment implements Configurati
         binding2.confirmButton.setOnClickListener(v -> {
 
 
-                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
-                            WebServices.API__UPDATE_CONFIG_DEVICE + devicesList.get(0).data.get(position).id + "/assignRoom",
-                            params, response -> {
-
-                        Toast toast = Toast.makeText(context, "Device location Updated", Toast.LENGTH_SHORT);
-                        toast.show();
-
-                        binding.progress.setVisibility(View.VISIBLE);
-                        devicesList.clear();
-                        actionViews(true);
-
-                        check.set(true);
-
-
-                    }, error -> {
-                        Toast toast = Toast.makeText(context, "Device location not Updated", Toast.LENGTH_SHORT);
-                        toast.show();
-                        Log.d("TAG", "_apiGetRoom: error2 " + error);
-
-                    }) {
-                        @Override
-                        public Map<String, String> getHeaders() throws AuthFailureError {
-                            HashMap header = new HashMap<>();
-                            header.put("Authorization", sharedPrefs.getKey());
-                            Log.d("TAG", "getHeaders: " + header.toString());
-                            return header;
-                        }
-                    };
-
-
-                    jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
-                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-                    VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
-                    dialog.dismiss();
+//                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
+//                            WebServices.API__UPDATE_CONFIG_DEVICE + devicesList.get(0).data.get(position).id + "/assignRoom",
+//                            params, response -> {
+//
+//                        Toast toast = Toast.makeText(context, "Device location Updated", Toast.LENGTH_SHORT);
+//                        toast.show();
+//
+//                        binding.progress.setVisibility(View.VISIBLE);
+//                        devicesList.clear();
+//                        actionViews(true);
+//
+//                        check.set(true);
+//
+//
+//                    }, error -> {
+//                        Toast toast = Toast.makeText(context, "Device location not Updated", Toast.LENGTH_SHORT);
+//                        toast.show();
+//                        Log.d("TAG", "_apiGetRoom: error2 " + error);
+//
+//                    }) {
+//                        @Override
+//                        public Map<String, String> getHeaders() throws AuthFailureError {
+//                            HashMap header = new HashMap<>();
+//                            header.put("Authorization", sharedPrefs.getKey());
+//                            Log.d("TAG", "getHeaders: " + header.toString());
+//                            return header;
+//                        }
+//                    };
+//
+//
+//                    jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+//                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//                    VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+//                    dialog.dismiss();
 
                 }
 

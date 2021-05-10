@@ -157,30 +157,30 @@ public class EnterEmailFragment extends Fragment {
         }
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_SEND_EMAIL + email, params, response -> {
-
-            Log.d(TAG, "validation: res " + response);
-            try {
-                JSONArray jsonArray = response.getJSONArray("employees");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-//            Toast toast = Toast.makeText(getContext(), "Incorrect email or password", Toast.LENGTH_SHORT);
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_SEND_EMAIL + email, params, response -> {
+//
+//            Log.d(TAG, "validation: res " + response);
+//            try {
+//                JSONArray jsonArray = response.getJSONArray("employees");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+////            Toast toast = Toast.makeText(getContext(), "Incorrect email or password", Toast.LENGTH_SHORT);
+////            toast.show();
+//
+//            EnterEmailFragmentDirections.ActionEnterEmailFragmentToPinFragment actions = EnterEmailFragmentDirections.actionEnterEmailFragmentToPinFragment();
+//            actions.setEmail(email);
+//            navController.navigate(actions);
+//
+//        }, error -> {
+//
+//            Toast toast = Toast.makeText(getContext(), "Incorrect email", Toast.LENGTH_SHORT);
 //            toast.show();
-
-            EnterEmailFragmentDirections.ActionEnterEmailFragmentToPinFragment actions = EnterEmailFragmentDirections.actionEnterEmailFragmentToPinFragment();
-            actions.setEmail(email);
-            navController.navigate(actions);
-
-        }, error -> {
-
-            Toast toast = Toast.makeText(getContext(), "Incorrect email", Toast.LENGTH_SHORT);
-            toast.show();
-            Log.d(TAG, "validation: error " + error);
-
-        });
-
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+//            Log.d(TAG, "validation: error " + error);
+//
+//        });
+//
+//        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
 
 //        EnterEmailFragmentDirections.ActionEnterEmailFragmentToPinFragment actions = EnterEmailFragmentDirections.actionEnterEmailFragmentToPinFragment();

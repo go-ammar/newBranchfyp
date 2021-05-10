@@ -104,7 +104,7 @@ public class PinFragment extends Fragment {
             }
 
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_PIN, params, response -> {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "WebServices.API_PIN", params, response -> {
 
                 Log.d(TAG, "validation: res " + response);
 

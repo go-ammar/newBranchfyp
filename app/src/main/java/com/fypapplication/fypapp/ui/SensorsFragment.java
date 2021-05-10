@@ -86,7 +86,7 @@ public class SensorsFragment extends Fragment {
         sensorList.clear();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                WebServices.API_GET_SENSORS + id, params, response -> {
+                "" + id, params, response -> {
 
             Log.d(TAG, "_apigetSensors: res " + response);
 

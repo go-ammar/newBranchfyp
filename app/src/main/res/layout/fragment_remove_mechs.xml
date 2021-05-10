@@ -10,7 +10,22 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".RemoveMechsFragment">
+
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/_16sdp"
+            android:layout_margin="@dimen/margin_huge"
+
+            android:text="Remove Mechanics"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/serviceRecyclerView"
@@ -21,7 +36,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv"
-
             tools:listitem="@layout/item_mechlist" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

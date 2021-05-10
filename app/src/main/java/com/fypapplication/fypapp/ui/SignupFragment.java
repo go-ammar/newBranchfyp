@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -23,9 +24,13 @@ import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.Login;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
+import com.fypapplication.fypapp.webservices.WebServices;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignupFragment extends Fragment {
 
@@ -78,19 +83,22 @@ public class SignupFragment extends Fragment {
             // BODY
             params.put("email", binding.emailEt.getText().toString());
             params.put("password", binding.passwordEt.getText().toString());
-            params.put("latitude", 0);
-            params.put("longitude", 0);
-            params.put("type", binding.passwordEt.getText().toString());
+            params.put("latitude", 1);
+            params.put("longitude", 1);
+            params.put("name", binding.nameEt.getText().toString());
+            params.put("type", 2);
             params.put("phone", binding.phoneEt.getText().toString());
+            Log.d(TAG, "signUpApi: "+params);
 //            Log.d(TAG, "validations: email is:  " + binding.emailEt.getText().toString());
         } catch (Exception e) {
             Log.e(TAG, "signUpApi: ", e);
         }
 
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, "SignupAPI", params, response -> {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_SIGNUP, params, response -> {
 
             Log.d(TAG, "signUpApi: res " + response);
+            Toast.makeText(getContext(), "User Created", Toast.LENGTH_SHORT).show();
 
 //            Login login = new Login();
 //
@@ -107,7 +115,15 @@ public class SignupFragment extends Fragment {
 
             Log.e(TAG, "signUpApi: ", error);
 
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+        };
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

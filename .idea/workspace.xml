@@ -6,7 +6,6 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="actionv" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -15,22 +14,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="612c2949-c3e3-46f4-8be7-25a7d30c5c00" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/RemoveMechsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/RemoveMechsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/MechServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/MechServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/ConfigurationAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/ConfigurationAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/RemoveMechAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/adapters/RemoveMechAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/helper/ChangesHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/helper/ChangesHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/AddMechsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/AddMechsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/MyServicesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/MyServicesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/DeviceConfigurationFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/DeviceConfigurationFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/DevicePerRoomFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/DevicePerRoomFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/EnterEmailFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/EnterEmailFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/GetRoomsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/GetRoomsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/PinFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/PinFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SensorsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SensorsFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SigninFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SigninFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SignupFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SignupFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/StatisticsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/StatisticsFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/webservices/WebServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/webservices/WebServices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_mechs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_mechs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_account.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dash_board.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dash_board.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_remove_mechs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_remove_mechs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_signin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_signin.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DRGGAM58C1000789]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -108,7 +128,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../newBranchfyp" />
     <property name="multi-representation-previewC:/Users/go_am/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/go_am/AppData/Local/Android/Sdk/sources/android-29/android/view/View.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/go_am/AppData/Local/Android/Sdk/sources/android-29/android/widget/AutoCompleteTextView.java_selected" value="Custom views" />
@@ -346,26 +366,26 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="527" y="154" key="AndroidCreateXmlResourceDialog/0.0.1366.728@0.0.1366.728" timestamp="1619433247907" />
-    <state x="539" y="91" key="FileChooserDialogImpl" timestamp="1620480653006">
+    <state x="539" y="91" key="FileChooserDialogImpl" timestamp="1620635979279">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="539" y="91" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1620480653006" />
-    <state width="1323" height="222" key="GridCell.Tab.0.bottom" timestamp="1620481689927">
+    <state x="539" y="91" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1620635979279" />
+    <state width="1323" height="222" key="GridCell.Tab.0.bottom" timestamp="1620640871082">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="222" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1620481689927" />
-    <state width="1323" height="222" key="GridCell.Tab.0.center" timestamp="1620481689927">
+    <state width="1323" height="222" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1620640871082" />
+    <state width="1323" height="222" key="GridCell.Tab.0.center" timestamp="1620640871082">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="222" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1620481689927" />
-    <state width="1323" height="222" key="GridCell.Tab.0.left" timestamp="1620481689927">
+    <state width="1323" height="222" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1620640871082" />
+    <state width="1323" height="222" key="GridCell.Tab.0.left" timestamp="1620640871082">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="222" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1620481689927" />
-    <state width="1323" height="222" key="GridCell.Tab.0.right" timestamp="1620481689927">
+    <state width="1323" height="222" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1620640871082" />
+    <state width="1323" height="222" key="GridCell.Tab.0.right" timestamp="1620640871082">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="222" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1620481689927" />
+    <state width="1323" height="222" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1620640871082" />
     <state x="184" y="9" key="SettingsEditor" timestamp="1619684012074">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -382,10 +402,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1619431728100" />
-    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup" timestamp="1620572961501">
+    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup" timestamp="1620638279370">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1620572961501" />
+    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1620638279370" />
     <state x="405" y="275" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1620028845272">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

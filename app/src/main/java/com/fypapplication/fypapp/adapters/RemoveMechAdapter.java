@@ -49,11 +49,14 @@ public class RemoveMechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         User user = userArrayList.get(position);
 
-        String address = getAddress(Long.parseLong(user.lat), Long.parseLong(user.lng));
+//        String address = getAddress(Long.parseLong(user.lat), Long.parseLong(user.lng));
+        String address = "Address";
         ((RemoveMechViewHolder) holder).setBinding(user, address);
+        Log.d(TAG, "onBindViewHolder: "+user.id);
 
         ((RemoveMechViewHolder) holder).binding.delete.setOnClickListener(v -> {
-            removeMechInterface.removeMech(user);
+            removeMechInterface.removeMech(userArrayList.get(position));
+            Log.d(TAG, "onBindViewHolder: "+userArrayList.get(position).id);
         });
 
     }

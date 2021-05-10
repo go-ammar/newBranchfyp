@@ -97,7 +97,7 @@ public class StatisticsFragment extends Fragment {
         JSONObject params = new JSONObject();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                WebServices.API_GET_SENSORS + id, params, response -> {
+                "WebServices.API_GET_SENSORS" + id, params, response -> {
 
             Log.d("Stats", "Stats: res " + response);
 

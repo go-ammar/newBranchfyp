@@ -101,66 +101,66 @@ public class DevicePerRoomFragment extends Fragment {
 
         deviceModel.clear();
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_DEVICES, params, response -> {
-
-            Log.d(TAG, "_apigetDevices: res " + response);
-
-
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
-                    .create();
-            Devices getDevices = gson.fromJson(response.toString(), Devices.class);
-
-            Log.d(TAG, "actionViews: " + getDevices.toString());
-            devicesList.add(getDevices);
-
-
-            Log.d(TAG, "actionViews: get room is " + devicesList.get(0).data.size());
-
-            binding.progress.setVisibility(View.GONE);
-
-
-            for (int i = 0; devicesList.get(0).data.size() > i; i++) {
-
-                if (devicesList.get(0).data.get(i).presentIn != null)
-                    if (devicesList.get(0).data.get(i).presentIn._id.equals(id.getId())) {
-                        DeviceModelClass dmc = new DeviceModelClass();
-                        dmc.deviceName = devicesList.get(0).data.get(i).name;
-                        dmc.id = devicesList.get(0).data.get(i).id;
-                        deviceModel.add(dmc);
-                    }
-            }
-
-            if (deviceModel.size() == 0) {
-                binding.tv2.setVisibility(View.VISIBLE);
-            }
-
-            adapter = new DevicesPerRoomAdapter(deviceModel, mContext, id.getId());
-            recycle.setAdapter(adapter);
-
-            Log.d(TAG, "actionViews: List is " + devicesList.toString());
-
-        }, error -> {
-            binding.progress.setVisibility(View.GONE);
-
-            Toast toast = Toast.makeText(mContext, "Could not get devices", Toast.LENGTH_SHORT);
-            toast.show();
-            Log.d(TAG, "_apiGetDevices: error " + error);
-
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap header = new HashMap<>();
-                header.put("Authorization", sharedPrefs.getKey());
-                Log.d(TAG, "getHeaders: " + header.toString());
-                return header;
-            }
-        };
-
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_DEVICES, params, response -> {
+//
+//            Log.d(TAG, "_apigetDevices: res " + response);
+//
+//
+//            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssz")
+//                    .create();
+//            Devices getDevices = gson.fromJson(response.toString(), Devices.class);
+//
+//            Log.d(TAG, "actionViews: " + getDevices.toString());
+//            devicesList.add(getDevices);
+//
+//
+//            Log.d(TAG, "actionViews: get room is " + devicesList.get(0).data.size());
+//
+//            binding.progress.setVisibility(View.GONE);
+//
+//
+//            for (int i = 0; devicesList.get(0).data.size() > i; i++) {
+//
+//                if (devicesList.get(0).data.get(i).presentIn != null)
+//                    if (devicesList.get(0).data.get(i).presentIn._id.equals(id.getId())) {
+//                        DeviceModelClass dmc = new DeviceModelClass();
+//                        dmc.deviceName = devicesList.get(0).data.get(i).name;
+//                        dmc.id = devicesList.get(0).data.get(i).id;
+//                        deviceModel.add(dmc);
+//                    }
+//            }
+//
+//            if (deviceModel.size() == 0) {
+//                binding.tv2.setVisibility(View.VISIBLE);
+//            }
+//
+//            adapter = new DevicesPerRoomAdapter(deviceModel, mContext, id.getId());
+//            recycle.setAdapter(adapter);
+//
+//            Log.d(TAG, "actionViews: List is " + devicesList.toString());
+//
+//        }, error -> {
+//            binding.progress.setVisibility(View.GONE);
+//
+//            Toast toast = Toast.makeText(mContext, "Could not get devices", Toast.LENGTH_SHORT);
+//            toast.show();
+//            Log.d(TAG, "_apiGetDevices: error " + error);
+//
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap header = new HashMap<>();
+//                header.put("Authorization", sharedPrefs.getKey());
+//                Log.d(TAG, "getHeaders: " + header.toString());
+//                return header;
+//            }
+//        };
+//
+//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//        VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
 
     }
 

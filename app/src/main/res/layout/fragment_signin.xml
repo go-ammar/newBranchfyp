@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:text="test@test.com"
+                android:text="go_ammar@hotmail.com"
                 android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
-                android:text="test@test.com"
+                android:text="desert123"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>

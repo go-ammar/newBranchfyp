@@ -38,7 +38,35 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_dashboard_to_myServicesFragment"
+            app:destination="@id/myServicesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_dashboard_to_addMechsFragment"
+            app:destination="@id/addMechsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_dashboard_to_removeMechsFragment"
+            app:destination="@id/removeMechsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_dashboard_to_myAccountFragment"
+            app:destination="@id/myAccountFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -147,8 +175,7 @@
         <argument
             android:name="_id"
             android:defaultValue="default"
-            app:argType="string"
-            />
+            app:argType="string" />
         <action
             android:id="@+id/action_devicePerRoomFragment_to_sensorPerDevice"
             app:destination="@id/sensorPerDevice"
@@ -203,36 +230,69 @@
     </fragment>
 
 
-
     <fragment
         android:id="@+id/servicesFragment"
         android:name="com.fypapplication.fypapp.ui.ServicesFragment"
-        android:label="ServicesFragment" >
+        android:label="ServicesFragment">
         <argument
             android:name="vehicleType"
-            app:argType="string"
-            android:defaultValue="null" />
+            android:defaultValue="null"
+            app:argType="string" />
         <action
             android:id="@+id/action_servicesFragment_to_scheduleBookingFragment"
             app:destination="@id/scheduleBookingFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/scheduleBookingFragment"
         android:name="com.fypapplication.fypapp.ui.ScheduleBookingFragment"
-        android:label="ScheduleBookingFragment" >
+        android:label="ScheduleBookingFragment">
         <argument
             android:name="vehicleType"
-            app:argType="string"
-            android:defaultValue="null" />
+            android:defaultValue="null"
+            app:argType="string" />
         <argument
             android:name="service"
-            app:argType="com.fypapplication.fypapp.models.Services[]"
-            />
+            app:argType="com.fypapplication.fypapp.models.Services[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/myServicesFragment"
+        android:name="com.fypapplication.fypapp.ui.MyServicesFragment"
+        android:label="MyServicesFragment">
+        <argument
+            android:name="hello"
+            android:defaultValue="null"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addMechsFragment"
+        android:name="com.fypapplication.fypapp.ui.AddMechsFragment"
+        android:label="AddMechsFragment">
+        <argument
+            android:name="test"
+            android:defaultValue="null"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/removeMechsFragment"
+        android:name="com.fypapplication.fypapp.RemoveMechsFragment"
+        android:label="RemoveMechsFragment">
+        <argument
+            android:name="test"
+            android:defaultValue="null"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/myAccountFragment"
+        android:name="com.fypapplication.fypapp.ui.MyAccountFragment"
+        android:label="MyAccountFragment">
+        <argument
+            android:name="test"
+            android:defaultValue="null"
+            app:argType="string" />
     </fragment>
 
 

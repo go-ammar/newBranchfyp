@@ -16,8 +16,11 @@ public class Services implements Parcelable {
             return new Services[size];
         }
     };
+
+
     public String service;
     public String vehicleType;
+
 
     public Services(Parcel in) {
         service = in.readString();

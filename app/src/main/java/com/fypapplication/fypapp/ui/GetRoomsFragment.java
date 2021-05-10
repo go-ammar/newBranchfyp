@@ -31,7 +31,6 @@ import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.RoomAdapter;
 import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
 import com.fypapplication.fypapp.databinding.FragmentGetRoomsBinding;
-import com.fypapplication.fypapp.databinding.AddRoomDialogBinding;
 import com.fypapplication.fypapp.databinding.UpdateRoomDialogBinding;
 import com.fypapplication.fypapp.models.GetRoom;
 import com.fypapplication.fypapp.models.Room;
@@ -53,15 +52,14 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
 
 
     private static final String TAG = "GetRoomsFragment";
+    private final ArrayList<GetRoom> getRoomList = new ArrayList<>();
+    NavController navController;
+    FragmentGetRoomsBinding binding;
+    Context mContext = getContext();
     private String URL;
     private List<Room> lst;
-    NavController navController;
     private RecyclerView recycle;
     private RoomAdapter roomAdapter;
-    FragmentGetRoomsBinding binding;
-    private final ArrayList<GetRoom> getRoomList = new ArrayList<>();
-    Context mContext = getContext();
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,11 +68,6 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_get_rooms, container, false);
         mContext = getContext();
         return binding.getRoot();
-
-
-
-
-
 
     }
 
@@ -158,7 +151,6 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
                     getRoomList.add(getRoom1);
 
 
-
                     binding.progress.setVisibility(View.GONE);
                     roomAdapter = new RoomAdapter(mContext, getRoomList, this);
                     Log.d(TAG, "actionViews: adapter called " + getRoomList.get(0).data.size());
@@ -190,90 +182,90 @@ public class GetRoomsFragment extends Fragment implements RoomInterface {
     }
 
     void addRoomsDialog() {
-
-        AddRoomDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.add_room_dialog,
-                null, false);
-
-        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
-                .setView(binding.getRoot())
-                .create();
-
-        binding.addRoomBtn.setOnClickListener(view -> {
-            if (binding.romno.getEditText().getText().toString().length() == 0) {
-                alertDialog.dismiss();
-            }
-
-
-            JSONObject params = new JSONObject();
-
-            try {
-
-                // BODY
-                params.put("name", binding.romno.getEditText().getText().toString().trim());
-
-            } catch (Exception e) {
-                Log.e(TAG, "_apiLogin: ", e);
-            }
-
-            SharedPrefs sharedPrefs = new SharedPrefs(mContext);
-            Log.d(TAG, "access token is: in getroom" + sharedPrefs.getKey());
-            try {
-
-                Log.d(TAG, "actionViews: in getroom " + sharedPrefs.getKey());
-
-            } catch (Exception e) {
-                Log.e(TAG, "_apiLogin: ", e);
-            }
-
-
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_ADD_ROOM, params, response -> {
-
-                Log.d(TAG, "_apigetRoom: res " + response);
-                Toast toast = Toast.makeText(mContext, "Room added", Toast.LENGTH_SHORT);
-
-
-                toast.show();
-                alertDialog.dismiss();
-                actionViews();
-
-
-            }, error -> {
-                Toast toast = Toast.makeText(mContext, "Could not add room", Toast.LENGTH_SHORT);
-                toast.show();
-                Log.d(TAG, "_apiGetRoom: error " + error);
-                alertDialog.dismiss();
-
-
-            }) {
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap header = new HashMap<>();
-                    header.put("Authorization", sharedPrefs.getKey());
-                    Log.d(TAG, "getHeaders: " + header.toString());
-                    return header;
-                }
-            };
-
-            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-            VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
-
-
-        });
-
-        binding.CancelBtn.setOnClickListener(view -> {
-            alertDialog.dismiss();
-        });
-
-        if (alertDialog.getWindow() != null)
-            alertDialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
-        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        alertDialog.show();
-
-
+//
+//        AddRoomDialogBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.add_change_dialog,
+//                null, false);
+//
+//        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+//                .setView(binding.getRoot())
+//                .create();
+//
+//        binding.addRoomBtn.setOnClickListener(view -> {
+//            if (binding.romno.getEditText().getText().toString().length() == 0) {
+//                alertDialog.dismiss();
+//            }
+//
+//
+//            JSONObject params = new JSONObject();
+//
+//            try {
+//
+//                // BODY
+//                params.put("name", binding.romno.getEditText().getText().toString().trim());
+//
+//            } catch (Exception e) {
+//                Log.e(TAG, "_apiLogin: ", e);
+//            }
+//
+//            SharedPrefs sharedPrefs = new SharedPrefs(mContext);
+//            Log.d(TAG, "access token is: in getroom" + sharedPrefs.getKey());
+//            try {
+//
+//                Log.d(TAG, "actionViews: in getroom " + sharedPrefs.getKey());
+//
+//            } catch (Exception e) {
+//                Log.e(TAG, "_apiLogin: ", e);
+//            }
+//
+//
+//            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_ADD_ROOM, params, response -> {
+//
+//                Log.d(TAG, "_apigetRoom: res " + response);
+//                Toast toast = Toast.makeText(mContext, "Room added", Toast.LENGTH_SHORT);
+//
+//
+//                toast.show();
+//                alertDialog.dismiss();
+//                actionViews();
+//
+//
+//            }, error -> {
+//                Toast toast = Toast.makeText(mContext, "Could not add room", Toast.LENGTH_SHORT);
+//                toast.show();
+//                Log.d(TAG, "_apiGetRoom: error " + error);
+//                alertDialog.dismiss();
+//
+//
+//            }) {
+//                @Override
+//                public Map<String, String> getHeaders() throws AuthFailureError {
+//                    HashMap header = new HashMap<>();
+//                    header.put("Authorization", sharedPrefs.getKey());
+//                    Log.d(TAG, "getHeaders: " + header.toString());
+//                    return header;
+//                }
+//            };
+//
+//            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+//                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//
+//            VolleySingleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
+//
+//
+//        });
+//
+//        binding.CancelBtn.setOnClickListener(view -> {
+//            alertDialog.dismiss();
+//        });
+//
+//        if (alertDialog.getWindow() != null)
+//            alertDialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
+//        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
+//        alertDialog.show();
+//
+//
     }
 
 

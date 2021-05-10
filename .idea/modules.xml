@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Electrosoftnew.iml" filepath="$PROJECT_DIR$/.idea/modules/Electrosoftnew.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Electrosoftnew.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Electrosoftnew.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/fypapplication.iml" filepath="$PROJECT_DIR$/.idea/modules/fypapplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/fypapplication.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/fypapplication.app.iml" />
     </modules>
   </component>
 </project>

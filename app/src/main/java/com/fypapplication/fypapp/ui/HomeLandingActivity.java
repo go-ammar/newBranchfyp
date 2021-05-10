@@ -14,11 +14,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.databinding.ActivityHomeLandingBinding;
 import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
+import com.fypapplication.fypapp.helper.NotifyJobService;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 
 public class HomeLandingActivity extends AppCompatActivity {
@@ -33,19 +35,18 @@ public class HomeLandingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         if (getIntent().getBooleanExtra(EXTRA_LOGOUT, false)) {
             clearBackStack();
         } else {
             binding = DataBindingUtil.setContentView(this, R.layout.activity_home_landing);
             setUpNavigation();
         }
-
+        NotifyJobService.schedule(this,NotifyJobService.ONE_DAY_INTERVAL);
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
 
         if (item.getItemId() == R.id.logoutBtn) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

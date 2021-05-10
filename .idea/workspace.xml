@@ -6,7 +6,11 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+<<<<<<< HEAD
     <option name="TOOL_WINDOW_CUSTOM_FILTER" value="actionviews: " />
+=======
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="actionv" />
+>>>>>>> a702308f8e7fe440b594b2cfc3bd40707d1ed595
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -33,6 +37,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="612c2949-c3e3-46f4-8be7-25a7d30c5c00" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
@@ -40,6 +45,17 @@
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/RemoveMechsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/RemoveMechsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/MechServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/models/MechServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/AddMechsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/AddMechsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/MyServicesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/MyServicesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SigninFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/ui/SigninFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/webservices/WebServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/fypapplication/fypapp/webservices/WebServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_mechs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_mechs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_account.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_account.xml" afterDir="false" />
+>>>>>>> a702308f8e7fe440b594b2cfc3bd40707d1ed595
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +90,12 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Electrosoftnew" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="android" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Electrosoftnew" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
@@ -88,8 +110,8 @@
       <list>
         <option value="resourceFile" />
         <option value="Interface" />
-        <option value="layoutResourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -118,15 +140,19 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="memory.settings.postsync.last.time.stamp" value="1620605582791" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
+>>>>>>> a702308f8e7fe440b594b2cfc3bd40707d1ed595
     <property name="multi-representation-previewC:/Users/go_am/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/go_am/AppData/Local/Android/Sdk/sources/android-29/android/view/View.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/go_am/AppData/Local/Android/Sdk/sources/android-29/android/widget/AutoCompleteTextView.java_selected" value="Custom views" />
-    <property name="project.structure.last.edited" value="SDK Location" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
@@ -140,21 +166,36 @@
       <recent name="com.fypapplication.fypapp.ui" />
       <recent name="com.electrosoft.electrosoftnew.ui" />
     </key>
+<<<<<<< HEAD
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Android Projects\electrosoft-android\app\src\main\res\drawable-v24" />
     </key>
+=======
+>>>>>>> a702308f8e7fe440b594b2cfc3bd40707d1ed595
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Android Projects\FYP App\electrosoft-android\app" />
       <recent name="C:\Android Projects\electrosoft-android\app\src\main\res\drawable" />
       <recent name="C:\Android Projects\electrosoft-android\app\src\main\res\layout" />
       <recent name="C:\Android Projects\electrosoft-android\app\src\main\res\anim" />
       <recent name="C:\Android Projects\electrosoft-android\app\src\main\res" />
     </key>
+<<<<<<< HEAD
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.fypapplication.fypapp.helper" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.electrosoft.electrosoftnew.models" />
     </key>
+=======
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.electrosoft.electrosoftnew.models" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Android Projects\FYP App\electrosoft-android\app\src\main\res\drawable-v24" />
+      <recent name="C:\Android Projects\FYP App\electrosoft-android\app" />
+      <recent name="C:\Android Projects\electrosoft-android\app\src\main\res\drawable-v24" />
+    </key>
+>>>>>>> a702308f8e7fe440b594b2cfc3bd40707d1ed595
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -227,6 +268,25 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="electrosoft-android [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildDependents" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="electrosoft-android [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -246,8 +306,49 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="electrosoft-android [cleanBuildCache]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="cleanBuildCache" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="electrosoft-android [signingReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="signingReport" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.electrosoft-android [buildDependents]" />
+        <item itemvalue="Gradle.electrosoft-android [cleanBuildCache]" />
+        <item itemvalue="Gradle.electrosoft-android [signingReport]" />
         <item itemvalue="Gradle.electrosoft-android [build]" />
       </list>
     </recent_temporary>
@@ -282,25 +383,57 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1619431248676">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="488" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1619431248676" />
+=======
+    <state x="200" y="110" key="#PSD" timestamp="1620028853891">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="200" y="110" key="#PSD/0.0.1366.728@0.0.1366.728" timestamp="1620028853891" />
+    <state x="488" y="70" width="652" height="587" key="#com.intellij.ide.util.MemberChooser" timestamp="1620472555847">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="70" width="652" height="587" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1620472555847" />
+>>>>>>> a702308f8e7fe440b594b2cfc3bd40707d1ed595
     <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1616580778482">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.728@0.0.1366.728" timestamp="1616580778482" />
-    <state x="466" y="233" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1617345878685">
+    <state x="466" y="233" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1620471283347">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="466" y="233" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1617345878685" />
+    <state x="466" y="233" width="433" height="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1620471283347" />
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1617348003086">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="111" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1617348003086" />
-    <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1617796777733">
+    <state x="413" y="111" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog" timestamp="1620208838418">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="413" y="111" key="#com.intellij.refactoring.typeMigration.ui.FailedConversionsDialog/0.0.1366.728@0.0.1366.728" timestamp="1620208838418" />
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog" timestamp="1620471969989">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1620471969989" />
+    <state x="527" y="154" key="AndroidCreateXmlResourceDialog" timestamp="1619433247907">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="527" y="154" key="AndroidCreateXmlResourceDialog/0.0.1366.728@0.0.1366.728" timestamp="1619433247907" />
+    <state x="539" y="91" key="FileChooserDialogImpl" timestamp="1620480653006">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="539" y="91" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1620480653006" />
+    <state width="1323" height="222" key="GridCell.Tab.0.bottom" timestamp="1620481689927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="222" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1620481689927" />
+    <state width="1323" height="222" key="GridCell.Tab.0.center" timestamp="1620481689927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+<<<<<<< HEAD
     <state x="263" y="119" key="AndroidCreateResourceFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1617796777733" />
     <state x="527" y="154" key="AndroidCreateXmlResourceDialog" timestamp="1619433247907">
       <screen x="0" y="0" width="1366" height="728" />
@@ -339,5 +472,40 @@
     </state>
     <state x="345" y="148" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1619430725783" />
     <state x="485" y="97" width="945" height="981" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1619971549592" />
+=======
+    <state width="1323" height="222" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1620481689927" />
+    <state width="1323" height="222" key="GridCell.Tab.0.left" timestamp="1620481689927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="222" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1620481689927" />
+    <state width="1323" height="222" key="GridCell.Tab.0.right" timestamp="1620481689927">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="222" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1620481689927" />
+    <state x="184" y="9" key="SettingsEditor" timestamp="1619684012074">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1619684012074" />
+    <state x="443" y="162" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1620208287855">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="443" y="162" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1366.728@0.0.1366.728" timestamp="1620208287855" />
+    <state x="390" y="97" width="771" height="534" key="find.popup" timestamp="1620472810412">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="390" y="97" width="771" height="534" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1620472810412" />
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup" timestamp="1619431728100">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="162" width="672" height="677" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1619431728100" />
+    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup" timestamp="1620572961501">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="345" y="148" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1620572961501" />
+    <state x="405" y="275" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1620028845272">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="405" y="275" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1366.728@0.0.1366.728" timestamp="1620028845272" />
+>>>>>>> a702308f8e7fe440b594b2cfc3bd40707d1ed595
   </component>
 </project>

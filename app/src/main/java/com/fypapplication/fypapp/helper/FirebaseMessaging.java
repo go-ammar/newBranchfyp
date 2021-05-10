@@ -13,9 +13,13 @@ import androidx.core.app.NotificationCompat;
 
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.ui.DashBoardFragment;
+import com.fypapplication.fypapp.ui.MapMarkerActivity;
 import com.google.firebase.BuildConfig;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import org.json.JSONObject;
+
 public class FirebaseMessaging extends FirebaseMessagingService {
 
     private static final String TAG = "FirebaseMessaging";
@@ -24,13 +28,19 @@ public class FirebaseMessaging extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         try {
 
+            Log.d(TAG, "onMessageReceived: " + remoteMessage.getData());
 
-            if (BuildConfig.DEBUG) Log.d(TAG, "onMessageReceived: "+remoteMessage.getData());
-            Intent intent = new Intent(this, DashBoardFragment.class);
+            JSONObject body = new JSONObject(remoteMessage.getData().get("body"));
+            String lat = body.getString("lat");
+            String lng = body.getString("lng");
+
+            Intent intent = new Intent(this, MapMarkerActivity.class);
+            intent.putExtra("lat",lat);
+            intent.putExtra("lng", lng);
             try {
 
-            }catch (Exception ex){
-                if (BuildConfig.DEBUG) Log.d(TAG, "onMessageReceived: "+ ex);
+            } catch (Exception ex) {
+                if (BuildConfig.DEBUG) Log.d(TAG, "onMessageReceived: " + ex);
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
@@ -56,7 +66,8 @@ public class FirebaseMessaging extends FirebaseMessagingService {
         } catch (Exception e) {
 
             e.printStackTrace();
-        }    }
+        }
+    }
 
     @Override
     public void onNewToken(@NonNull String s) {

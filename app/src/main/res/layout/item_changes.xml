@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="service"
+            type="com.fypapplication.fypapp.models.ChangesDue" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/margin_small"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/deleteChangeDue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:src="@drawable/ic_baseline_delete_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/serviceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Service: `+ service.typeOfChange}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dateOfChangeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Date of change: `+ service.dateOfChange}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/serviceTv" />
+
+        <TextView
+            android:id="@+id/durationOfChangeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Duration: `+ service.duration}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateOfChangeTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

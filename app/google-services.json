@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "363932389724",
+    "project_id": "mechanic-fyp",
+    "storage_bucket": "mechanic-fyp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363932389724:android:dbad44f6fa2273d52ab199",
+        "android_client_info": {
+          "package_name": "com.fypapplication.fypapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363932389724-4gvjfh60q4869udirvjn7kvfjd4q2pj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoKZNbPWcmdXt1UnWWaY7BVM_dseLTiV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363932389724-4gvjfh60q4869udirvjn7kvfjd4q2pj0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

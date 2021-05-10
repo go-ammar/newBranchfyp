@@ -1,6 +1,7 @@
 package com.fypapplication.fypapp.ui;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -65,8 +66,17 @@ public class ScheduleBookingFragment extends Fragment {
             showDatePicker();
         });
 
+        binding.nextBtn.setOnClickListener(v -> {
+
+        });
         hour = binding.timePicker1.getCurrentHour();
         min = binding.timePicker1.getCurrentMinute();
+
+        binding.proceedbtn.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), MapMarkerActivity.class);
+            startActivity(intent);
+
+        });
 
     }
 

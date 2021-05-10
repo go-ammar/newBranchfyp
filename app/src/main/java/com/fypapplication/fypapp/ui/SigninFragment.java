@@ -9,16 +9,34 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.databinding.FragmentSigninBinding;
+import com.fypapplication.fypapp.helper.Global;
+import com.fypapplication.fypapp.models.Login;
+import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
+import com.fypapplication.fypapp.webservices.VolleySingleton;
+import com.fypapplication.fypapp.webservices.WebServices;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class SigninFragment extends Fragment {
 
 
+    private static final String TAG = "SigninFragment";
     NavController navController;
     FragmentSigninBinding binding;
 
@@ -51,10 +69,11 @@ public class SigninFragment extends Fragment {
     private void actionViews() {
 
 
-
         binding.loginBtn.setOnClickListener(v -> {
 
-            navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
+
+            loginApi();
+//            navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
 
         });
 
@@ -64,6 +83,75 @@ public class SigninFragment extends Fragment {
         });
 
 
+    }
+
+    private void loginApi() {
+
+
+        JSONObject params = new JSONObject();
+
+        try {
+            // BODY
+            params.put("email", binding.emailEt.getText().toString());
+            params.put("password", binding.passwordEt.getText().toString());
+//            Log.d(TAG, "validations: email is:  " + binding.emailEt.getText().toString());
+        } catch (Exception e) {
+            Log.e(TAG, "_apiLogin: ", e);
+        }
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_LOGIN, params, res -> {
+
+            Log.d(TAG, "_apiLogin: res " + res);
+
+            JSONObject response = null;
+            try {
+                response = res.getJSONObject("user");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Login login = new Login();
+
+
+            login.id = response.optString("id");
+            login.name = response.optString("name");
+            login.email = response.optString("email");
+            login.phoneNumber = response.optLong("phone");
+            login.type = response.optInt("type");
+
+            login.lng = response.optLong("longitude");
+            login.lat = response.optLong("latitude");
+
+
+            //INITIALIZE SHARED PREFS TOKEN HERE USING login.data.accessToken.
+            SharedPrefs sharedPrefs = new SharedPrefs(requireContext());
+            try {
+                sharedPrefs.setKey(res.getString("token"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            sharedPrefs.putUser(login);
+            navController.navigate(R.id.action_loginFragment_to_homeLandingActivity);
+
+        }, error -> {
+
+            Log.e(TAG, "loginApi: ", error);
+
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
     }
 

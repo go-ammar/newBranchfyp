@@ -86,5 +86,6 @@
     <string name="room_not_assigned">Room not Assigned</string>
     <string name="logout">Logout</string>
     <string name="logout_text">Are you sure you want to log out?</string>
+    <string name="google_maps_api_key">AIzaSyCz7M3lGYiADeSEUAr6XzxyRkqEHbrR05o</string>
 
 </resources>

@@ -35,18 +35,18 @@ public class FirebaseMessaging extends FirebaseMessagingService {
             String lng = body.getString("lng");
 
             Intent intent = new Intent(this, MapMarkerActivity.class);
-            intent.putExtra("lat",lat);
+            intent.putExtra("lat", lat);
             intent.putExtra("lng", lng);
             try {
 
             } catch (Exception ex) {
-                if (BuildConfig.DEBUG) Log.d(TAG, "onMessageReceived: " + ex);
+                Log.d(TAG, "onMessageReceived: " + ex);
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
             final String channelId = "Default";
             final NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
-                    .setSmallIcon(R.drawable.logo)
+                    .setSmallIcon(R.drawable.splash_screen)
                     .setContentTitle(remoteMessage.getData().get("title"))
                     .setContentText(remoteMessage.getData().get("msg"))
                     .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)

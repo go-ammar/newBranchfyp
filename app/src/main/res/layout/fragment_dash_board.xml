@@ -447,9 +447,10 @@
 
             <ImageView
                 android:id="@+id/imageAdmin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="128dp"
+                android:paddingBottom="@dimen/margin_small"
                 android:layout_marginTop="64dp"
+                android:layout_width="match_parent"
                 android:src="@drawable/ic_admin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

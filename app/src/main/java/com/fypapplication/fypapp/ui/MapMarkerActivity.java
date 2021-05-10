@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 import java.util.Locale;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -40,14 +41,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-public class MapMarkerActivity  extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
-
-    private GoogleMap mMap;
-    LocationManager locationManager;
-    LocationListener locationListener;
+public class MapMarkerActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     private static final String TAG = "MapMarkerActivity";
-
+    LocationManager locationManager;
+    LocationListener locationListener;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +60,12 @@ public class MapMarkerActivity  extends AppCompatActivity implements OnMapReadyC
     }
 
 
-    public void centreMapOnLocation(Location location, String title){
+    public void centreMapOnLocation(Location location, String title) {
 
-        LatLng userLocation = new LatLng(location.getLatitude(),location.getLongitude());
+        LatLng userLocation = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(userLocation).title(title));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,12));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation, 12));
 
     }
 
@@ -74,21 +73,16 @@ public class MapMarkerActivity  extends AppCompatActivity implements OnMapReadyC
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
-        {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                 Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 assert lastKnownLocation != null;
-                centreMapOnLocation(lastKnownLocation,"Your Location");
+                centreMapOnLocation(lastKnownLocation, "Your Location");
 
             }
         }
     }
-
-
-
 
 
     @Override
@@ -103,20 +97,18 @@ public class MapMarkerActivity  extends AppCompatActivity implements OnMapReadyC
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
 
-
-
         mMap.setOnMapLongClickListener(this);
 
         Log.d(TAG, "onMapReady: map is ready");
         Intent intent = getIntent();
-        if (intent.getIntExtra("Place Number",0) == 0 ){
+        if (intent.getIntExtra("Place Number", 0) == 0) {
 
             // Zoom into users location
-            locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
             locationListener = new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-                    centreMapOnLocation(location,"Your Location");
+                    centreMapOnLocation(location, "Your Location");
                 }
 
                 @Override
@@ -135,13 +127,13 @@ public class MapMarkerActivity  extends AppCompatActivity implements OnMapReadyC
                 }
             };
 
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locationListener);
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                 Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 assert lastKnownLocation != null;
-                centreMapOnLocation(lastKnownLocation,"Your Location");
+                centreMapOnLocation(lastKnownLocation, "Your Location");
             } else {
-                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         } else {
             Location placeLocation = new Location(LocationManager.GPS_PROVIDER);
@@ -154,14 +146,14 @@ public class MapMarkerActivity  extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onMapLongClick(LatLng latLng) {
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-        String adress ="";
+        String adress = "";
         try {
-            List<Address> listaddress = geocoder.getFromLocation(latLng.latitude,latLng.longitude,1);
+            List<Address> listaddress = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
 
-            if (listaddress != null && listaddress.size()>0){
-                if (listaddress.get(0).getThoroughfare() != null){
+            if (listaddress != null && listaddress.size() > 0) {
+                if (listaddress.get(0).getThoroughfare() != null) {
 
-                    if (listaddress.get(0).getSubThoroughfare() != null){
+                    if (listaddress.get(0).getSubThoroughfare() != null) {
                         adress += listaddress.get(0).getSubThoroughfare() + "";
 
                     }
@@ -170,7 +162,7 @@ public class MapMarkerActivity  extends AppCompatActivity implements OnMapReadyC
 
             }
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -19,7 +19,7 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_16sdp"
+            android:layout_margin="@dimen/margin_huge"
             android:text="Add Mechanic"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,6 @@
                 android:id="@+id/emailET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusable="false"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -125,7 +124,6 @@
                 android:id="@+id/passwordET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:focusableInTouchMode="false"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>

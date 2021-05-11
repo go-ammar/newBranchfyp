@@ -120,7 +120,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
                             Toast.makeText(getContext(), "marker clicked " + mechId, Toast.LENGTH_SHORT).show();
 
-                            openPriceDialogue();
+                            openPriceDialogue(user);
 
                         }
                     }
@@ -170,24 +170,22 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
         }
     };
 
-    private void openPriceDialogue() {
+    private void openPriceDialogue(User user) {
 
 
-            dialog = new Dialog(requireContext());
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setCancelable(true);
+        dialog = new Dialog(requireContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
 
-            Button dialogButton = dialog.findViewById(R.id.call_btn);
+        dialogueMechanicServiceBinding.callBtn.setOnClickListener(v -> {
 
-            dialogueMechanicServiceBinding.callBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + user.phoneNumber));
+            startActivity(intent);
 
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:03402211539"));
-                startActivity(intent);
+        });
 
-            });
-
-            dialog.show();
+        dialog.show();
 
 
     }
@@ -267,9 +265,8 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
     private void actionViews() {
 
-        dialogueMechanicServiceBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout. dialogue_mechanic_service, null, false);
+        dialogueMechanicServiceBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialogue_mechanic_service, null, false);
         dialog.setContentView(dialogueMechanicServiceBinding.getRoot());
-
 
 
     }
@@ -353,6 +350,6 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
     @Override
     public void onClickService(MechServices mechServices) {
-        Log.d(TAG, "onClickService: "+mechServices.service);
+        Log.d(TAG, "onClickService: " + mechServices.service);
     }
 }

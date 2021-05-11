@@ -15,7 +15,7 @@ import com.fypapplication.fypapp.models.MechServices;
 
 import java.util.ArrayList;
 
-public class MechanicPriceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MechanicPriceAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     Context context;
     ArrayList<MechServices> mechPriceArraylist;
@@ -39,9 +39,9 @@ public class MechanicPriceAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MechServices service = mechPriceArraylist.get(position);
-        ((MechServicesAdapter.MechServiceViewHolder) holder).setBinding(service);
+        ((MechanicPriceAdapter.MechServiceViewHolder) holder).setBinding(service);
 
-        ((MechServicesAdapter.MechServiceViewHolder) holder).binding.deleteChangeDue.setOnClickListener(v -> {
+        ((MechServiceViewHolder) holder).binding.serviceTv.setOnClickListener(v -> {
             myServicesInterface.onClickService(service);
         });
     }
@@ -50,9 +50,11 @@ public class MechanicPriceAdapter extends RecyclerView.Adapter<RecyclerView.View
     public int getItemCount() {
         return mechPriceArraylist.size();
     }
+
     public interface MyServicesInterface {
         void onClickService(MechServices mechServices);
     }
+
     public static class MechServiceViewHolder extends RecyclerView.ViewHolder {
 
         ItemMechServicesBinding binding;

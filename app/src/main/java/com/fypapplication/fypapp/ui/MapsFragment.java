@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fypapplication.fypapp.R;
+import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,6 +19,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsFragment extends Fragment {
+
+    SharedPrefs sharedPrefs;
+    int userType = 0;
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -41,7 +45,8 @@ public class MapsFragment extends Fragment {
                 sydney = new LatLng(-34, 151);
             }
             googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            float zoomLevel = 16.0f;
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
         }
     };
 
@@ -57,10 +62,15 @@ public class MapsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        sharedPrefs = new SharedPrefs(getContext());
+        userType = sharedPrefs.getUser().type;
+
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
+
     }
 }

@@ -39,11 +39,12 @@ public class MechanicPriceAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MechServices service = mechPriceArraylist.get(position);
-        ((MechServicesAdapter.MechServiceViewHolder) holder).setBinding(service);
+        ((MechanicPriceAdapter.MechServiceViewHolder) holder).setBinding(service);
 
-        ((MechServicesAdapter.MechServiceViewHolder) holder).binding.deleteChangeDue.setOnClickListener(v -> {
+        ((MechServiceViewHolder) holder).binding.serviceTv.setOnClickListener(v -> {
             myServicesInterface.onClickService(service);
         });
+
     }
 
     @Override

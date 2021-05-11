@@ -120,7 +120,6 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
                             Toast.makeText(getContext(), "marker clicked " + mechId, Toast.LENGTH_SHORT).show();
 
-                            openPriceDialogue();
 
                         }
                     }
@@ -128,6 +127,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                     //ye this ki jagah kiya lagaun
                     mechanicPriceAdapter = new MechanicPriceAdapter(context, priceArrayList, myServicesInterface);
                     dialogueMechanicServiceBinding.recyler.setAdapter(mechanicPriceAdapter);
+                    openPriceDialogue(user);
 
 
                 } else {
@@ -170,7 +170,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
         }
     };
 
-    private void openPriceDialogue() {
+    private void openPriceDialogue(User user) {
 
 
             dialog = new Dialog(requireContext());
@@ -182,7 +182,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
             dialogueMechanicServiceBinding.callBtn.setOnClickListener(v -> {
 
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:03402211539"));
+                intent.setData(Uri.parse("tel:"+user.phoneNumber+));
                 startActivity(intent);
 
             });

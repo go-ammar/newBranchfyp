@@ -9,6 +9,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,8 +31,10 @@ import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.MechanicPriceAdapter;
 import com.fypapplication.fypapp.databinding.DialogueMechanicServiceBinding;
 import com.fypapplication.fypapp.databinding.ItemMechServicesBinding;
+import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
 import com.fypapplication.fypapp.models.MechServices;
 import com.fypapplication.fypapp.models.User;
+import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -55,6 +62,8 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
     ItemMechServicesBinding binding;
     DialogueMechanicServiceBinding dialogueMechanicServiceBinding;
     Dialog dialog;
+    String customerId;
+    MechanicPriceAdapter.MyServicesInterface myServicesInterface;
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         /**
@@ -79,11 +88,13 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
             if (!args.getFromServices()) {
                 sydney = new LatLng(Double.parseDouble(args.getLat()), Double.parseDouble(args.getLng()));
 
+                customerId = args.getUserId();
                 googleMap.addMarker(new MarkerOptions().position(sydney).title("Emergency here!"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-                googleMap.getMaxZoomLevel();
+                float zoom = 16.0f;
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoom));
+
             } else {
-//                sydney = new LatLng(-34, 151);
+
                 getUserData(googleMap);
                 getMechServices();
 
@@ -92,26 +103,20 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
             googleMap.setOnMarkerClickListener(marker -> {
 
-                Log.d(TAG, "onMapReady: " + mechId);
-                if (mechId != null) {
-                    //get service here
 
-                }
-
-                User user = (User) marker.getTag();
-                Log.d(TAG, "onMapReady: " + user.name);
-                mechId = user.id;
-                Log.d(TAG, "onMapReady: " + args.getFromServices());
-                Log.d(TAG, "onMapReady: size " + mechServicesArrayList.size());
                 if (args.getFromServices()) {
+                    User user = (User) marker.getTag();
+                    Log.d(TAG, "onMapReady: " + user.name);
+                    mechId = user.id;
+                    Log.d(TAG, "onMapReady: " + args.getFromServices());
+                    Log.d(TAG, "onMapReady: size " + mechServicesArrayList.size());
+
                     for (int i = 0; i < mechServicesArrayList.size(); i++) {
                         Log.d(TAG, "onMapReady: in loop " + mechServicesArrayList.get(i).id);
                         if (mechServicesArrayList.get(i).id.equals(mechId)) {
 
                             //TODO in adapter, send this arraylist.
                             priceArrayList.add(mechServicesArrayList.get(i));
-
-
 
                             Toast.makeText(getContext(), "marker clicked " + mechId, Toast.LENGTH_SHORT).show();
 
@@ -121,10 +126,42 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                     }
 
                     //ye this ki jagah kiya lagaun
-                    mechanicPriceAdapter = new MechanicPriceAdapter(context, priceArrayList, this);
+                    mechanicPriceAdapter = new MechanicPriceAdapter(context, priceArrayList, myServicesInterface);
                     dialogueMechanicServiceBinding.recyler.setAdapter(mechanicPriceAdapter);
+
+
+                } else {
+
+                    DeleteRoomDialogBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.delete_room_dialog,
+                            null, false);
+                    final AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setView(binding1.getRoot())
+                            .create();
+                    binding1.text.setText("Do you want to accept the customer?");
+
+                    if (dialog.getWindow() != null)
+                        dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
+
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.show();
+
+                    binding1.cancelButton.setText("Cancel");
+                    binding1.cancelButton.setOnClickListener(view -> {
+
+                        dialog.dismiss();
+                    });
+
+                    binding1.confirmButton.setText("Accept");
+
+                    binding1.confirmButton.setOnClickListener(v -> {
+
+
+                    });
+
+                    dialog.show();
+
                 }
-                Toast.makeText(getContext(), "marker clicked", Toast.LENGTH_SHORT).show();
+
 
                 return false;
             });
@@ -207,6 +244,8 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                              @Nullable Bundle savedInstanceState) {
         mechServicesArrayList = new ArrayList<>();
         priceArrayList = new ArrayList<>();
+
+        myServicesInterface = this;
 
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }

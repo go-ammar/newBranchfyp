@@ -313,6 +313,10 @@
             android:defaultValue="null"
             app:argType="string" />
         <argument
+            android:name="user_id"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
             android:name="fromServices"
             android:defaultValue="false"
             app:argType="boolean" />

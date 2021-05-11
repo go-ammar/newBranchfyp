@@ -1,10 +1,14 @@
 package com.fypapplication.fypapp.ui;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,9 +30,13 @@ import com.android.volley.TimeoutError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
+import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
+import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
 import com.fypapplication.fypapp.databinding.FragmentDashBoardBinding;
+import com.fypapplication.fypapp.databinding.MechanicAcceptedDialogBinding;
 import com.fypapplication.fypapp.helper.GPSTracker;
 import com.fypapplication.fypapp.helper.Global;
+import com.fypapplication.fypapp.models.User;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
 import com.google.firebase.FirebaseApp;
@@ -55,6 +63,7 @@ public class DashBoardFragment extends Fragment {
     SharedPrefs sharedPrefs;
     LocationManager locationManager;
     String latitude, longitude;
+    String mechanicId;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -95,18 +104,19 @@ public class DashBoardFragment extends Fragment {
         getLocation();
 
         Bundle extras = getActivity().getIntent().getExtras();
-        Log.d(TAG, "actionViews: "+extras);
+        Log.d(TAG, "actionViews: " + extras);
         if (extras != null) {
             extras.getString("lat");
             extras.getString("lng");
 
-            Log.d(TAG, "actionViews: lat "+extras.getString("lat"));
+            Log.d(TAG, "actionViews: lat " + extras.getString("lat"));
 
             DashBoardFragmentDirections.ActionNavDashboardToMapsFragment action =
                     DashBoardFragmentDirections.actionNavDashboardToMapsFragment();
 
             action.setLat(extras.getString("lat"));
             action.setLng(extras.getString("lng"));
+            action.setUserId(extras.getString("user_id"));
 
             navController.navigate(action);
         }
@@ -186,15 +196,6 @@ public class DashBoardFragment extends Fragment {
         });
 
 
-        binding.image.setOnClickListener(view -> {
-
-            try {
-                Intent intent = new Intent(getActivity(), MapsFragment.class);
-                startActivity(intent);
-            }catch (Exception e){
-                Log.d(TAG, "actionViews: "+e);
-            }
-        });
     }
 
     private void _apiSendEmergency() {
@@ -264,14 +265,14 @@ public class DashBoardFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         } else {
             Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            Log.d(TAG, "getLocation: location gps status "+locationGPS);
+            Log.d(TAG, "getLocation: location gps status " + locationGPS);
 
             if (locationGPS != null) {
                 double lat = locationGPS.getLatitude();
                 double longi = locationGPS.getLongitude();
                 latitude = String.valueOf(lat);
                 longitude = String.valueOf(longi);
-                Log.d(TAG, "getLocation:latiiidads  "+latitude);
+                Log.d(TAG, "getLocation:latiiidads  " + latitude);
             } else {
             }
         }
@@ -290,6 +291,7 @@ public class DashBoardFragment extends Fragment {
 
             data.put("lat", latitude);
             data.put("lng", longitude);
+            data.put("user_id", sharedPrefs.getUser().id);
 
             params.put("body", data.toString());
             params.put("tokens", jsonArray);
@@ -397,6 +399,77 @@ public class DashBoardFragment extends Fragment {
             Log.e(TAG, "_apiUpdateFirebaseToken: ", e);
         }
     }
-//
+
+
+    public void mechanicAccepted() {
+        User user = new User();
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS, null,
+                response -> {
+
+
+                    //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
+
+                    Log.d(TAG, "mechanicAccepted: " + response.length());
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject userObj = response.getJSONObject(i);
+                            Log.d(TAG, "actionViews: " + userObj.optInt("type"));
+
+                            if (userObj.optString("_id").equals(mechanicId)) {
+
+                                user.email = userObj.optString("email");
+                                user.phoneNumber = String.valueOf(userObj.optInt("phone"));
+                                user.id = userObj.optString("_id");
+                                user.lat = userObj.optString("latitude");
+                                user.lng = userObj.optString("longitude");
+                                user.name = userObj.optString("name");
+
+                                openDialogForMech(user);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+
+                }, error -> {
+
+            Log.e(TAG, "mechanicAccepted: ", error);
+
+        });
+
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    private void openDialogForMech(User user) {
+        MechanicAcceptedDialogBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.mechanic_accepted_dialog,
+                null, false);
+        final AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setView(binding1.getRoot())
+                .create();
+
+        if (dialog.getWindow() != null)
+            dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        binding1.callMech.setOnClickListener(view -> {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + user.phoneNumber));
+            startActivity(intent);
+        });
+
+        dialog.show();
+
+    }
 
 }

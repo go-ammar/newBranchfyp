@@ -48,6 +48,7 @@ public class MapsFragment extends Fragment {
     ArrayList<MechServices> priceArrayList;
     Context context;
     String mechId;
+    String customerId;
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         /**
@@ -72,11 +73,13 @@ public class MapsFragment extends Fragment {
             if (!args.getFromServices()) {
                 sydney = new LatLng(Double.parseDouble(args.getLat()), Double.parseDouble(args.getLng()));
 
+                customerId = args.getUserId();
                 googleMap.addMarker(new MarkerOptions().position(sydney).title("Emergency here!"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-                googleMap.getMaxZoomLevel();
+                float zoom = 16.0f;
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoom));
+
             } else {
-//                sydney = new LatLng(-34, 151);
+
                 getUserData(googleMap);
                 getMechServices();
 
@@ -85,18 +88,13 @@ public class MapsFragment extends Fragment {
 
             googleMap.setOnMarkerClickListener(marker -> {
 
-                Log.d(TAG, "onMapReady: " + mechId);
-                if (mechId != null) {
-                    //get service here
-
-                }
 
                 if (args.getFromServices()) {
-                User user = (User) marker.getTag();
-                Log.d(TAG, "onMapReady: " + user.name);
-                mechId = user.id;
-                Log.d(TAG, "onMapReady: " + args.getFromServices());
-                Log.d(TAG, "onMapReady: size " + mechServicesArrayList.size());
+                    User user = (User) marker.getTag();
+                    Log.d(TAG, "onMapReady: " + user.name);
+                    mechId = user.id;
+                    Log.d(TAG, "onMapReady: " + args.getFromServices());
+                    Log.d(TAG, "onMapReady: size " + mechServicesArrayList.size());
 
                     for (int i = 0; i < mechServicesArrayList.size(); i++) {
                         Log.d(TAG, "onMapReady: in loop " + mechServicesArrayList.get(i).id);
@@ -104,8 +102,6 @@ public class MapsFragment extends Fragment {
 
                             //TODO in adapter, send this arraylist.
                             priceArrayList.add(mechServicesArrayList.get(i));
-
-                            Toast.makeText(getContext(), "marker clicked " + mechId, Toast.LENGTH_SHORT).show();
 
                         }
                     }
@@ -116,7 +112,7 @@ public class MapsFragment extends Fragment {
                     final AlertDialog dialog = new AlertDialog.Builder(context)
                             .setView(binding1.getRoot())
                             .create();
-                    binding1.text.setText(R.string.logout_text);
+                    binding1.text.setText("Do you want to accept the customer?");
 
                     if (dialog.getWindow() != null)
                         dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
@@ -141,8 +137,6 @@ public class MapsFragment extends Fragment {
 
                 }
 
-
-                Toast.makeText(getContext(), "marker clicked", Toast.LENGTH_SHORT).show();
 
                 return false;
             });

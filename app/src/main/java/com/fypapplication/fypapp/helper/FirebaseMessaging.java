@@ -35,15 +35,14 @@ public class FirebaseMessaging extends FirebaseMessagingService {
             JSONObject body = new JSONObject(remoteMessage.getData().get("body"));
             String lat = body.getString("lat");
             String lng = body.getString("lng");
+            String user_id = body.getString("user_id");
 
             Intent intent = new Intent(this, HomeLandingActivity.class);
             intent.putExtra("lat", lat);
             intent.putExtra("lng", lng);
-            try {
+            intent.putExtra("user_id", user_id);
 
-            } catch (Exception ex) {
-                Log.d(TAG, "onMessageReceived: " + ex);
-            }
+
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
             final String channelId = "Default";

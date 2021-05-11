@@ -2,9 +2,14 @@ package com.fypapplication.fypapp.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,8 +21,10 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.fypapplication.fypapp.R;
+import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
 import com.fypapplication.fypapp.models.MechServices;
 import com.fypapplication.fypapp.models.User;
+import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -84,12 +91,13 @@ public class MapsFragment extends Fragment {
 
                 }
 
+                if (args.getFromServices()) {
                 User user = (User) marker.getTag();
                 Log.d(TAG, "onMapReady: " + user.name);
                 mechId = user.id;
                 Log.d(TAG, "onMapReady: " + args.getFromServices());
                 Log.d(TAG, "onMapReady: size " + mechServicesArrayList.size());
-                if (args.getFromServices()) {
+
                     for (int i = 0; i < mechServicesArrayList.size(); i++) {
                         Log.d(TAG, "onMapReady: in loop " + mechServicesArrayList.get(i).id);
                         if (mechServicesArrayList.get(i).id.equals(mechId)) {
@@ -103,7 +111,37 @@ public class MapsFragment extends Fragment {
                     }
                 } else {
 
+                    DeleteRoomDialogBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.delete_room_dialog,
+                            null, false);
+                    final AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setView(binding1.getRoot())
+                            .create();
+                    binding1.text.setText(R.string.logout_text);
+
+                    if (dialog.getWindow() != null)
+                        dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
+
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    dialog.show();
+
+                    binding1.cancelButton.setText("Cancel");
+                    binding1.cancelButton.setOnClickListener(view -> {
+
+                        dialog.dismiss();
+                    });
+
+                    binding1.confirmButton.setText("Accept");
+
+                    binding1.confirmButton.setOnClickListener(v -> {
+
+
+                    });
+
+                    dialog.show();
+
                 }
+
+
                 Toast.makeText(getContext(), "marker clicked", Toast.LENGTH_SHORT).show();
 
                 return false;

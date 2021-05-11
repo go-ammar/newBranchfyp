@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.ui.DashBoardFragment;
+import com.fypapplication.fypapp.ui.HomeLandingActivity;
 import com.fypapplication.fypapp.ui.MapDemoActivity;
 import com.fypapplication.fypapp.ui.MapMarkerActivity;
 import com.google.firebase.BuildConfig;
@@ -35,7 +36,7 @@ public class FirebaseMessaging extends FirebaseMessagingService {
             String lat = body.getString("lat");
             String lng = body.getString("lng");
 
-            Intent intent = new Intent(this, MapDemoActivity.class);
+            Intent intent = new Intent(this, HomeLandingActivity.class);
             intent.putExtra("lat", lat);
             intent.putExtra("lng", lng);
             try {

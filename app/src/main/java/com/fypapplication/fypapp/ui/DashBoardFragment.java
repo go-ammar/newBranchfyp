@@ -1,6 +1,7 @@
 package com.fypapplication.fypapp.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -48,11 +49,10 @@ import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 public class DashBoardFragment extends Fragment {
 
     private static final String TAG = "DashBoardFragment";
-
+    private static final int REQUEST_LOCATION = 1;
     NavController navController;
     FragmentDashBoardBinding binding;
     SharedPrefs sharedPrefs;
-    private static final int REQUEST_LOCATION = 1;
     LocationManager locationManager;
     String latitude, longitude;
 
@@ -93,6 +93,23 @@ public class DashBoardFragment extends Fragment {
     private void actionViews() {
         locationManager = (LocationManager) requireActivity().getSystemService(getContext().LOCATION_SERVICE);
         getLocation();
+
+        Bundle extras = getActivity().getIntent().getExtras();
+        Log.d(TAG, "actionViews: "+extras);
+        if (extras != null) {
+            extras.getString("lat");
+            extras.getString("lng");
+
+            Log.d(TAG, "actionViews: lat "+extras.getString("lat"));
+
+            DashBoardFragmentDirections.ActionNavDashboardToMapsFragment action =
+                    DashBoardFragmentDirections.actionNavDashboardToMapsFragment();
+
+            action.setLat(extras.getString("lat"));
+            action.setLng(extras.getString("lng"));
+
+            navController.navigate(action);
+        }
 
         binding.carMechanicCard.setOnClickListener(v -> {
             DashBoardFragmentDirections.ActionNavDashboardToServicesFragment action =
@@ -164,8 +181,8 @@ public class DashBoardFragment extends Fragment {
         });
 
         binding.emergencyBtn.setOnClickListener(v -> {
-            navController.navigate(R.id.action_nav_dashboard_to_mapsFragment);
-//            _apiSendEmergency();
+//            navController.navigate(R.id.action_nav_dashboard_to_mapsFragment);
+            _apiSendEmergency();
         });
     }
 

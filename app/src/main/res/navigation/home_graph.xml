@@ -220,8 +220,7 @@
         tools:layout="@layout/fragment_sensors">
         <action
             android:id="@+id/action_sensorsFragment_to_statisticsFragment"
-            app:destination="@id/statisticsFragment"
-            />
+            app:destination="@id/statisticsFragment" />
         <argument
             android:name="device_id"
             android:defaultValue="null"
@@ -301,7 +300,17 @@
         android:id="@+id/mapsFragment"
         android:name="com.fypapplication.fypapp.ui.MapsFragment"
         android:label="fragment_maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_maps">
+        <argument
+            android:name="lat"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="lng"
+            android:defaultValue="null"
+            app:argType="string" />
+
+    </fragment>
 
 
 </navigation>

@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
+import com.fypapplication.fypapp.models.MechServices;
 import com.fypapplication.fypapp.models.User;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
@@ -24,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONException;
@@ -35,9 +37,11 @@ public class MapsFragment extends Fragment {
 
     private static final String TAG = "MapsFragment";
     ArrayList<User> userArrayList;
+    ArrayList<MechServices> mechServicesArrayList;
     Context context;
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    String MechId;
 
+    private OnMapReadyCallback callback = new OnMapReadyCallback() {
         /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
@@ -51,11 +55,79 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(GoogleMap googleMap) {
 
-            if (userArrayList.size() >0){
-                loadMarkers(googleMap);
+//            if (userArrayList.size() >0){
+//                Log.d(TAG, "onMapReady: size is more than zero");
+//                loadMarkers(googleMap);
+//            }
+            MapsFragmentArgs args = MapsFragmentArgs.fromBundle(getArguments());
+            LatLng sydney;
+            if (args != null) {
+                sydney = new LatLng(Double.parseDouble(args.getLat()), Double.parseDouble(args.getLng()));
+
+                googleMap.addMarker(new MarkerOptions().position(sydney).title("Emergency here!"));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                googleMap.getMaxZoomLevel();
+            } else {
+//                sydney = new LatLng(-34, 151);
+                getUserData(googleMap);
             }
+
+            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    MechId = marker.getId();
+                    if (MechId != null){
+                        //get service here
+                        getMechServices();
+                    }
+                    return false;
+                }
+            });
+
+
         }
     };
+
+    private void getMechServices() {
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_SERVICES, null, res -> {
+
+            for (int i = 0; i<res.length(); i++){
+                try {
+                    JSONObject object = res.getJSONObject(i);
+
+                    MechServices mechServices = new MechServices();
+                    if (object.getString("mechanic").equals(MechId)){
+                        mechServices.service = object.getString("service_name");
+                        mechServices.vehicleType = object.getString("vehicle_type");
+                        mechServices.price = object.getInt("price");
+
+                        mechServicesArrayList.add(mechServices);
+
+                        if (mechServicesArrayList.size() >0){
+                            //attach adapter here// with notify on cliock
+                        }
+
+                    }
+
+                } catch (JSONException e) {
+                    Log.e(TAG, "getServices: ", e);
+                }
+
+            }
+
+
+        }, error -> {
+
+            Log.e(TAG, "getServices: ", error);
+
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+    }
 
 
     @Nullable
@@ -76,17 +148,20 @@ public class MapsFragment extends Fragment {
         }
         context = getContext();
         userArrayList = new ArrayList<>();
-        getUserData();
+        mechServicesArrayList = new ArrayList<>();
+//        getUserData();
 
     }
 
-    private void getUserData() {
+    private void getUserData(GoogleMap googleMap) {
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS, null,
                 response -> {
 
 
                     //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
 
+
+                    Log.d(TAG, "getUserData: response is  "+response.toString());
                     Log.d(TAG, "actionViews: " + response.length());
                     for (int i = 0; i < response.length(); i++) {
                         try {
@@ -112,9 +187,9 @@ public class MapsFragment extends Fragment {
 
                     }
 
-//                    if (userArrayList.size() >0){
-//                        loadMarkers();
-//                    }
+                    if (userArrayList.size() >0){
+                        loadMarkers(googleMap);
+                    }
 
 
                 }, error -> {
@@ -139,6 +214,7 @@ public class MapsFragment extends Fragment {
             LatLng latlng = new LatLng(Double.parseDouble(user.lat), Double.parseDouble(user.lng));
             googleMap.addMarker(new MarkerOptions().position(latlng).title(user.name));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+            googleMap.getMaxZoomLevel();
         }
     }
 }

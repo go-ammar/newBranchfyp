@@ -73,8 +73,14 @@ public class ScheduleBookingFragment extends Fragment {
         min = binding.timePicker1.getCurrentMinute();
 
         binding.proceedbtn.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), MapMarkerActivity.class);
-            startActivity(intent);
+
+            try {
+                Intent intent = new Intent(getActivity(), MapsFragment.class);startActivity(intent);
+            }catch (Exception e){
+                Log.d(TAG, "actionViews: "+e);
+            }
+
+
 
         });
 

@@ -30,14 +30,14 @@ import java.util.Locale;
 public class ScheduleBookingFragment extends Fragment {
 
 
+    private static final String TAG = "ScheduleBookingFragment";
     FragmentScheduleBookingBinding binding;
     NavController navController;
     DatePickerDialog picker;
     String dateString = null;
-    private List<Services> servicesArrayList = new ArrayList<>();
-    private static final String TAG = "ScheduleBookingFragment";
     int hour;
     int min;
+    private List<Services> servicesArrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -75,11 +75,13 @@ public class ScheduleBookingFragment extends Fragment {
         binding.proceedbtn.setOnClickListener(v -> {
 
             try {
-                Intent intent = new Intent(getActivity(), MapsFragment.class);startActivity(intent);
-            }catch (Exception e){
-                Log.d(TAG, "actionViews: "+e);
+                ScheduleBookingFragmentDirections.ActionScheduleBookingFragmentToMapsFragment action =
+                        ScheduleBookingFragmentDirections.actionScheduleBookingFragmentToMapsFragment();
+                action.setFromServices(true);
+                navController.navigate(action);
+            } catch (Exception e) {
+                Log.d(TAG, "actionViews: " + e);
             }
-
 
 
         });

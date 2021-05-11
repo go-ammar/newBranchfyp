@@ -10,12 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.fypapplication.fypapp.R;
-import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
 import com.fypapplication.fypapp.models.MechServices;
 import com.fypapplication.fypapp.models.User;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
@@ -38,10 +38,11 @@ public class MapsFragment extends Fragment {
     private static final String TAG = "MapsFragment";
     ArrayList<User> userArrayList;
     ArrayList<MechServices> mechServicesArrayList;
+    ArrayList<MechServices> priceArrayList;
     Context context;
-    String MechId;
+    String mechId;
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         /**
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
@@ -61,7 +62,7 @@ public class MapsFragment extends Fragment {
 //            }
             MapsFragmentArgs args = MapsFragmentArgs.fromBundle(getArguments());
             LatLng sydney;
-            if (args != null) {
+            if (!args.getFromServices()) {
                 sydney = new LatLng(Double.parseDouble(args.getLat()), Double.parseDouble(args.getLng()));
 
                 googleMap.addMarker(new MarkerOptions().position(sydney).title("Emergency here!"));
@@ -70,18 +71,40 @@ public class MapsFragment extends Fragment {
             } else {
 //                sydney = new LatLng(-34, 151);
                 getUserData(googleMap);
+                getMechServices();
+
             }
 
-            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker) {
-                    MechId = marker.getId();
-                    if (MechId != null){
-                        //get service here
-                        getMechServices();
-                    }
-                    return false;
+
+            googleMap.setOnMarkerClickListener(marker -> {
+
+                Log.d(TAG, "onMapReady: " + mechId);
+                if (mechId != null) {
+                    //get service here
+
                 }
+
+                User user = (User) marker.getTag();
+                Log.d(TAG, "onMapReady: " + user.name);
+                mechId = user.id;
+                Log.d(TAG, "onMapReady: " + args.getFromServices());
+                Log.d(TAG, "onMapReady: size " + mechServicesArrayList.size());
+                if (args.getFromServices()) {
+                    for (int i = 0; i < mechServicesArrayList.size(); i++) {
+                        Log.d(TAG, "onMapReady: in loop " + mechServicesArrayList.get(i).id);
+                        if (mechServicesArrayList.get(i).id.equals(mechId)) {
+
+                            //TODO in adapter, send this arraylist.
+                            priceArrayList.add(mechServicesArrayList.get(i));
+
+                            Toast.makeText(getContext(), "marker clicked " + mechId, Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                }
+                Toast.makeText(getContext(), "marker clicked", Toast.LENGTH_SHORT).show();
+
+                return false;
             });
 
 
@@ -91,23 +114,26 @@ public class MapsFragment extends Fragment {
     private void getMechServices() {
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_SERVICES, null, res -> {
 
-            for (int i = 0; i<res.length(); i++){
+            Log.d(TAG, "getMechServices: " + res);
+            for (int i = 0; i < res.length(); i++) {
                 try {
                     JSONObject object = res.getJSONObject(i);
 
+
                     MechServices mechServices = new MechServices();
-                    if (object.getString("mechanic").equals(MechId)){
-                        mechServices.service = object.getString("service_name");
-                        mechServices.vehicleType = object.getString("vehicle_type");
-                        mechServices.price = object.getInt("price");
 
-                        mechServicesArrayList.add(mechServices);
+                    mechServices.service = object.getString("service_name");
+                    mechServices.vehicleType = object.getString("vehicle_type");
+                    mechServices.price = object.getInt("price");
+                    mechServices.id = object.getString("mechanic");
 
-                        if (mechServicesArrayList.size() >0){
-                            //attach adapter here// with notify on cliock
-                        }
+                    Log.d(TAG, "getMechServices: added");
+                    mechServicesArrayList.add(mechServices);
 
+                    if (mechServicesArrayList.size() > 0) {
+                        //attach adapter here// with notify on cliock
                     }
+
 
                 } catch (JSONException e) {
                     Log.e(TAG, "getServices: ", e);
@@ -135,6 +161,9 @@ public class MapsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        mechServicesArrayList = new ArrayList<>();
+        priceArrayList = new ArrayList<>();
+
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
@@ -148,7 +177,6 @@ public class MapsFragment extends Fragment {
         }
         context = getContext();
         userArrayList = new ArrayList<>();
-        mechServicesArrayList = new ArrayList<>();
 //        getUserData();
 
     }
@@ -161,12 +189,12 @@ public class MapsFragment extends Fragment {
                     //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
 
 
-                    Log.d(TAG, "getUserData: response is  "+response.toString());
+                    Log.d(TAG, "getUserData: response is  " + response.toString());
                     Log.d(TAG, "actionViews: " + response.length());
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject userObj = response.getJSONObject(i);
-                            Log.d(TAG, "actionViews: "+userObj.optInt("type"));
+                            Log.d(TAG, "actionViews: " + userObj.optInt("type"));
 
                             if (userObj.optInt("type") == 3) {
                                 User user = new User();
@@ -177,7 +205,7 @@ public class MapsFragment extends Fragment {
                                 user.lng = userObj.optString("longitude");
                                 user.name = userObj.optString("name");
 
-                                Log.d(TAG, "getUserData: user name is "+user.name);
+                                Log.d(TAG, "getUserData: user name is " + user.name);
                                 userArrayList.add(user);
 
                             }
@@ -187,7 +215,7 @@ public class MapsFragment extends Fragment {
 
                     }
 
-                    if (userArrayList.size() >0){
+                    if (userArrayList.size() > 0) {
                         loadMarkers(googleMap);
                     }
 
@@ -209,12 +237,24 @@ public class MapsFragment extends Fragment {
     private void loadMarkers(GoogleMap googleMap) {
 
 
-        for (int i = 0; i < userArrayList.size() ; i++){
-            User user = new User();
+        for (int i = 0; i < userArrayList.size(); i++) {
+
+            User user = userArrayList.get(i);
             LatLng latlng = new LatLng(Double.parseDouble(user.lat), Double.parseDouble(user.lng));
-            googleMap.addMarker(new MarkerOptions().position(latlng).title(user.name));
+
+            Marker marker = googleMap.addMarker(new MarkerOptions()
+                    .position(latlng)
+                    .title(user.name));
+
+            marker.setTag(user);
+
+//            Marker marker = new MarkerOptions().position(latlng).title(user.id);
+//            marker.setTag(user);
+//            googleMap.addMarker(marker);
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
+
             googleMap.getMaxZoomLevel();
+
         }
     }
 }

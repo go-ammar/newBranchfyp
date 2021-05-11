@@ -172,6 +172,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_nav_dashboard_to_mapsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_nav_dashboard_to_myAccountFragment">
                               <value>
                                 <LayoutPositions />
@@ -272,8 +277,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="-358" />
+                            <option name="y" value="2033" />
                           </Point>
                         </option>
                       </LayoutPositions>

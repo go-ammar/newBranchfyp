@@ -1,17 +1,25 @@
 package com.fypapplication.fypapp.ui;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.PersistableBundle;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.fypapplication.fypapp.R;
@@ -42,20 +50,19 @@ import static com.google.android.gms.location.LocationServices.getFusedLocationP
 @RuntimePermissions
 public class MapDemoActivity extends AppCompatActivity {
 
-    private SupportMapFragment mapFragment;
-    private GoogleMap map;
-    private LocationRequest mLocationRequest;
-    Location mCurrentLocation;
-    private long UPDATE_INTERVAL = 60000;  /* 60 secs */
-    private long FASTEST_INTERVAL = 5000; /* 5 secs */
     private static final String TAG = "MapDemoActivity";
     private final static String KEY_LOCATION = "location";
-
     /*
      * Define a request code to send to Google Play services This code is
      * returned in Activity.onActivityResult
      */
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+    private final long UPDATE_INTERVAL = 60000;  /* 60 secs */
+    private final long FASTEST_INTERVAL = 5000; /* 5 secs */
+    Location mCurrentLocation;
+    private SupportMapFragment mapFragment;
+    private GoogleMap map;
+    private LocationRequest mLocationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +77,11 @@ public class MapDemoActivity extends AppCompatActivity {
             mCurrentLocation = savedInstanceState.getParcelable(KEY_LOCATION);
         }
 
-        mapFragment = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        Log.d(TAG, "onCreate: " + mapFragment);
+
+
         if (mapFragment != null) {
             mapFragment.getMapAsync(this::loadMap);
         } else {
@@ -84,7 +95,7 @@ public class MapDemoActivity extends AppCompatActivity {
         if (map != null) {
             // Map is ready
 
-//            Toast.makeText(this, "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Map Fragment was loaded properly!", Toast.LENGTH_SHORT).show();
 //            MapDemoActivityPermissionsDispatcher.getMyLocationWithPermissionCheck(this);
 //            MapDemoActivityPermissionsDispatcher.startLocationUpdatesWithPermissionCheck(this);
             LatLng sydney = new LatLng(-33.852, 151.211);
@@ -224,8 +235,8 @@ public class MapDemoActivity extends AppCompatActivity {
 
         mCurrentLocation = location;
         String msg = "Updated Location: " +
-                Double.toString(location.getLatitude()) + "," +
-                Double.toString(location.getLongitude());
+                location.getLatitude() + "," +
+                location.getLongitude();
 //        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 

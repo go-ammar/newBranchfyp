@@ -91,6 +91,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="mapsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="61" />
+                            <option name="y" value="2036" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="myAccountFragment">
                     <value>
                       <LayoutPositions>
@@ -144,8 +156,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="744" />
-                            <option name="y" value="1094" />
+                            <option name="x" value="-113" />
+                            <option name="y" value="1161" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -257,7 +269,14 @@
                   </entry>
                   <entry key="scheduleBookingFragment">
                     <value>
-                      <LayoutPositions />
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
                     </value>
                   </entry>
                   <entry key="sensorPerDevice">

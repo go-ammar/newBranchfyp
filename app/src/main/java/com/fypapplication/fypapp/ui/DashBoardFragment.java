@@ -164,7 +164,8 @@ public class DashBoardFragment extends Fragment {
         });
 
         binding.emergencyBtn.setOnClickListener(v -> {
-            _apiSendEmergency();
+            navController.navigate(R.id.action_nav_dashboard_to_mapsFragment);
+//            _apiSendEmergency();
         });
     }
 

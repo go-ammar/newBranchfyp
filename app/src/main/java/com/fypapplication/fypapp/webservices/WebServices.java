@@ -13,6 +13,7 @@ public class WebServices {
     public static String API_DELETE_SERVICES = BASE_URL + "api/services/";
     public static final String API_IS_LOGGED_IN =  BASE_URL + "api/notifications";
     public static final String API_GET_NOTIFCATION_PAYLOAD =  BASE_URL + "api/notifications/getUsers";
+    public static final String API_GET_BOOKING = BASE_URL + "api/bookings" ;
 
 
     public static String API_PIN = BASE_URL +"api/users/verify_reset_password";

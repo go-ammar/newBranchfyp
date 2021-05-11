@@ -9,16 +9,19 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +39,7 @@ import com.fypapplication.fypapp.databinding.FragmentDashBoardBinding;
 import com.fypapplication.fypapp.databinding.MechanicAcceptedDialogBinding;
 import com.fypapplication.fypapp.helper.GPSTracker;
 import com.fypapplication.fypapp.helper.Global;
+import com.fypapplication.fypapp.models.Booking;
 import com.fypapplication.fypapp.models.User;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
@@ -47,6 +51,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -64,6 +69,9 @@ public class DashBoardFragment extends Fragment {
     LocationManager locationManager;
     String latitude, longitude;
     String mechanicId;
+
+    Handler handler;
+    Runnable runnable;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -192,12 +200,14 @@ public class DashBoardFragment extends Fragment {
 
         binding.emergencyBtn.setOnClickListener(v -> {
 //            navController.navigate(R.id.action_nav_dashboard_to_mapsFragment);
+            handler = new Handler();
             _apiSendEmergency();
         });
 
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     private void _apiSendEmergency() {
 
 //        GPSTracker gpsTracker = new GPSTracker(getContext());
@@ -230,6 +240,7 @@ public class DashBoardFragment extends Fragment {
             }
 
             apiSendTokensEmergency(jsonArray);
+            _apiForBooking();
 
         }, error -> {
 
@@ -272,7 +283,7 @@ public class DashBoardFragment extends Fragment {
                 double longi = locationGPS.getLongitude();
                 latitude = String.valueOf(lat);
                 longitude = String.valueOf(longi);
-                Log.d(TAG, "getLocation:latiiidads  " + latitude);
+                Log.d(TAG, "getLocation:  " + latitude);
             } else {
             }
         }
@@ -282,7 +293,6 @@ public class DashBoardFragment extends Fragment {
 
 
         JSONObject params = new JSONObject();
-
 
         try {
             params.put("title", "title of notification");
@@ -447,6 +457,77 @@ public class DashBoardFragment extends Fragment {
 
         VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public void _apiForBooking() {
+
+        handler.postDelayed(runnable = () -> {
+            JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_BOOKING, null,
+                    response -> {
+
+                        ArrayList<Booking> bookingList = new ArrayList<>();
+                        //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
+//                    "_id": "609a4b66980dce0015d316e2",
+//                            "time": "1970-01-19T18:12:04.443Z",
+//                            "latitude": 5,
+//                            "longitude": 7,
+//                            "service": "Emergency",
+//                            "userId": "6097f56c68d5f84a5841c27f",
+//                            "mechanicId": "6098e8d6643e5d00157554e8",
+//                            "createdAt": "2021-05-11T09:16:22.019Z",
+//                            "updatedAt": "2021-05-11T09:16:22.019Z",
+//                            "__v": 0
+
+                        Log.d(TAG, "getUserData: response is  " + response.toString());
+                        Log.d(TAG, "actionViews: " + response.length());
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                JSONObject userObj = response.getJSONObject(i);
+                                Log.d(TAG, "actionViews: " + userObj.optString("_id"));
+
+                                Booking user = new Booking();
+                                user.id = userObj.optString("_id");
+                                user.mechanicId = userObj.optString("mechanicId");
+                                user.lat = userObj.optString("latitude");
+                                user.lng = userObj.optString("longitude");
+                                Log.d(TAG, "_bookingCreated: " + longitude + "  " + latitude);
+                                if (user.lat.equals(latitude) && user.lng.equals(longitude)) {
+                                    _bookingCreated(user.mechanicId);
+                                } else {
+                                    handler.postDelayed(runnable, 10000);
+                                }
+                                user.userId = userObj.optString("userId");
+
+
+                                bookingList.add(user);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+
+                    }, error -> {
+
+                Log.e(TAG, "removeMech: ", error);
+
+            });
+
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            VolleySingleton.getInstance(requireContext()).addToRequestQueue(jsonObjectRequest);
+        }, 10000);
+
+
+    }
+
+    private void _bookingCreated(String mechanicId) {
+        handler = null;
+        Log.d(TAG, "_bookingCreated: done booking");
     }
 
     private void openDialogForMech(User user) {

@@ -173,7 +173,6 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
     private void openPriceDialogue(User user) {
 
 
-        dialog = new Dialog(requireContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
 
@@ -266,8 +265,8 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
     private void actionViews() {
 
         dialogueMechanicServiceBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialogue_mechanic_service, null, false);
+        dialog = new Dialog(requireContext());
         dialog.setContentView(dialogueMechanicServiceBinding.getRoot());
-
 
     }
 

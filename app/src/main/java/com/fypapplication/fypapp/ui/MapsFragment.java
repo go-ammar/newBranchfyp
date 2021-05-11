@@ -2,20 +2,30 @@ package com.fypapplication.fypapp.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.fypapplication.fypapp.R;
+import com.fypapplication.fypapp.adapters.MechanicPriceAdapter;
+import com.fypapplication.fypapp.databinding.DialogueMechanicServiceBinding;
+import com.fypapplication.fypapp.databinding.ItemMechServicesBinding;
 import com.fypapplication.fypapp.models.MechServices;
 import com.fypapplication.fypapp.models.User;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
@@ -33,7 +43,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MapsFragment extends Fragment {
+public class MapsFragment extends Fragment implements MechanicPriceAdapter.MyServicesInterface {
 
     private static final String TAG = "MapsFragment";
     ArrayList<User> userArrayList;
@@ -41,6 +51,10 @@ public class MapsFragment extends Fragment {
     ArrayList<MechServices> priceArrayList;
     Context context;
     String mechId;
+    MechanicPriceAdapter mechanicPriceAdapter;
+    ItemMechServicesBinding binding;
+    DialogueMechanicServiceBinding dialogueMechanicServiceBinding;
+    Dialog dialog;
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         /**
@@ -97,10 +111,18 @@ public class MapsFragment extends Fragment {
                             //TODO in adapter, send this arraylist.
                             priceArrayList.add(mechServicesArrayList.get(i));
 
+
+
                             Toast.makeText(getContext(), "marker clicked " + mechId, Toast.LENGTH_SHORT).show();
+
+                            openPriceDialogue();
 
                         }
                     }
+
+                    //ye this ki jagah kiya lagaun
+                    mechanicPriceAdapter = new MechanicPriceAdapter(context, priceArrayList, this);
+                    dialogueMechanicServiceBinding.recyler.setAdapter(mechanicPriceAdapter);
                 }
                 Toast.makeText(getContext(), "marker clicked", Toast.LENGTH_SHORT).show();
 
@@ -110,6 +132,28 @@ public class MapsFragment extends Fragment {
 
         }
     };
+
+    private void openPriceDialogue() {
+
+
+            dialog = new Dialog(requireContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(true);
+
+            Button dialogButton = dialog.findViewById(R.id.call_btn);
+
+            dialogueMechanicServiceBinding.callBtn.setOnClickListener(v -> {
+
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:03402211539"));
+                startActivity(intent);
+
+            });
+
+            dialog.show();
+
+
+    }
 
     private void getMechServices() {
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_SERVICES, null, res -> {
@@ -177,7 +221,17 @@ public class MapsFragment extends Fragment {
         }
         context = getContext();
         userArrayList = new ArrayList<>();
+        actionViews();
 //        getUserData();
+
+    }
+
+    private void actionViews() {
+
+        dialogueMechanicServiceBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout. dialogue_mechanic_service, null, false);
+        dialog.setContentView(dialogueMechanicServiceBinding.getRoot());
+
+
 
     }
 
@@ -256,5 +310,10 @@ public class MapsFragment extends Fragment {
             googleMap.getMaxZoomLevel();
 
         }
+    }
+
+    @Override
+    public void onClickService(MechServices mechServices) {
+        Log.d(TAG, "onClickService: "+mechServices.service);
     }
 }

@@ -169,44 +169,6 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
 
     }
 
-    public void getServices(){
-
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_SERVICES, null, res -> {
-
-            for (int i = 0; i<res.length(); i++){
-                try {
-                    JSONObject object = res.getJSONObject(i);
-
-                    MechServices mechServices = new MechServices();
-                    if (object.getString("mechanic").equals(MECHANIC_ID HERE)){
-                        mechServices.service = object.getString("service_name");
-                        mechServices.vehicleType = object.getString("vehicle_type");
-                        mechServices.price = object.getInt("price");
-
-                        YOURARRAYLIST.add(mechServices);
-
-                    }
-
-                } catch (JSONException e) {
-                    Log.e(TAG, "getServices: ", e);
-                }
-
-            }
-
-
-        }, error -> {
-
-            Log.e(TAG, "getServices: ", error);
-
-        });
-
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
-
-    }
 
     @Override
     public void deleteService(MechServices mechServices) {

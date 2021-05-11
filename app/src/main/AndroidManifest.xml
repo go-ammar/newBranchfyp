@@ -47,6 +47,7 @@
         <activity android:name=".ui.MapMarkerActivity" />
         <activity android:name=".ui.NotificationActivity" />
         <activity android:name=".ui.HomeLandingActivity" />
+<!--        <activity android:name=".ui.MapsFragment"/>-->
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

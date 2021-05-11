@@ -184,6 +184,17 @@ public class DashBoardFragment extends Fragment {
 //            navController.navigate(R.id.action_nav_dashboard_to_mapsFragment);
             _apiSendEmergency();
         });
+
+
+        binding.image.setOnClickListener(view -> {
+
+            try {
+                Intent intent = new Intent(getActivity(), MapsFragment.class);
+                startActivity(intent);
+            }catch (Exception e){
+                Log.d(TAG, "actionViews: "+e);
+            }
+        });
     }
 
     private void _apiSendEmergency() {
@@ -246,17 +257,21 @@ public class DashBoardFragment extends Fragment {
     }
 
     private void getLocation() {
+        Log.d(TAG, "getLocation: andr mt ao bahar jao besharam");
         if (ActivityCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         } else {
             Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Log.d(TAG, "getLocation: location gps status "+locationGPS);
+
             if (locationGPS != null) {
                 double lat = locationGPS.getLatitude();
                 double longi = locationGPS.getLongitude();
                 latitude = String.valueOf(lat);
                 longitude = String.valueOf(longi);
+                Log.d(TAG, "getLocation:latiiidads  "+latitude);
             } else {
             }
         }

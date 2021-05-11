@@ -4,12 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.fypapplication.fypapp.R;
+import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
+import com.fypapplication.fypapp.models.User;
+import com.fypapplication.fypapp.webservices.VolleySingleton;
+import com.fypapplication.fypapp.webservices.WebServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -17,8 +26,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class MapsFragment extends Fragment {
 
+    private static final String TAG = "MapsFragment";
+    ArrayList<User> userArrayList;
+    Context context;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
@@ -33,10 +50,10 @@ public class MapsFragment extends Fragment {
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng sydney = new LatLng(-34, 151);
-            googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+            if (userArrayList.size() >0){
+                loadMarkers(googleMap);
+            }
         }
     };
 
@@ -56,6 +73,72 @@ public class MapsFragment extends Fragment {
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
+        }
+        context = getContext();
+        userArrayList = new ArrayList<>();
+        getUserData();
+
+    }
+
+    private void getUserData() {
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS, null,
+                response -> {
+
+
+                    //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
+
+                    Log.d(TAG, "actionViews: " + response.length());
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject userObj = response.getJSONObject(i);
+                            Log.d(TAG, "actionViews: "+userObj.optInt("type"));
+
+                            if (userObj.optInt("type") == 3) {
+                                User user = new User();
+                                user.email = userObj.optString("email");
+                                user.phoneNumber = String.valueOf(userObj.optInt("phone"));
+                                user.id = userObj.optString("_id");
+                                user.lat = userObj.optString("latitude");
+                                user.lng = userObj.optString("longitude");
+                                user.name = userObj.optString("name");
+
+                                Log.d(TAG, "getUserData: user name is "+user.name);
+                                userArrayList.add(user);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+//                    if (userArrayList.size() >0){
+//                        loadMarkers();
+//                    }
+
+
+                }, error -> {
+
+            Log.e(TAG, "removeMech: ", error);
+
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    private void loadMarkers(GoogleMap googleMap) {
+
+
+        for (int i = 0; i < userArrayList.size() ; i++){
+            User user = new User();
+            LatLng latlng = new LatLng(Double.parseDouble(user.lat), Double.parseDouble(user.lng));
+            googleMap.addMarker(new MarkerOptions().position(latlng).title(user.name));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
         }
     }
 }

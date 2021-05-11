@@ -44,6 +44,7 @@ public class MechanicPriceAdapter extends RecyclerView.Adapter<RecyclerView.View
         ((MechServiceViewHolder) holder).binding.serviceTv.setOnClickListener(v -> {
             myServicesInterface.onClickService(service);
         });
+
     }
 
     @Override

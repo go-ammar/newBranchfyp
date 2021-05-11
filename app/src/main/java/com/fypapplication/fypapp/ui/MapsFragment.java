@@ -101,6 +101,8 @@ public class MapsFragment extends Fragment {
 
                         }
                     }
+                } else {
+
                 }
                 Toast.makeText(getContext(), "marker clicked", Toast.LENGTH_SHORT).show();
 

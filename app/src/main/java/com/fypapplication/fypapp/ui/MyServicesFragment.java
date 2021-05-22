@@ -78,7 +78,7 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
     private void actionViews() {
 
         mechServicesArrayList = sharedPrefs.getMechServices();
-        adapter = new MechServicesAdapter(mContext, mechServicesArrayList, this);
+        adapter = new MechServicesAdapter(mContext, mechServicesArrayList, this, false);
         binding.serviceRecyclerView.setAdapter(adapter);
 
 

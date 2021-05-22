@@ -1,4 +1,4 @@
-package com.fypapplication.fypapp;
+package com.fypapplication.fypapp.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,28 +14,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
-import com.fypapplication.fypapp.adapters.RoomAdapter;
 import com.fypapplication.fypapp.databinding.FragmentRemoveMechsBinding;
-import com.fypapplication.fypapp.models.GetRoom;
 import com.fypapplication.fypapp.models.User;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.RemoveMechInterface {
 

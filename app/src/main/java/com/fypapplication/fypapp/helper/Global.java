@@ -10,4 +10,6 @@ public class Global {
     public static final int MECH_TYPE = 3;
     public static final int ADMIN_TYPE = 1;
     public static final int CUSTOMER_TYPE = 2;
+
+    public static boolean check = true;
 }

@@ -110,6 +110,11 @@ public class ContactFragment extends Fragment implements ChangesAdapter.ChangeIn
                 .setView(binding1.getRoot())
                 .create();
 
+        if (sharedPrefs.getUser().type == 3) {
+            binding1.userName.setVisibility(View.VISIBLE);
+            binding1.userNumber.setVisibility(View.VISIBLE);
+        }
+
 
         binding1.dateOfChangeET.setOnClickListener(v -> {
             SimpleDateFormat format = new SimpleDateFormat("MMM dd yyyy", Locale.US);

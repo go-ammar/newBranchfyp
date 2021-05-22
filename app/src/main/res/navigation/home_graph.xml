@@ -11,13 +11,7 @@
         android:name="com.fypapplication.fypapp.ui.DashBoardFragment"
         android:label="@string/text_dashboard"
         tools:layout="@layout/fragment_dash_board">
-        <action
-            android:id="@+id/action_nav_dashboard_to_nav_get_rooms"
-            app:destination="@id/nav_get_rooms"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+
         <action
             android:id="@+id/action_nav_dashboard_to_nav_notifications"
             app:destination="@id/nav_notifications"
@@ -25,13 +19,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_dashboard_to_deviceConfigurationFragment"
-            app:destination="@id/deviceConfigurationFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+
         <action
             android:id="@+id/action_nav_dashboard_to_servicesFragment"
             app:destination="@id/servicesFragment"
@@ -72,44 +60,7 @@
             app:destination="@id/mapsFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_get_rooms"
-        android:name="com.fypapplication.fypapp.ui.GetRoomsFragment"
-        android:label="Rooms"
-        tools:layout="@layout/fragment_get_rooms">
-        <argument
-            android:name="JsonResponseString"
-            android:defaultValue="null"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_nav_get_rooms_to_addSensorFragment"
-            app:destination="@id/addSensorFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_get_rooms_to_getSensorsFragment"
-            app:destination="@id/getSensorsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_get_rooms_to_updateRoomFragment"
-            app:destination="@id/updateRoomFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_get_rooms_to_sensorPerRoomFragment"
-            app:destination="@id/devicePerRoomFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
+
 
     <fragment
         android:id="@+id/nav_about"
@@ -120,7 +71,7 @@
     <fragment
         android:id="@+id/nav_contact"
         android:name="com.fypapplication.fypapp.ui.ContactFragment"
-        android:label="Contact"
+        android:label="Changes"
         tools:layout="@layout/fragment_contact" />
 
     <fragment
@@ -129,113 +80,16 @@
         android:label="Notifications"
         tools:layout="@layout/fragment_notifications" />
 
-    <fragment
-        android:id="@+id/sensorPerDevice"
-        android:name="com.fypapplication.fypapp.ui.SensorsPerDeviceFragment"
-        android:label="Sensors in Device" />
 
-    <fragment
-        android:id="@+id/addSensorFragment"
-        android:name="com.fypapplication.fypapp.ui.AddSensorFragment"
-        android:label="fragment_add_sensor"
-        tools:layout="@layout/fragment_add_sensor" />
 
-    <fragment
-        android:id="@+id/getSensorsFragment"
-        android:name="com.fypapplication.fypapp.ui.GetSensorsFragment"
-        android:label="fragment_get_sensors"
-        tools:layout="@layout/fragment_get_sensors">
-        <action
-            android:id="@+id/action_getSensorsFragment_to_updateSensorFragment"
-            app:destination="@id/updateSensorFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
 
-    <fragment
-        android:id="@+id/updateSensorFragment"
-        android:name="com.fypapplication.fypapp.ui.UpdateSensorFragment"
-        android:label="fragment_update_sensor"
-        tools:layout="@layout/fragment_update_sensor" />
-
-    <fragment
-        android:id="@+id/updateRoomFragment"
-        android:name="com.fypapplication.fypapp.ui.UpdateRoomFragment"
-        android:label="fragment_update_room"
-        tools:layout="@layout/fragment_update_room" />
-
-    <fragment
-        android:id="@+id/deviceConfigurationFragment"
-        android:name="com.fypapplication.fypapp.ui.DeviceConfigurationFragment"
-        android:label="Configuration" />
-
-    <fragment
-        android:id="@+id/devicePerRoomFragment"
-        android:name="com.fypapplication.fypapp.ui.DevicePerRoomFragment"
-        android:label="{roomName}">
-        <argument
-            android:name="_id"
-            android:defaultValue="default"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_devicePerRoomFragment_to_sensorPerDevice"
-            app:destination="@id/sensorPerDevice"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_devicePerRoomFragment_to_sensorsFragment"
-            app:destination="@id/sensorsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <argument
-            android:name="roomName"
-            android:defaultValue="null"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/statisticsFragment"
-        android:name="com.fypapplication.fypapp.ui.StatisticsFragment"
-        android:label="Statistics"
-        tools:layout="@layout/fragment_statistics">
-        <argument
-            android:name="sensor_id"
-            android:defaultValue="id"
-            app:argType="string" />
-        <argument
-            android:name="sensor_name"
-            android:defaultValue="null"
-            app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/sensorsFragment"
-        android:name="com.fypapplication.fypapp.ui.SensorsFragment"
-        android:label="{device_name}"
-        tools:layout="@layout/fragment_sensors">
-        <action
-            android:id="@+id/action_sensorsFragment_to_statisticsFragment"
-            app:destination="@id/statisticsFragment" />
-        <argument
-            android:name="device_id"
-            android:defaultValue="null"
-            app:argType="string" />
-        <argument
-            android:name="device_name"
-            android:defaultValue="null"
-            app:argType="string" />
-    </fragment>
 
 
     <fragment
         android:id="@+id/servicesFragment"
         android:name="com.fypapplication.fypapp.ui.ServicesFragment"
-        android:label="ServicesFragment">
+        android:label="Services"
+        >
         <argument
             android:name="vehicleType"
             android:defaultValue="null"
@@ -251,7 +105,7 @@
     <fragment
         android:id="@+id/scheduleBookingFragment"
         android:name="com.fypapplication.fypapp.ui.ScheduleBookingFragment"
-        android:label="ScheduleBookingFragment">
+        android:label="Scheduling">
         <argument
             android:name="vehicleType"
             android:defaultValue="null"
@@ -266,7 +120,7 @@
     <fragment
         android:id="@+id/myServicesFragment"
         android:name="com.fypapplication.fypapp.ui.MyServicesFragment"
-        android:label="MyServicesFragment">
+        android:label="My Services">
         <argument
             android:name="hello"
             android:defaultValue="null"
@@ -275,7 +129,7 @@
     <fragment
         android:id="@+id/addMechsFragment"
         android:name="com.fypapplication.fypapp.ui.AddMechsFragment"
-        android:label="AddMechsFragment">
+        android:label="Add Mechanics">
         <argument
             android:name="test"
             android:defaultValue="null"
@@ -283,8 +137,8 @@
     </fragment>
     <fragment
         android:id="@+id/removeMechsFragment"
-        android:name="com.fypapplication.fypapp.RemoveMechsFragment"
-        android:label="RemoveMechsFragment">
+        android:name="com.fypapplication.fypapp.ui.RemoveMechsFragment"
+        android:label="Remove Mechanics">
         <argument
             android:name="test"
             android:defaultValue="null"
@@ -293,7 +147,7 @@
     <fragment
         android:id="@+id/myAccountFragment"
         android:name="com.fypapplication.fypapp.ui.MyAccountFragment"
-        android:label="MyAccountFragment">
+        android:label="My Account">
         <argument
             android:name="test"
             android:defaultValue="null"
@@ -302,7 +156,7 @@
     <fragment
         android:id="@+id/mapsFragment"
         android:name="com.fypapplication.fypapp.ui.MapsFragment"
-        android:label="fragment_maps"
+        android:label="Maps"
         tools:layout="@layout/fragment_maps">
         <argument
             android:name="lat"

@@ -34,7 +34,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
-import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
 import com.fypapplication.fypapp.databinding.FragmentDashBoardBinding;
 import com.fypapplication.fypapp.databinding.MechanicAcceptedDialogBinding;
 import com.fypapplication.fypapp.helper.GPSTracker;
@@ -83,6 +82,7 @@ public class DashBoardFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -98,7 +98,6 @@ public class DashBoardFragment extends Fragment {
         if (sharedPrefs.getUser().type == Global.ADMIN_TYPE) {
             binding.adminConstraint.setVisibility(View.VISIBLE);
         } else if (sharedPrefs.getUser().type == Global.CUSTOMER_TYPE) {
-            initFirebaseToken();
             binding.customerConstraint.setVisibility(View.VISIBLE);
         } else if (sharedPrefs.getUser().type == Global.MECH_TYPE) {
             initFirebaseToken();
@@ -107,12 +106,14 @@ public class DashBoardFragment extends Fragment {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     private void actionViews() {
         locationManager = (LocationManager) requireActivity().getSystemService(getContext().LOCATION_SERVICE);
         getLocation();
 
         Bundle extras = getActivity().getIntent().getExtras();
         Log.d(TAG, "actionViews: " + extras);
+        if(Global.check)
         if (extras != null) {
             extras.getString("lat");
             extras.getString("lng");
@@ -209,15 +210,6 @@ public class DashBoardFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void _apiSendEmergency() {
-
-//        GPSTracker gpsTracker = new GPSTracker(getContext());
-
-//        if (gpsTracker.getIsGPSTrackingEnabled()) {
-//            stringLatitude = String.valueOf(gpsTracker.latitude);
-
-//            stringLongitude = String.valueOf(gpsTracker.longitude);
-
-//        }
 
         JSONArray jsonArray = new JSONArray();
 
@@ -493,9 +485,14 @@ public class DashBoardFragment extends Fragment {
                                 user.lng = userObj.optString("longitude");
                                 Log.d(TAG, "_bookingCreated: " + longitude + "  " + latitude);
                                 if (user.lat.equals(latitude) && user.lng.equals(longitude)) {
-                                    _bookingCreated(user.mechanicId);
+                                    if (runnable != null)
+                                        _bookingCreated(user.mechanicId);
                                 } else {
-                                    handler.postDelayed(runnable, 10000);
+                                    try {
+                                        handler.postDelayed(runnable, 10000);
+                                    } catch (Exception e) {
+                                        Log.e(TAG, "_apiForBooking: ", e);
+                                    }
                                 }
                                 user.userId = userObj.optString("userId");
 
@@ -527,6 +524,9 @@ public class DashBoardFragment extends Fragment {
 
     private void _bookingCreated(String mechanicId) {
         handler = null;
+        runnable = null;
+        this.mechanicId = mechanicId;
+        mechanicAccepted();
         Log.d(TAG, "_bookingCreated: done booking");
     }
 
@@ -540,15 +540,16 @@ public class DashBoardFragment extends Fragment {
         if (dialog.getWindow() != null)
             dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
 
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
+        binding1.setMechanic(user);
         binding1.callMech.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" + user.phoneNumber));
             startActivity(intent);
         });
 
+        dialog.setCancelable(true);
         dialog.show();
 
     }

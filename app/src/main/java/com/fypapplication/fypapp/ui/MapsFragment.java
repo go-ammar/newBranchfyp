@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -27,11 +28,16 @@ import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
+import com.fypapplication.fypapp.adapters.MechServicesAdapter;
 import com.fypapplication.fypapp.adapters.MechanicPriceAdapter;
+import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
 import com.fypapplication.fypapp.databinding.DialogueMechanicServiceBinding;
 import com.fypapplication.fypapp.databinding.ItemMechServicesBinding;
 import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
+import com.fypapplication.fypapp.databinding.MechanicAcceptedDialogBinding;
+import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.MechServices;
 import com.fypapplication.fypapp.models.User;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
@@ -63,8 +69,10 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
     DialogueMechanicServiceBinding dialogueMechanicServiceBinding;
     Dialog dialog;
     String customerId;
+    SharedPrefs sharedPrefs;
     MechanicPriceAdapter.MyServicesInterface myServicesInterface;
 
+    MechServicesAdapter.MyServicesInterface anInterface;
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         /**
          * Manipulates the map once available.
@@ -111,6 +119,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                     Log.d(TAG, "onMapReady: " + args.getFromServices());
                     Log.d(TAG, "onMapReady: size " + mechServicesArrayList.size());
 
+                    priceArrayList.clear();
                     for (int i = 0; i < mechServicesArrayList.size(); i++) {
                         Log.d(TAG, "onMapReady: in loop " + mechServicesArrayList.get(i).id);
                         if (mechServicesArrayList.get(i).id.equals(mechId)) {
@@ -118,15 +127,12 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                             //TODO in adapter, send this arraylist.
                             priceArrayList.add(mechServicesArrayList.get(i));
 
-                            Toast.makeText(getContext(), "marker clicked " + mechId, Toast.LENGTH_SHORT).show();
-
 
                         }
                     }
 
                     //ye this ki jagah kiya lagaun
-                    mechanicPriceAdapter = new MechanicPriceAdapter(context, priceArrayList, myServicesInterface);
-                    dialogueMechanicServiceBinding.recyler.setAdapter(mechanicPriceAdapter);
+
                     openPriceDialogue(user);
 
 
@@ -155,6 +161,45 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
                     binding1.confirmButton.setOnClickListener(v -> {
 
+                        JSONObject params = new JSONObject();
+
+                        try {
+
+                            params.put("latitude", Double.parseDouble(args.getLat()));
+                            params.put("longitude", Double.parseDouble(args.getLng()));
+                            params.put("userId", args.getUserId());
+                            params.put("mechanicId", sharedPrefs.getUser().id);
+                            params.put("service", "Emergency");
+                            params.put("time", System.currentTimeMillis());
+
+                            Log.d(TAG, "Bookings : " + params);
+
+                        } catch (Exception e) {
+                            Log.e(TAG, "apiSendTokensEmergency: ", e);
+                        }
+
+
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_GET_BOOKING, params,
+                                response -> {
+
+                                    Log.d(TAG, "mechanicAccepted: " + response);
+                                    Toast.makeText(context, "Booking Created", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+
+                                    showCustomerDialog(args.getUserId());
+
+                                }, error -> {
+
+                            Log.e(TAG, "mechanicAccepted: ", error);
+
+                        });
+
+
+                        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+                                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+                        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
                     });
 
@@ -170,13 +215,98 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
         }
     };
 
+    private void showCustomerDialog(String userId) {
+
+        User user = new User();
+
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS, null,
+                response -> {
+
+                    //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
+
+                    Log.d(TAG, "actionViews: " + response.length());
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            JSONObject userObj = response.getJSONObject(i);
+                            Log.d(TAG, "actionViews: " + userObj.optInt("type"));
+
+                            if (userObj.optString("_id").equals(userId)) {
+
+                                user.email = userObj.optString("email");
+                                user.phoneNumber = String.valueOf(userObj.optInt("phone"));
+                                user.id = userObj.optString("_id");
+                                user.lat = userObj.optString("latitude");
+                                user.lng = userObj.optString("longitude");
+                                user.name = userObj.optString("name");
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    MechanicAcceptedDialogBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.mechanic_accepted_dialog,
+                            null, false);
+                    final AlertDialog dialog = new AlertDialog.Builder(getContext())
+                            .setView(binding1.getRoot())
+                            .create();
+
+                    if (dialog.getWindow() != null)
+                        dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
+
+                    dialog.show();
+
+                    binding1.setMechanic(user);
+                    binding1.mechName.setText("Customer name: " + user.name);
+                    binding1.mechNumber.setText("Phone number: " + user.phoneNumber);
+                    binding1.callMech.setOnClickListener(view -> {
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:" + user.phoneNumber));
+                        startActivity(intent);
+                    });
+
+                    dialog.setCancelable(true);
+                    dialog.show();
+
+                }, error -> {
+
+            Log.e(TAG, "removeMech: ", error);
+
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+
+
+    }
+
     private void openPriceDialogue(User user) {
 
 
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
+        DialogueMechanicServiceBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialogue_mechanic_service,
+                null, false);
+        final AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setView(binding1.getRoot())
+                .create();
 
-        dialogueMechanicServiceBinding.callBtn.setOnClickListener(v -> {
+        if (dialog.getWindow() != null)
+            dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
+
+        dialog.show();
+
+        MechServicesAdapter adapter = new MechServicesAdapter(context, priceArrayList, anInterface, true);
+        binding1.recyler.setLayoutManager(new LinearLayoutManager(context));
+        binding1.recyler.setAdapter(adapter);
+
+
+        dialog.setCancelable(true);
+        dialog.show();
+
+        binding1.callBtn.setOnClickListener(v -> {
 
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" + user.phoneNumber));
@@ -184,7 +314,33 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
         });
 
-        dialog.show();
+
+//        dialogueMechanicServiceBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialogue_mechanic_service, null, false);
+//
+//
+//
+//
+//        Dialog dialog;
+//        dialog = new Dialog(requireContext());
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//
+//        dialog.setContentView(dialogueMechanicServiceBinding.getRoot());
+//        dialog.setCancelable(true);
+//
+//        mechanicPriceAdapter = new MechanicPriceAdapter(context, priceArrayList, myServicesInterface);
+//        dialogueMechanicServiceBinding.recyler.setLayoutManager(new LinearLayoutManager(context));
+//        dialogueMechanicServiceBinding.recyler.setAdapter(mechanicPriceAdapter);
+//
+//        dialogueMechanicServiceBinding.callBtn.setOnClickListener(v -> {
+//
+//            Intent intent = new Intent(Intent.ACTION_DIAL);
+//            intent.setData(Uri.parse("tel:" + user.phoneNumber));
+//            startActivity(intent);
+//
+//        });
+//
+//        dialog.show();
+
 
 
     }
@@ -196,7 +352,6 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
             for (int i = 0; i < res.length(); i++) {
                 try {
                     JSONObject object = res.getJSONObject(i);
-
 
                     MechServices mechServices = new MechServices();
 
@@ -241,9 +396,10 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                              @Nullable Bundle savedInstanceState) {
         mechServicesArrayList = new ArrayList<>();
         priceArrayList = new ArrayList<>();
-
+        sharedPrefs = new SharedPrefs(getContext());
         myServicesInterface = this;
 
+        Global.check = false;
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
@@ -264,9 +420,8 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
     private void actionViews() {
 
-        dialogueMechanicServiceBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialogue_mechanic_service, null, false);
-        dialog = new Dialog(requireContext());
-        dialog.setContentView(dialogueMechanicServiceBinding.getRoot());
+//        dialog = new Dialog(requireContext());
+//        dialog.setContentView(dialogueMechanicServiceBinding.getRoot());
 
     }
 

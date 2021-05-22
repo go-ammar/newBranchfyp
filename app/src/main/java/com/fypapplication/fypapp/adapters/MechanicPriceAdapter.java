@@ -1,6 +1,7 @@
 package com.fypapplication.fypapp.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -39,7 +40,8 @@ public class MechanicPriceAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MechServices service = mechPriceArraylist.get(position);
-        ((MechanicPriceAdapter.MechServiceViewHolder) holder).setBinding(service);
+        Log.d("TAG", "onBindViewHolder: "+service.price);
+        ((MechServiceViewHolder) holder).setBinding(service);
 
         ((MechServiceViewHolder) holder).binding.serviceTv.setOnClickListener(v -> {
             myServicesInterface.onClickService(service);

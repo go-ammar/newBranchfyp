@@ -2,6 +2,7 @@ package com.fypapplication.fypapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -20,11 +21,13 @@ public class MechServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     Context context;
     ArrayList<MechServices> mechServicesArrayList;
     MyServicesInterface myServicesInterface;
+    Boolean check;
 
-    public MechServicesAdapter(Context context, ArrayList<MechServices> mechServicesArrayList, MyServicesInterface myServicesInterface) {
+    public MechServicesAdapter(Context context, ArrayList<MechServices> mechServicesArrayList, MyServicesInterface myServicesInterface, Boolean check) {
         this.context = context;
         this.mechServicesArrayList = mechServicesArrayList;
         this.myServicesInterface = myServicesInterface;
+        this.check = check;
     }
 
     @NonNull
@@ -40,6 +43,9 @@ public class MechServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         MechServices service = mechServicesArrayList.get(position);
         ((MechServiceViewHolder) holder).setBinding(service);
+
+        if (check)
+            ((MechServiceViewHolder) holder).binding.deleteChangeDue.setVisibility(View.GONE);
 
         ((MechServiceViewHolder) holder).binding.deleteChangeDue.setOnClickListener(v -> {
             myServicesInterface.deleteService(service);

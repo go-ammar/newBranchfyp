@@ -47,7 +47,6 @@
             app:strokeColor="#808080"
             android:layout_weight="1"
             android:layout_width="0dp"
-
             android:layout_margin="@dimen/_16sdp"
             android:padding="@dimen/_8sdp"
             android:text="@string/cancel"

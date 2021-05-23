@@ -15,11 +15,12 @@ public class WebServices {
     public static final String API_GET_NOTIFCATION_PAYLOAD =  BASE_URL + "api/notifications/getUsers";
     public static final String API_GET_BOOKING = BASE_URL + "api/bookings" ;
 
+    //jsonarrayrequest
     public static final String API_GET_MECHS = BASE_URL + "api/users/mechs";
     //add mechanic id after this
-    public static final String API_GET_SERVICE_BYMECH = BASE_URL + "api/services/services_by_id/" ;
+    public static final String API_GET_SERVICE_BYMECH = BASE_URL + "api/services/services_by_id/";
     //add mech id after this
-    public static final String API_GET_BOOKINGS_BYMECH = BASE_URL + "api/services/mech_id/" ;
+    public static final String API_GET_BOOKINGS_BYMECH = BASE_URL + "api/services/mech_id/";
     //add customer id after this
     public static final String API_GET_BOOKINGS_BYCUSTOMER = BASE_URL + "api/services/customer_id/" ;
 
@@ -28,6 +29,9 @@ public class WebServices {
 
     //add userid after this.
     public static final String API_GET_DEVICE_TOKEN_BY_USER = BASE_URL + "api/notifications//notification_user/";
+
+    //delete deviceToken
+    public static final String API_DELETE_DEVICE_TOKEN_BY_USER = BASE_URL + "api/notifications/";
 
 
 

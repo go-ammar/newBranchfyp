@@ -13,22 +13,37 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.databinding.ActivityHomeLandingBinding;
 import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
+import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.helper.NotifyJobService;
+import com.fypapplication.fypapp.models.Login;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
+import com.fypapplication.fypapp.webservices.VolleySingleton;
+import com.fypapplication.fypapp.webservices.WebServices;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeLandingActivity extends AppCompatActivity {
 
+    private static final String TAG = "HomeLandingActivity";
     private final String EXTRA_LOGOUT = "clearBackStack";
     NavController navController;
     ActivityHomeLandingBinding binding;
-
+    SharedPrefs sharedPrefs;
     AppBarConfiguration appBarConfiguration;
 
     @Override
@@ -41,7 +56,10 @@ public class HomeLandingActivity extends AppCompatActivity {
             binding = DataBindingUtil.setContentView(this, R.layout.activity_home_landing);
             setUpNavigation();
         }
-        NotifyJobService.schedule(this,NotifyJobService.ONE_DAY_INTERVAL);
+        NotifyJobService.schedule(this, NotifyJobService.ONE_DAY_INTERVAL);
+
+        sharedPrefs = new SharedPrefs(getApplicationContext());
+
     }
 
     @Override
@@ -117,7 +135,11 @@ public class HomeLandingActivity extends AppCompatActivity {
 
         binding1.confirmButton.setText("Yes");
         binding1.confirmButton.setOnClickListener(v -> {
-            SharedPrefs sharedPrefs = new SharedPrefs(getApplicationContext());
+
+            if (sharedPrefs.getUser().type == Global.MECH_TYPE) {
+                deleteDeviceTokenApi();
+            }
+
             sharedPrefs.clearSpecificKey("key");
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -126,6 +148,33 @@ public class HomeLandingActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+    private void deleteDeviceTokenApi() {
+
+        String id = sharedPrefs.getUser().id;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_DELETE_DEVICE_TOKEN_BY_USER + id, null, res -> {
+
+            Log.d(TAG, "deleteDeviceTokenApi: " + res);
+
+        }, error -> {
+
+            Log.e(TAG, "deleteDeviceTokenApi: ", error);
+
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+
     }
 
 

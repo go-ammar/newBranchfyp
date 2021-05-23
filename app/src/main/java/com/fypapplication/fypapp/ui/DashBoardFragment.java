@@ -113,22 +113,22 @@ public class DashBoardFragment extends Fragment {
 
         Bundle extras = getActivity().getIntent().getExtras();
         Log.d(TAG, "actionViews: " + extras);
-        if(Global.check)
-        if (extras != null) {
-            extras.getString("lat");
-            extras.getString("lng");
+        if (Global.check)
+            if (extras != null) {
+                extras.getString("lat");
+                extras.getString("lng");
 
-            Log.d(TAG, "actionViews: lat " + extras.getString("lat"));
+                Log.d(TAG, "actionViews: lat " + extras.getString("lat"));
 
-            DashBoardFragmentDirections.ActionNavDashboardToMapsFragment action =
-                    DashBoardFragmentDirections.actionNavDashboardToMapsFragment();
+                DashBoardFragmentDirections.ActionNavDashboardToMapsFragment action =
+                        DashBoardFragmentDirections.actionNavDashboardToMapsFragment();
 
-            action.setLat(extras.getString("lat"));
-            action.setLng(extras.getString("lng"));
-            action.setUserId(extras.getString("user_id"));
+                action.setLat(extras.getString("lat"));
+                action.setLng(extras.getString("lng"));
+                action.setUserId(extras.getString("user_id"));
 
-            navController.navigate(action);
-        }
+                navController.navigate(action);
+            }
 
         binding.carMechanicCard.setOnClickListener(v -> {
             DashBoardFragmentDirections.ActionNavDashboardToServicesFragment action =
@@ -181,7 +181,6 @@ public class DashBoardFragment extends Fragment {
 
             Navigation.createNavigateOnClickListener(action).onClick(binding.myServices);
         });
-
 
         binding.addMechs.setOnClickListener(v -> {
             DashBoardFragmentDirections.ActionNavDashboardToAddMechsFragment action =
@@ -308,7 +307,6 @@ public class DashBoardFragment extends Fragment {
             JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.POST,
                     WebServices.API_IS_LOGGED_IN + "/send-notification", params, res -> {
 
-
             }, error -> {
 
                 Log.e(TAG, "_apiSendEmergency: ", error);
@@ -361,17 +359,20 @@ public class DashBoardFragment extends Fragment {
 
         try {
             params.put("device_token", token);
-            params.put("user_id", sharedPrefs.getUser().id);
+//            params.put("user_id", sharedPrefs.getUser().id);
 //            params.put("deviceType", "Android");
             Log.d(TAG, "_apiUpdateFirebaseToken params: ");
         } catch (Exception e) {
             Log.e(TAG, "_apiUpdateFirebaseToken params: ", e);
         }
 
+        String id = sharedPrefs.getUser().id;
+
         Log.d(TAG, "_apiUpdateFirebaseToken: " + params);
         try {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-                    WebServices.API_IS_LOGGED_IN + "/register-device", params, response -> {
+            Log.d(TAG, "_apiUpdateFirebaseToken: api hit is "+WebServices.API_IS_LOGGED_IN + "/" + id);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
+                    WebServices.API_IS_LOGGED_IN + "/" + id, params, response -> {
 
                 Log.d(TAG, "_apiUpdateFirebaseToken api: " + response);
 

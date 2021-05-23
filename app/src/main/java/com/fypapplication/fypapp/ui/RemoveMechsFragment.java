@@ -74,29 +74,25 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
         }
 
 
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS, null,
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS + "/mechs", null,
                 response -> {
 
-
-                    //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
 
                     Log.d(TAG, "actionViews: " + response.length());
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject userObj = response.getJSONObject(i);
-                            Log.d(TAG, "actionViews: "+userObj.optInt("type"));
+                            Log.d(TAG, "actionViews: " + userObj.optInt("type"));
 
-                            if (userObj.optInt("type") == 3) {
-                                User user = new User();
-                                user.email = userObj.optString("email");
-                                user.phoneNumber = String.valueOf(userObj.optInt("phone"));
-                                user.id = userObj.optString("_id");
-                                user.lat = userObj.optString("latitude");
-                                user.lng = userObj.optString("longitude");
-                                user.name = userObj.optString("name");
+                            User user = new User();
+                            user.email = userObj.optString("email");
+                            user.phoneNumber = String.valueOf(userObj.optInt("phone"));
+                            user.id = userObj.optString("_id");
+                            user.lat = userObj.optString("latitude");
+                            user.lng = userObj.optString("longitude");
+                            user.name = userObj.optString("name");
 
-                                userArrayList.add(user);
-                            }
+                            userArrayList.add(user);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -132,7 +128,7 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
         SharedPrefs sharedPrefs = new SharedPrefs(context);
 
 
-        Log.d(TAG, "removeMech: "+WebServices.API_REMOVE_MECH + id);
+        Log.d(TAG, "removeMech: " + WebServices.API_REMOVE_MECH + id);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_REMOVE_MECH + id, null,
                 response -> {
 

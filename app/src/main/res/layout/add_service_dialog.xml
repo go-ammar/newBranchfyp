@@ -56,7 +56,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/serviceName">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
+                style="@style/ExposedDropdownMenu"
                 android:id="@+id/vehicleTypeET"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

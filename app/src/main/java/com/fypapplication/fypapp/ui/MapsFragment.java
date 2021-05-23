@@ -301,7 +301,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
         MechServicesAdapter adapter = new MechServicesAdapter(context, priceArrayList, anInterface, true);
         binding1.recyler.setLayoutManager(new LinearLayoutManager(context));
         binding1.recyler.setAdapter(adapter);
-
+        
 
         dialog.setCancelable(true);
         dialog.show();

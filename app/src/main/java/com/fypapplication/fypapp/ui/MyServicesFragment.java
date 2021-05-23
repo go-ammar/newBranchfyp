@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -36,6 +37,7 @@ import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -77,14 +79,23 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
 
     private void actionViews() {
 
-        mechServicesArrayList = sharedPrefs.getMechServices();
-        adapter = new MechServicesAdapter(mContext, mechServicesArrayList, this, false);
-        binding.serviceRecyclerView.setAdapter(adapter);
-
+        apiGetServices();
 
         binding.addServiceBtn.setOnClickListener(view -> {
             AddServiceDialogBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.add_service_dialog,
                     null, false);
+
+
+            String[] data = {"Car", "Bike", "Rickshaw", "Truck"};
+
+            ArrayAdapter<String> dropDown = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, data);
+            binding1.vehicleTypeET.setInputType(0);
+
+            binding1.vehicleTypeET.setOnClickListener(v -> {
+                binding1.vehicleTypeET.setAdapter(dropDown);
+                binding1.vehicleTypeET.showDropDown();
+                binding1.vehicleTypeET.requestFocus();
+            });
 
             AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                     .setView(binding1.getRoot())
@@ -125,6 +136,49 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
 
     }
 
+    private void apiGetServices() {
+
+        String id = sharedPrefs.getUser().id;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_SERVICE_BYMECH + id, null, res -> {
+
+
+            try {
+                JSONArray service = res.getJSONArray("Service");
+
+                for (int i = 0; i < service.length(); i++) {
+                    MechServices mechServices = new MechServices();
+                    JSONObject obj = service.getJSONObject(i);
+                    mechServices.price = obj.optInt("price");
+                    mechServices.service = obj.optString("service_name");
+                    mechServices.vehicleType = obj.optString("vehicle_type");
+                    mechServices.id = obj.optString("_id");
+                    mechServicesArrayList.add(mechServices);
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            adapter = new MechServicesAdapter(mContext, mechServicesArrayList, this, false);
+            binding.serviceRecyclerView.setAdapter(adapter);
+
+
+        }, error -> {
+
+            Log.e(TAG, "loginApi: ", error);
+
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+
+
+    }
+
     private void apiAddService(String service_name, int price, String vehicle_type) {
         JSONObject params = new JSONObject();
 
@@ -150,7 +204,7 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
 
             mechServicesArrayList.add(mechServices);
 
-            sharedPrefs.putMechServicesList(mechServicesArrayList);
+//            sharedPrefs.putMechServicesList(mechServicesArrayList);
 
             adapter.notifyDataSetChanged();
 

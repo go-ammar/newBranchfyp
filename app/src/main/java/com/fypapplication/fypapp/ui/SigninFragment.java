@@ -25,12 +25,14 @@ import com.fypapplication.fypapp.models.Login;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 public class SigninFragment extends Fragment {
@@ -39,6 +41,7 @@ public class SigninFragment extends Fragment {
     private static final String TAG = "SigninFragment";
     NavController navController;
     FragmentSigninBinding binding;
+    SharedPrefs sharedPrefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,7 @@ public class SigninFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
+        sharedPrefs = new SharedPrefs(getContext());
         actionViews();
 
 
@@ -100,6 +104,7 @@ public class SigninFragment extends Fragment {
         }
 
 
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_LOGIN, params, res -> {
 
             Log.d(TAG, "_apiLogin: res " + res);
@@ -122,9 +127,13 @@ public class SigninFragment extends Fragment {
             login.lng = response.optLong("longitude");
             login.lat = response.optLong("latitude");
 
-
-            //INITIALIZE SHARED PREFS TOKEN HERE USING login.data.accessToken.
             SharedPrefs sharedPrefs = new SharedPrefs(requireContext());
+
+            if (login.type == Global.MECH_TYPE) {
+                sharedPrefs.putBoolean("hasDeviceToken", true);
+                initFirebaseToken();
+            }
+            //INITIALIZE SHARED PREFS TOKEN HERE USING login.data.accessToken.
             try {
                 sharedPrefs.setKey(res.getString("token"));
             } catch (JSONException e) {
@@ -138,7 +147,7 @@ public class SigninFragment extends Fragment {
 
             Log.e(TAG, "loginApi: ", error);
 
-        }){
+        }) {
             @Override
             public Map<String, String> getHeaders() {
                 HashMap<String, String> headers = new HashMap<>();
@@ -146,13 +155,75 @@ public class SigninFragment extends Fragment {
                 return headers;
             }
         };
-
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
+    }
+
+    private void initFirebaseToken() {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.w(TAG, "getInstanceId failed", task.getException());
+                        return;
+                    }
+                    String token = Objects.requireNonNull(task.getResult()).getToken();
+//                    sharedPrefs.putString("devicetoken",token);
+//                    if (BuildConfig.DEBUG) Log.d(TAG, "initFirebaseToken: "+ token);
+                    Log.d(TAG, "initFirebaseToken: " + token);
+                    _apiUpdateFirebaseToken(token);
+                });
+
+    }
+
+    public void _apiUpdateFirebaseToken(String token) {
+
+        JSONObject params = new JSONObject();
+
+        try {
+            params.put("device_token", token);
+            params.put("user_id", sharedPrefs.getUser().id);
+//            params.put("deviceType", "Android");
+            Log.d(TAG, "_apiUpdateFirebaseToken params: ");
+        } catch (Exception e) {
+            Log.e(TAG, "_apiUpdateFirebaseToken params: ", e);
+        }
+
+        Log.d(TAG, "_apiUpdateFirebaseToken: " + params);
+        try {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                    WebServices.API_IS_LOGGED_IN + "/register-device", params, response -> {
+
+                Log.d(TAG, "_apiUpdateFirebaseToken api: " + response);
+
+            }, error -> {
+
+                Log.e(TAG, "_apiUpdateFirebaseToken api: ", error);
+
+            }) {
+
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> headers = new HashMap<>();
+
+                    headers.put("Content-Type", "application/json");
+
+                    return headers;
+                }
+            };
+
+
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+        } catch (Exception e) {
+            Log.e(TAG, "_apiUpdateFirebaseToken: ", e);
+        }
     }
 
 }

@@ -403,7 +403,6 @@ public class DashBoardFragment extends Fragment {
         }
     }
 
-
     public void mechanicAccepted() {
         User user = new User();
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS, null,

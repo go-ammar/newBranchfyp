@@ -16,7 +16,7 @@ public class WebServices {
     public static final String API_GET_BOOKING = BASE_URL + "api/bookings" ;
 
     //jsonarrayrequest
-    public static final String API_GET_MECHS = BASE_URL + "api/users/mechs";
+    public static final String API_GET_MECHS = BASE_URL + "api/users/mechs/3";
     //add mechanic id after this
     public static final String API_GET_SERVICE_BYMECH = BASE_URL + "api/services/services_by_id/";
     //add mech id after this

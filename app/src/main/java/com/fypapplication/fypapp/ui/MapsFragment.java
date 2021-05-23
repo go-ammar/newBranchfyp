@@ -1,29 +1,29 @@
 package com.fypapplication.fypapp.ui;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -32,10 +32,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.MechServicesAdapter;
 import com.fypapplication.fypapp.adapters.MechanicPriceAdapter;
-import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
+import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
 import com.fypapplication.fypapp.databinding.DialogueMechanicServiceBinding;
 import com.fypapplication.fypapp.databinding.ItemMechServicesBinding;
-import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
 import com.fypapplication.fypapp.databinding.MechanicAcceptedDialogBinding;
 import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.MechServices;
@@ -59,6 +58,7 @@ import java.util.ArrayList;
 public class MapsFragment extends Fragment implements MechanicPriceAdapter.MyServicesInterface {
 
     private static final String TAG = "MapsFragment";
+    private static final int REQUEST_LOCATION = 1;
     ArrayList<User> userArrayList;
     ArrayList<MechServices> mechServicesArrayList;
     ArrayList<MechServices> priceArrayList;
@@ -69,7 +69,10 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
     DialogueMechanicServiceBinding dialogueMechanicServiceBinding;
     Dialog dialog;
     String customerId;
+    LocationManager locationManager;
     SharedPrefs sharedPrefs;
+    String latitude, longitude;
+
     MechanicPriceAdapter.MyServicesInterface myServicesInterface;
 
     MechServicesAdapter.MyServicesInterface anInterface;
@@ -104,7 +107,10 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
             } else {
 
                 getUserData(googleMap);
+                sydney = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
                 getMechServices();
+                float zoom = 16.0f;
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoom));
 
             }
 
@@ -271,7 +277,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
                 }, error -> {
 
-            Log.e(TAG, "removeMech: ", error);
+            Log.e(TAG, "showCustomerDialog: ", error);
 
         });
 
@@ -301,7 +307,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
         MechServicesAdapter adapter = new MechServicesAdapter(context, priceArrayList, anInterface, true);
         binding1.recyler.setLayoutManager(new LinearLayoutManager(context));
         binding1.recyler.setAdapter(adapter);
-        
+
 
         dialog.setCancelable(true);
         dialog.show();
@@ -340,7 +346,6 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 //        });
 //
 //        dialog.show();
-
 
 
     }
@@ -398,10 +403,34 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
         priceArrayList = new ArrayList<>();
         sharedPrefs = new SharedPrefs(getContext());
         myServicesInterface = this;
-
+        getLocation();
         Global.check = false;
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
+
+    private void getLocation() {
+        Log.d(TAG, "getLocation: andr mt ao bahar jao besharam");
+        locationManager = (LocationManager) requireActivity().getSystemService(getContext().LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(
+                getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        } else {
+            Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Log.d(TAG, "getLocation: location gps status " + locationGPS);
+
+            if (locationGPS != null) {
+                double lat = locationGPS.getLatitude();
+                double longi = locationGPS.getLongitude();
+                latitude = String.valueOf(lat);
+                longitude = String.valueOf(longi);
+                Log.d(TAG, "getLocation:  " + latitude);
+            } else {
+            }
+        }
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -426,33 +455,27 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
     }
 
     private void getUserData(GoogleMap googleMap) {
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS, null,
+
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_MECHS, null,
                 response -> {
 
-
-                    //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
-
-
-                    Log.d(TAG, "getUserData: response is  " + response.toString());
-                    Log.d(TAG, "actionViews: " + response.length());
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject userObj = response.getJSONObject(i);
                             Log.d(TAG, "actionViews: " + userObj.optInt("type"));
 
-                            if (userObj.optInt("type") == 3) {
-                                User user = new User();
-                                user.email = userObj.optString("email");
-                                user.phoneNumber = String.valueOf(userObj.optInt("phone"));
-                                user.id = userObj.optString("_id");
-                                user.lat = userObj.optString("latitude");
-                                user.lng = userObj.optString("longitude");
-                                user.name = userObj.optString("name");
+                            User user = new User();
+                            user.email = userObj.optString("email");
+                            user.phoneNumber = String.valueOf(userObj.optInt("phone"));
+                            user.id = userObj.optString("_id");
+                            user.lat = userObj.optString("latitude");
+                            user.lng = userObj.optString("longitude");
+                            user.name = userObj.optString("name");
 
-                                Log.d(TAG, "getUserData: user name is " + user.name);
-                                userArrayList.add(user);
+                            Log.d(TAG, "getUserData: user name is " + user.name);
+                            userArrayList.add(user);
 
-                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -466,7 +489,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
                 }, error -> {
 
-            Log.e(TAG, "removeMech: ", error);
+            Log.e(TAG, "getUserData: ", error);
 
         });
 

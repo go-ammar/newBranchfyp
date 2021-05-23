@@ -74,7 +74,7 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
         }
 
 
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_USERS + "/mechs", null,
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_MECHS, null,
                 response -> {
 
 

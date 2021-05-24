@@ -118,6 +118,7 @@ public class SigninFragment extends Fragment {
             Login login = new Login();
 
 
+            assert response != null;
             login.id = response.optString("id");
             login.name = response.optString("name");
             login.email = response.optString("email");
@@ -130,7 +131,6 @@ public class SigninFragment extends Fragment {
             SharedPrefs sharedPrefs = new SharedPrefs(requireContext());
 
             if (login.type == Global.MECH_TYPE) {
-                sharedPrefs.putBoolean("hasDeviceToken", true);
                 initFirebaseToken();
             }
             //INITIALIZE SHARED PREFS TOKEN HERE USING login.data.accessToken.

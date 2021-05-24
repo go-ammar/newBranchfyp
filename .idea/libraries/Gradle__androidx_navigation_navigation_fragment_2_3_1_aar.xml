@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.navigation:navigation-fragment:2.3.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/882b0ba3cb77ca3b11777419f8bec297/navigation-fragment-2.3.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/882b0ba3cb77ca3b11777419f8bec297/navigation-fragment-2.3.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/882b0ba3cb77ca3b11777419f8bec297/navigation-fragment-2.3.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ce39506ea358b7d2d258ccc72f7401db/navigation-fragment-2.3.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ce39506ea358b7d2d258ccc72f7401db/navigation-fragment-2.3.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ce39506ea358b7d2d258ccc72f7401db/navigation-fragment-2.3.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

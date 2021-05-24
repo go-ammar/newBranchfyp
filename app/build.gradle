@@ -3,7 +3,6 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'com.google.gms.google-services'
 
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -117,6 +116,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-places:17.0.0'
 
 
+    compile 'com.google.firebase:firebase-core:10.0.1'
 
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "com.google.android.gms:play-services-maps:$googlePlayVersion"
@@ -124,3 +124,4 @@ dependencies {
     implementation "org.permissionsdispatcher:permissionsdispatcher:$permissionDispatcherVersion"
     annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:$permissionDispatcherVersion"
 }
+

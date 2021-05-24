@@ -1,9 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: org.permissionsdispatcher:permissionsdispatcher:4.7.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/172bc55a3e9c0aa2edabf5d7fa3ab533/jetified-permissionsdispatcher-4.7.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/172bc55a3e9c0aa2edabf5d7fa3ab533/jetified-permissionsdispatcher-4.7.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/172bc55a3e9c0aa2edabf5d7fa3ab533/jetified-permissionsdispatcher-4.7.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cf3cefc4b7dacf5b420e6aa11217742/jetified-permissionsdispatcher-4.7.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/295e6d55b6d543ca3b2f9d2c6453eb0e/jetified-permissionsdispatcher-4.7.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cf3cefc4b7dacf5b420e6aa11217742/jetified-permissionsdispatcher-4.7.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cf3cefc4b7dacf5b420e6aa11217742/jetified-permissionsdispatcher-4.7.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.permissionsdispatcher/permissionsdispatcher/4.7.0/367d1e6a747659f3ccd7e1a0de99b99c5c8e1182/permissionsdispatcher-4.7.0-javadoc.jar!/" />

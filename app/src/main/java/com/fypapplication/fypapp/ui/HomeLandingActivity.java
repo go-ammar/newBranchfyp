@@ -30,6 +30,7 @@ import com.fypapplication.fypapp.models.Login;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
+import com.google.firebase.FirebaseApp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +50,9 @@ public class HomeLandingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        FirebaseApp.initializeApp(this);
+
 
         if (getIntent().getBooleanExtra(EXTRA_LOGOUT, false)) {
             clearBackStack();

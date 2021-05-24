@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
+import com.google.firebase.FirebaseApp;
 
 public class SplashScreenFragment extends Fragment {
 
@@ -36,6 +37,8 @@ public class SplashScreenFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = Navigation.findNavController(view);
+
+        FirebaseApp.initializeApp(getContext());
 
         actionViews();
     }

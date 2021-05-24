@@ -1,7 +1,11 @@
 package com.fypapplication.fypapp.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -10,132 +14,112 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.fypapplication.fypapp.R;
+import com.fypapplication.fypapp.databinding.FragmentAboutBinding;
+import com.fypapplication.fypapp.helper.Global;
+import com.fypapplication.fypapp.models.Booking;
+import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
+import com.fypapplication.fypapp.webservices.VolleySingleton;
+import com.fypapplication.fypapp.webservices.WebServices;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AboutFragment extends Fragment {
 
-
-    String URLr="http://electrosofttechnologies.com/apis/readNrooms.php";
-    String URLs="http://www.electrosofttechnologies.com/apis/readNsensors.php";
-    String URLas="http://www.electrosofttechnologies.com/apis/readNActivesensors.php";
-    String URLds="http://www.electrosofttechnologies.com/apis/readNDeactivesensors.php";
+    FragmentAboutBinding binding;
+    SharedPrefs sharedPrefs;
+    Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_about, container, false);
+
+        return binding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
+        context = getContext();
+        sharedPrefs = new SharedPrefs(context);
 
-    private void totalrooms()
-    {
-        StringRequest stringRequest = new StringRequest( Request.Method.GET, URLr, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("Response", response);
-                String room = response;
-                //roomno.setText(room);
+        actionViews();
 
-                Toast.makeText(requireContext(), room, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(requireContext(), error+"not access", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        requestQueue.add(stringRequest);
 
     }
 
+    private void actionViews() {
 
-    private void totalSensor()
-    {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLs, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("Response", response);
-                String sensor = response;
-                //sensorno.setText(sensor);
 
-                Toast.makeText(requireContext(), sensor, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(requireContext(), error+"not access", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        requestQueue.add(stringRequest);
-
+        apiGetBookings();
     }
 
+    private void apiGetBookings() {
+        String url = "";
 
-    private void ActiveSensor()
-    {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLas, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("Response", response);
-                String AS = response;
-                //asensor.setText(AS);
+        if (sharedPrefs.getUser().type == Global.MECH_TYPE) {
+            url = WebServices.API_GET_BOOKINGS_BYMECH + sharedPrefs.getUser().id;
+        } else if (sharedPrefs.getUser().type == Global.CUSTOMER_TYPE) {
+            url = WebServices.API_GET_BOOKINGS_BYCUSTOMER + sharedPrefs.getUser().id;
+        }
 
-                Toast.makeText(requireContext(), AS, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
 
-                Toast.makeText(requireContext(), error+"not access", Toast.LENGTH_SHORT).show();
+            JSONArray jsonArray = response.optJSONArray("Booking");
 
-            }
-        });
+            for (int i =0 ; i<jsonArray.length(); i++){
+                JSONObject object = jsonArray.optJSONObject(i);
 
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        requestQueue.add(stringRequest);
+                Booking booking= new Booking();
 
-    }
-
-
-    private void DeactiveSensor()
-    {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLds, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("Response", response);
-                String DS = response;
-                //dsensor.setText(DS);
-
-                Toast.makeText(requireContext(), DS, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Toast.makeText(requireContext(), error+"not access", Toast.LENGTH_SHORT).show();
+                booking.id = object.optString("_id");
+                booking.service = object.optString("service");
+                booking.userId = object.optString("userId");
+                booking.mechanicId = object.optString("mechanicId");
+                booking.lng = object.optString("longitude");
+                booking.lat = object.optString("latitude");
+                booking.time = object.optString("time");
+                booking.lng = object.optString("longitude");
+                booking.lng = object.optString("longitude");
 
             }
-        });
 
-        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        requestQueue.add(stringRequest);
+        }, error -> {
+
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+
+                headers.put("Content-Type", "application/json");
+
+                return headers;
+            }
+        };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+
 
     }
 }

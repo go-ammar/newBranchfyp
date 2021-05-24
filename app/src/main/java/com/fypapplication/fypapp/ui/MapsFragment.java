@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -50,10 +52,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MapsFragment extends Fragment implements MechanicPriceAdapter.MyServicesInterface {
 
@@ -87,6 +94,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
          * user has installed Google Play services and returned to the app.
          */
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onMapReady(GoogleMap googleMap) {
 
@@ -108,12 +116,10 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
                 getUserData(googleMap);
                 sydney = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
-                getMechServices();
                 float zoom = 16.0f;
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoom));
 
             }
-
 
             googleMap.setOnMarkerClickListener(marker -> {
 
@@ -126,20 +132,42 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                     Log.d(TAG, "onMapReady: size " + mechServicesArrayList.size());
 
                     priceArrayList.clear();
-                    for (int i = 0; i < mechServicesArrayList.size(); i++) {
-                        Log.d(TAG, "onMapReady: in loop " + mechServicesArrayList.get(i).id);
-                        if (mechServicesArrayList.get(i).id.equals(mechId)) {
 
-                            //TODO in adapter, send this arraylist.
-                            priceArrayList.add(mechServicesArrayList.get(i));
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_SERVICE_BYMECH + user.id, null, res -> {
+
+                        try {
+                            JSONArray service = res.getJSONArray("Service");
+
+                            for (int i = 0; i < service.length(); i++) {
+                                MechServices mechServices = new MechServices();
+                                JSONObject obj = service.getJSONObject(i);
+                                mechServices.price = obj.optInt("price");
+                                mechServices.service = obj.optString("service_name");
+                                mechServices.vehicleType = obj.optString("vehicle_type");
+                                mechServices.id = obj.optString("_id");
+
+                                priceArrayList.add(mechServices);
+                            }
 
 
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    }
 
-                    //ye this ki jagah kiya lagaun
+                        openPriceDialogue(user);
 
-                    openPriceDialogue(user);
+
+                    }, error -> {
+
+                        Log.e(TAG, "loginApi: ", error);
+
+                    });
+
+                    jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                            DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+                    VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
 
                 } else {
@@ -176,7 +204,9 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                             params.put("userId", args.getUserId());
                             params.put("mechanicId", sharedPrefs.getUser().id);
                             params.put("service", "Emergency");
-                            params.put("time", System.currentTimeMillis());
+                            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+                            LocalDateTime now = LocalDateTime.now();
+                            params.put("time", dtf.format(now));
 
                             Log.d(TAG, "Bookings : " + params);
 
@@ -216,7 +246,6 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
                 return false;
             });
-
 
         }
     };
@@ -350,50 +379,6 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
     }
 
-    private void getMechServices() {
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_SERVICES, null, res -> {
-
-            Log.d(TAG, "getMechServices: " + res);
-            for (int i = 0; i < res.length(); i++) {
-                try {
-                    JSONObject object = res.getJSONObject(i);
-
-                    MechServices mechServices = new MechServices();
-
-                    mechServices.service = object.getString("service_name");
-                    mechServices.vehicleType = object.getString("vehicle_type");
-                    mechServices.price = object.getInt("price");
-                    mechServices.id = object.getString("mechanic");
-
-                    Log.d(TAG, "getMechServices: added");
-                    mechServicesArrayList.add(mechServices);
-
-                    if (mechServicesArrayList.size() > 0) {
-                        //attach adapter here// with notify on cliock
-                    }
-
-
-                } catch (JSONException e) {
-                    Log.e(TAG, "getServices: ", e);
-                }
-
-            }
-
-
-        }, error -> {
-
-            Log.e(TAG, "getServices: ", error);
-
-        });
-
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
-    }
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -449,9 +434,6 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
     private void actionViews() {
 
-//        dialog = new Dialog(requireContext());
-//        dialog.setContentView(dialogueMechanicServiceBinding.getRoot());
-
     }
 
     private void getUserData(GoogleMap googleMap) {
@@ -491,7 +473,16 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
             Log.e(TAG, "getUserData: ", error);
 
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+
+                headers.put("Content-Type", "application/json");
+
+                return headers;
+            }
+        };
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

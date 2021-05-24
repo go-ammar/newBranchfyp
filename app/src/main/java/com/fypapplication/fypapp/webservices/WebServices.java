@@ -20,9 +20,9 @@ public class WebServices {
     //add mechanic id after this
     public static final String API_GET_SERVICE_BYMECH = BASE_URL + "api/services/services_by_id/";
     //add mech id after this
-    public static final String API_GET_BOOKINGS_BYMECH = BASE_URL + "api/services/mech_id/";
+    public static final String API_GET_BOOKINGS_BYMECH = BASE_URL + "api/bookings/mech_id/";
     //add customer id after this
-    public static final String API_GET_BOOKINGS_BYCUSTOMER = BASE_URL + "api/services/customer_id/" ;
+    public static final String API_GET_BOOKINGS_BYCUSTOMER = BASE_URL + "api/bookings/customer_id/" ;
 
     //put api, add user id after this to update. params mae add only device_token in jsonobject
     public static final String API_UPDATE_DEVICE_TOKEN_BY_USER = BASE_URL + "api/notifications/";

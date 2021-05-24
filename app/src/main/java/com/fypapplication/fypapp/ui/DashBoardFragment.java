@@ -4,13 +4,16 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,41 +24,32 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.os.Handler;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.TimeoutError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
-import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
 import com.fypapplication.fypapp.databinding.FragmentDashBoardBinding;
 import com.fypapplication.fypapp.databinding.MechanicAcceptedDialogBinding;
-import com.fypapplication.fypapp.helper.GPSTracker;
 import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.Booking;
 import com.fypapplication.fypapp.models.User;
+import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
 import com.fypapplication.fypapp.webservices.WebServices;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 
 
 public class DashBoardFragment extends Fragment {
@@ -76,9 +70,8 @@ public class DashBoardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dash_board, container, false);
-
+        Log.d(TAG, "onCreateView: ");
         return binding.getRoot();
     }
 
@@ -86,30 +79,44 @@ public class DashBoardFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        FirebaseApp.initializeApp(requireContext());
         navController = Navigation.findNavController(view);
         sharedPrefs = new SharedPrefs(getContext());
 
-        setViews();
+        try {
+            setViews();
+        } catch (Exception e) {
+            Log.e(TAG, "onViewCreated: ", e);
+        }
         actionViews();
     }
 
     private void setViews() {
+
+        FirebaseApp.initializeApp(getContext());
+
+        initFirebaseToken();
+
         if (sharedPrefs.getUser().type == Global.ADMIN_TYPE) {
+            Log.d(TAG, "setViews: admin");
             binding.adminConstraint.setVisibility(View.VISIBLE);
         } else if (sharedPrefs.getUser().type == Global.CUSTOMER_TYPE) {
+            Log.d(TAG, "setViews: customer");
+            initFirebaseToken();
             binding.customerConstraint.setVisibility(View.VISIBLE);
         } else if (sharedPrefs.getUser().type == Global.MECH_TYPE) {
+            Log.d(TAG, "setViews: mech");
             initFirebaseToken();
             binding.mechConstraint.setVisibility(View.VISIBLE);
         }
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void actionViews() {
         locationManager = (LocationManager) requireActivity().getSystemService(getContext().LOCATION_SERVICE);
         getLocation();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        Log.d(TAG, "actionViews: time " + dtf.format(now));
 
         Bundle extras = getActivity().getIntent().getExtras();
         Log.d(TAG, "actionViews: " + extras);
@@ -133,7 +140,6 @@ public class DashBoardFragment extends Fragment {
         binding.carMechanicCard.setOnClickListener(v -> {
             DashBoardFragmentDirections.ActionNavDashboardToServicesFragment action =
                     DashBoardFragmentDirections.actionNavDashboardToServicesFragment();
-
             action.setVehicleType(Global.VEHICLE_CAR);
 
             Navigation.createNavigateOnClickListener(action).onClick(binding.carMechanicCard);
@@ -338,6 +344,7 @@ public class DashBoardFragment extends Fragment {
     private void initFirebaseToken() {
 
 
+//        FirebaseApp.initializeApp(getContext());
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(task -> {
                     if (!task.isSuccessful()) {
@@ -370,7 +377,7 @@ public class DashBoardFragment extends Fragment {
 
         Log.d(TAG, "_apiUpdateFirebaseToken: " + params);
         try {
-            Log.d(TAG, "_apiUpdateFirebaseToken: api hit is "+WebServices.API_IS_LOGGED_IN + "/" + id);
+            Log.d(TAG, "_apiUpdateFirebaseToken: api hit is " + WebServices.API_IS_LOGGED_IN + "/" + id);
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
                     WebServices.API_IS_LOGGED_IN + "/" + id, params, response -> {
 

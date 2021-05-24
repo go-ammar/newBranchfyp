@@ -1,204 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/gradiant_main"
-    tools:context=".ui.AboutFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/gradiant_main"
+        tools:context=".ui.AboutFragment">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="20dp"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal"
-                ><RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <TextView
-                    android:id="@+id/room"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="No Of Rooms"
-                    android:paddingTop="40dp"
-                    android:paddingBottom="10dp"
-                    android:textColor="@color/lightgray"
-                    android:textSize="25dp" />
-
-                <TextView
-                    android:id="@+id/r_no"
-                    android:layout_width="231dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:layout_alignParentRight="true"
-                    android:paddingTop="40dp"
-                    android:paddingBottom="10dp"
-                    android:text="no"
-                    android:textColor="@color/lightgray"
-                    android:textSize="25dp" />
-            </RelativeLayout>
-            </LinearLayout>
-
-            <View
-                android:id="@+id/v5"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:padding="50dp"
-                android:background="@color/lightgray" />
-
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal"
-                ><RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="20dp">
 
-
-                <TextView
-                    android:id="@+id/sensor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="No Of Sensor"
-                    android:paddingTop="40dp"
-                    android:paddingBottom="10dp"
-                    android:textColor="@color/lightgray"
-                    android:textSize="25dp" />
-
-                <TextView
-                    android:id="@+id/s_no"
-                    android:layout_width="231dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="end"
-                    android:layout_alignParentRight="true"
-                    android:paddingTop="40dp"
-                    android:paddingBottom="10dp"
-                    android:text="no"
-                    android:textColor="@color/lightgray"
-                    android:textSize="25dp" />
-            </RelativeLayout>
-            </LinearLayout>
-
-            <View
-                android:id="@+id/v1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:padding="50dp"
-                android:background="@color/lightgray" />
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="5dp"
-                >
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/as"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="Active Sensors"
-                        android:paddingTop="40dp"
-                        android:paddingBottom="10dp"
-                        android:textColor="@color/lightgray"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:id="@+id/Sno"
-                        android:layout_width="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="190dp"
-                        android:text="no"
-                        android:paddingTop="40dp"
-                        android:paddingBottom="10dp"
-                        android:textColor="@color/lightgray"
-                        android:textSize="25dp" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <View
-                android:id="@+id/v2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:padding="50dp"
-                android:background="@color/lightgray" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
 
+                        <TextView
+                            android:id="@+id/room"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:text="No Of Rooms"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/lightgray"
+                            android:textSize="25dp" />
 
+                        <TextView
+                            android:id="@+id/r_no"
+                            android:layout_width="231dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_alignParentRight="true"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="10dp"
+                            android:text="no"
+                            android:textColor="@color/lightgray"
+                            android:textSize="25dp" />
+                    </RelativeLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <RelativeLayout
+                <View
+                    android:id="@+id/v5"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="50dp"
+                    android:background="@color/lightgray" />
 
-                    <TextView
-                        android:id="@+id/ds"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Deactive Sensor"
-                        android:layout_alignParentLeft="true"
-                        android:paddingTop="40dp"
-                        android:paddingBottom="10dp"
-                        android:textColor="@color/lightgray"
-                        android:textSize="25dp" />
-                    <TextView
-                        android:id="@+id/dsno"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:paddingLeft="190dp"
-                        android:text="no"
-                        android:paddingTop="40dp"
-                        android:paddingBottom="10dp"
-                        android:layout_margin="5dp"
-                        android:textColor="@color/lightgray"
-                        android:textSize="25dp" />
-                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+                        <TextView
+                            android:id="@+id/sensor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:text="No Of Sensor"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/lightgray"
+                            android:textSize="25dp" />
+
+                        <TextView
+                            android:id="@+id/s_no"
+                            android:layout_width="231dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_alignParentRight="true"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="10dp"
+                            android:text="no"
+                            android:textColor="@color/lightgray"
+                            android:textSize="25dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/v1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="50dp"
+                    android:background="@color/lightgray" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="5dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/as"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:text="Active Sensors"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/lightgray"
+                            android:textSize="25dp" />
+
+                        <TextView
+                            android:id="@+id/Sno"
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="190dp"
+                            android:text="no"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/lightgray"
+                            android:textSize="25dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/v2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="50dp"
+                    android:background="@color/lightgray" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/ds"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Deactive Sensor"
+                            android:layout_alignParentLeft="true"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="10dp"
+                            android:textColor="@color/lightgray"
+                            android:textSize="25dp" />
+
+                        <TextView
+                            android:id="@+id/dsno"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:paddingLeft="190dp"
+                            android:text="no"
+                            android:paddingTop="40dp"
+                            android:paddingBottom="10dp"
+                            android:layout_margin="5dp"
+                            android:textColor="@color/lightgray"
+                            android:textSize="25dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/v3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="50dp"
+                    android:background="@color/lightgray" />
+
             </LinearLayout>
 
-            <View
-                android:id="@+id/v3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:padding="50dp"
-                android:background="@color/lightgray" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</FrameLayout>
+    </FrameLayout>
+</layout>

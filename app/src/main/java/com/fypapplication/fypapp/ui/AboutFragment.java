@@ -39,10 +39,10 @@ import java.util.Map;
 
 public class AboutFragment extends Fragment {
 
+    private static final String TAG = "AboutFragment";
     FragmentAboutBinding binding;
     SharedPrefs sharedPrefs;
     Context context;
-    private static final String TAG = "AboutFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,10 +83,10 @@ public class AboutFragment extends Fragment {
 
             JSONArray jsonArray = response.optJSONArray("Booking");
 
-            for (int i =0 ; i<jsonArray.length(); i++){
+            for (int i = jsonArray.length() - 1; i >= 0; i--) {
                 JSONObject object = jsonArray.optJSONObject(i);
 
-                Booking booking= new Booking();
+                Booking booking = new Booking();
 
                 booking.id = object.optString("_id");
                 booking.service = object.optString("service");

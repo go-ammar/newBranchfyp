@@ -15,15 +15,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.databinding.FragmentScheduleBookingBinding;
 import com.fypapplication.fypapp.models.Services;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,7 +41,7 @@ public class ScheduleBookingFragment extends Fragment {
     String dateString = null;
     int hour;
     int min;
-    private List<Services> servicesArrayList = new ArrayList<>();
+    private final List<Services> servicesArrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -54,8 +58,6 @@ public class ScheduleBookingFragment extends Fragment {
 
         navController = Navigation.findNavController(view);
 
-        ScheduleBookingFragmentArgs args = ScheduleBookingFragmentArgs.fromBundle(getArguments());
-        servicesArrayList = Arrays.asList(args.getService());
 
         actionViews();
     }
@@ -74,22 +76,52 @@ public class ScheduleBookingFragment extends Fragment {
 
         binding.proceedbtn.setOnClickListener(v -> {
 
-            try {
-                ScheduleBookingFragmentDirections.ActionScheduleBookingFragmentToMapsFragment action =
-                        ScheduleBookingFragmentDirections.actionScheduleBookingFragmentToMapsFragment();
-                action.setFromServices(true);
-                navController.navigate(action);
-            } catch (Exception e) {
-                Log.d(TAG, "actionViews: " + e);
-            }
+            if (dateString == null){
+                Toast.makeText(getContext(), "Please set a date", Toast.LENGTH_SHORT).show();
+            }else {
+                dateString = dateString + " "+ hour + ":" + min +":00";
+//                11/10/2017 11:16:46
 
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                //Date/time pattern of desired output date
+                DateFormat outputformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss aa");
+                Date date = null;
+                String output = null;
+                try{
+                    //Conversion of input String to date
+                    date= df.parse(dateString);
+                    //old date format to new date format
+                    output = outputformat.format(date);
+                    Log.d(TAG, "actionViews: date2   "+output);
+                }catch(ParseException pe){
+                    pe.printStackTrace();
+                }
+
+
+                Log.d(TAG, "actionViews: " + dateString);
+
+                try {
+                    ScheduleBookingFragmentDirections.ActionScheduleBookingFragmentToMapsFragment action =
+                            ScheduleBookingFragmentDirections.actionScheduleBookingFragmentToMapsFragment();
+
+                    ScheduleBookingFragmentArgs args = ScheduleBookingFragmentArgs.fromBundle(getArguments());
+
+                    action.setService(args.getService());
+                    action.setFromServices(true);
+                    action.setDate(output);
+
+                    navController.navigate(action);
+                } catch (Exception e) {
+                    Log.e(TAG, "actionViews: ", e);
+                }
+            }
 
         });
 
     }
 
     private void showDatePicker() {
-        SimpleDateFormat format = new SimpleDateFormat("MMM dd yyyy", Locale.US);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         Calendar calendar = Calendar.getInstance();
 
 

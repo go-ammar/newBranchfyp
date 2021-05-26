@@ -61,7 +61,6 @@
     </fragment>
 
 
-
     <fragment
         android:id="@+id/nav_about"
         android:name="com.fypapplication.fypapp.ui.AboutFragment"
@@ -81,15 +80,10 @@
         tools:layout="@layout/fragment_notifications" />
 
 
-
-
-
-
     <fragment
         android:id="@+id/servicesFragment"
         android:name="com.fypapplication.fypapp.ui.ServicesFragment"
-        android:label="Services"
-        >
+        android:label="Services">
         <argument
             android:name="vehicleType"
             android:defaultValue="null"
@@ -174,6 +168,15 @@
             android:name="fromServices"
             android:defaultValue="false"
             app:argType="boolean" />
+        <argument
+            android:name="date"
+            android:defaultValue="null"
+            app:argType="string" />
+        <argument
+            android:name="service"
+            app:nullable="true"
+            android:defaultValue="@null"
+            app:argType="com.fypapplication.fypapp.models.Services[]" />
 
     </fragment>
 

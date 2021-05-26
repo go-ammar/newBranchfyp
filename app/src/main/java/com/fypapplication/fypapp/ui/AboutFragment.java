@@ -42,6 +42,7 @@ public class AboutFragment extends Fragment {
     FragmentAboutBinding binding;
     SharedPrefs sharedPrefs;
     Context context;
+    private static final String TAG = "AboutFragment";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,13 +62,12 @@ public class AboutFragment extends Fragment {
 
         actionViews();
 
-
     }
 
     private void actionViews() {
 
-
         apiGetBookings();
+
     }
 
     private void apiGetBookings() {
@@ -102,6 +102,7 @@ public class AboutFragment extends Fragment {
 
         }, error -> {
 
+            Log.e(TAG, "apiGetBookings: ", error);
         }) {
 
             @Override

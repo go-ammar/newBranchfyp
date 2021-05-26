@@ -42,10 +42,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toTopOf="@+id/call_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/call_btn"
                     tools:listitem="@layout/item_mech_services" />
 
                 <Button
@@ -55,14 +55,33 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_16sdp"
                     android:layout_weight="1"
+                    android:drawableStart="@drawable/fa"
+                    android:drawableTint="@color/black"
                     android:padding="@dimen/_8sdp"
                     android:text="Call Now"
                     android:textAllCaps="false"
-                    app:layout_constraintTop_toBottomOf="@+id/recyler"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:drawableStart="@drawable/fa"
-                    android:drawableTint="@color/black"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/book_now"
+                    app:layout_constraintTop_toBottomOf="@+id/recyler"
+                    app:strokeColor="#808080" />
+
+                <Button
+                    android:id="@+id/book_now"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_16sdp"
+                    android:layout_weight="1"
+                    android:padding="@dimen/_8sdp"
+                    android:text="Book Now"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="@id/call_btn"
+                    app:layout_constraintEnd_toStartOf="@+id/call_btn"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyler"
                     app:strokeColor="#808080" />
 
 

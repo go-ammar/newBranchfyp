@@ -40,6 +40,7 @@ import com.fypapplication.fypapp.databinding.ItemMechServicesBinding;
 import com.fypapplication.fypapp.databinding.MechanicAcceptedDialogBinding;
 import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.MechServices;
+import com.fypapplication.fypapp.models.Services;
 import com.fypapplication.fypapp.models.User;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
@@ -59,7 +60,9 @@ import org.json.JSONObject;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MapsFragment extends Fragment implements MechanicPriceAdapter.MyServicesInterface {
@@ -79,10 +82,10 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
     LocationManager locationManager;
     SharedPrefs sharedPrefs;
     String latitude, longitude;
-
+    String date;
     MechanicPriceAdapter.MyServicesInterface myServicesInterface;
-
     MechServicesAdapter.MyServicesInterface anInterface;
+    private List<Services> servicesArrayList = new ArrayList<>();
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         /**
          * Manipulates the map once available.
@@ -113,8 +116,9 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoom));
 
             } else {
-
+                servicesArrayList = Arrays.asList(args.getService());
                 getUserData(googleMap);
+                date = args.getDate();
                 sydney = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
                 float zoom = 16.0f;
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoom));
@@ -159,7 +163,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
                     }, error -> {
 
-                        Log.e(TAG, "loginApi: ", error);
+                        Log.e(TAG, "onMapReady: ", error);
 
                     });
 
@@ -292,6 +296,7 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
                     dialog.show();
 
+                    binding1.tv.setText("Customer details");
                     binding1.setMechanic(user);
                     binding1.mechName.setText("Customer name: " + user.name);
                     binding1.mechNumber.setText("Phone number: " + user.phoneNumber);
@@ -347,8 +352,43 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
             intent.setData(Uri.parse("tel:" + user.phoneNumber));
             startActivity(intent);
 
+
         });
 
+        binding1.bookNow.setOnClickListener(v -> {
+
+            JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, WebServices.API_GET_DEVICE_TOKEN_BY_USER + user.id, null,
+                    response -> {
+
+                        JSONArray jsonArray = new JSONArray();
+
+
+                        for (int i = 0; i < response.length(); i++) {
+                            JSONObject obj = response.optJSONObject(i);
+
+                            jsonArray.put(obj.optString("device_token"));
+
+                        }
+
+                        apiSendTokensEmergency(jsonArray);
+
+                        bookingCreated(user);
+
+
+                    }, error -> {
+
+                Log.e(TAG, "mechanicAccepted: ", error);
+
+            });
+
+
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+
+        });
 
 //        dialogueMechanicServiceBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.dialogue_mechanic_service, null, false);
 //
@@ -377,6 +417,115 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 //        dialog.show();
 
 
+    }
+
+    private void bookingCreated(User user) {
+
+        JSONObject params = new JSONObject();
+
+        try {
+
+            params.put("latitude", user.lat);
+            params.put("longitude", user.lng);
+            params.put("userId", sharedPrefs.getUser().id);
+            params.put("mechanicId", user.id);
+            params.put("service", servicesArrayList.toString());
+            params.put("time", date);
+
+            Log.d(TAG, "Bookings : " + params);
+
+        } catch (Exception e) {
+            Log.e(TAG, "apiSendTokensEmergency: ", e);
+        }
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, WebServices.API_GET_BOOKING, params,
+                response -> {
+
+                    Log.d(TAG, "mechanicAccepted: " + response);
+                    Toast.makeText(context, "Booking Created", Toast.LENGTH_SHORT).show();
+
+                }, error -> {
+
+            Log.e(TAG, "mechanicAccepted: ", error);
+
+        });
+
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+
+
+    }
+
+    private void apiSendTokensEmergency(JSONArray jsonArray) {
+
+        JSONObject params = new JSONObject();
+
+        try {
+            params.put("title", "Booking request");
+
+            JSONObject data = new JSONObject();
+
+            data.put("lat", latitude);
+            data.put("lng", longitude);
+            data.put("user_id", sharedPrefs.getUser().id);
+            data.put("time", date);
+            JSONArray array = new JSONArray();
+
+            for (int i = 0; i < servicesArrayList.size(); i++) {
+                JSONObject obj = new JSONObject();
+                obj.put("service", servicesArrayList.get(i).service);
+                obj.put("vehicleType", servicesArrayList.get(i).vehicleType);
+
+                array.put(obj);
+            }
+
+            data.put("service", array.toString());
+
+
+            params.put("body", data.toString());
+            params.put("tokens", jsonArray);
+
+            Log.d(TAG, "apiSendTokensEmergency: " + params);
+
+        } catch (Exception e) {
+            Log.e(TAG, "apiSendTokensEmergency: ", e);
+        }
+
+        try {
+            JsonObjectRequest jsonObjectRequest1 = new JsonObjectRequest(Request.Method.POST,
+                    WebServices.API_IS_LOGGED_IN + "/send-notification", params, res -> {
+
+            }, error -> {
+
+                Log.e(TAG, "_apiSendEmergency: ", error);
+
+            }) {
+
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> headers = new HashMap<>();
+
+                    headers.put("Content-Type", "application/json");
+
+                    return headers;
+                }
+            };
+
+
+            jsonObjectRequest1.setRetryPolicy(new DefaultRetryPolicy(5000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest1);
+
+        } catch (Exception e) {
+            Log.e(TAG, "apiSendTokensEmergency: ", e);
+        }
     }
 
     @Nullable
@@ -415,7 +564,6 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
             }
         }
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

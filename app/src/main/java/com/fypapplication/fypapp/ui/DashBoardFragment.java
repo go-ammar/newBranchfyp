@@ -2,6 +2,7 @@ package com.fypapplication.fypapp.ui;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -9,11 +10,13 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +33,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.databinding.FragmentDashBoardBinding;
+import com.fypapplication.fypapp.databinding.LayoutYouHaveABookingBinding;
 import com.fypapplication.fypapp.databinding.MechanicAcceptedDialogBinding;
 import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.Booking;
@@ -48,8 +52,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 
 public class DashBoardFragment extends Fragment {
@@ -62,9 +68,11 @@ public class DashBoardFragment extends Fragment {
     LocationManager locationManager;
     String latitude, longitude;
     String mechanicId;
-
     Handler handler;
     Runnable runnable;
+    private Location mLocation;
+    private LocationListener mLocationListener;
+    private LocationManager mLocationManager;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -81,6 +89,7 @@ public class DashBoardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
         sharedPrefs = new SharedPrefs(getContext());
+        mLocationListener = new LocationListener(LocationManager.GPS_PROVIDER);
 
         try {
             setViews();
@@ -88,20 +97,20 @@ public class DashBoardFragment extends Fragment {
             Log.e(TAG, "onViewCreated: ", e);
         }
         actionViews();
+
     }
+
 
     private void setViews() {
 
         FirebaseApp.initializeApp(getContext());
 
-        initFirebaseToken();
 
         if (sharedPrefs.getUser().type == Global.ADMIN_TYPE) {
             Log.d(TAG, "setViews: admin");
             binding.adminConstraint.setVisibility(View.VISIBLE);
         } else if (sharedPrefs.getUser().type == Global.CUSTOMER_TYPE) {
             Log.d(TAG, "setViews: customer");
-            initFirebaseToken();
             binding.customerConstraint.setVisibility(View.VISIBLE);
         } else if (sharedPrefs.getUser().type == Global.MECH_TYPE) {
             Log.d(TAG, "setViews: mech");
@@ -112,8 +121,11 @@ public class DashBoardFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void actionViews() {
+
+        initializeLocationManager();
+        startTracking();
         locationManager = (LocationManager) requireActivity().getSystemService(getContext().LOCATION_SERVICE);
-        getLocation();
+//        getLocation();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         Log.d(TAG, "actionViews: time " + dtf.format(now));
@@ -125,16 +137,22 @@ public class DashBoardFragment extends Fragment {
                 extras.getString("lat");
                 extras.getString("lng");
 
-                Log.d(TAG, "actionViews: lat " + extras.getString("lat"));
+                Log.d(TAG, "actionViews: check "+extras.getString("time"));
+                if (!extras.getString("time").equals("")) {
+                    openDialogForNewBooking(extras.getString("user_id"));
+                } else {
 
-                DashBoardFragmentDirections.ActionNavDashboardToMapsFragment action =
-                        DashBoardFragmentDirections.actionNavDashboardToMapsFragment();
+                    Log.d(TAG, "actionViews: lat " + extras.getString("lat"));
 
-                action.setLat(extras.getString("lat"));
-                action.setLng(extras.getString("lng"));
-                action.setUserId(extras.getString("user_id"));
+                    DashBoardFragmentDirections.ActionNavDashboardToMapsFragment action =
+                            DashBoardFragmentDirections.actionNavDashboardToMapsFragment();
 
-                navController.navigate(action);
+                    action.setLat(extras.getString("lat"));
+                    action.setLng(extras.getString("lng"));
+                    action.setUserId(extras.getString("user_id"));
+
+                    navController.navigate(action);
+                }
             }
 
         binding.carMechanicCard.setOnClickListener(v -> {
@@ -213,21 +231,87 @@ public class DashBoardFragment extends Fragment {
 
     }
 
+    private void openDialogForNewBooking(String id) {
+
+        LayoutYouHaveABookingBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.layout_you_have_a_booking,
+                null, false);
+        final AlertDialog dialog = new AlertDialog.Builder(getContext())
+                .setView(binding1.getRoot())
+                .create();
+
+        if (dialog.getWindow() != null)
+            dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, WebServices.API_GET_USERS + "/" + id, null, response -> {
+
+            User user = new User();
+            Log.d(TAG, "openDialogForNewBooking: "+response);
+
+            user.phoneNumber = response.optString("phone");
+            user.id = response.optString("_id");
+            user.name = response.optString("name");
+            user.type = response.optString("type");
+            user.email = response.optString("email");
+            user.lat = response.optString("latitude");
+            user.lng = response.optString("longitude");
+
+            binding1.setMechanic(user);
+//            binding1.mechName.setText(response.optString("name"));
+//            binding1.mechNumber.setText(response.optString("phone"));
+
+            dialog.show();
+
+
+            binding1.callMech.setOnClickListener(view -> {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                intent.setData(Uri.parse("tel:" + user.phoneNumber));
+                startActivity(intent);
+            });
+
+            dialog.setCancelable(true);
+            dialog.show();
+
+
+        }, error -> {
+
+        }) {
+
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+
+                headers.put("Content-Type", "application/json");
+
+                return headers;
+            }
+        };
+
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void _apiSendEmergency() {
 
         JSONArray jsonArray = new JSONArray();
 
-        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
                 WebServices.API_GET_NOTIFCATION_PAYLOAD, null, response -> {
 
 
             Log.d(TAG, "_apiSendEmergency: " + response);
+            JSONArray array = response.optJSONArray("tokens");
 
-            for (int i = 0; i < response.length(); i++) {
+            for (int i = 0; i < array.length(); i++) {
                 try {
 
-                    JSONObject obj = response.getJSONObject(i);
+                    JSONObject obj = array.getJSONObject(i);
                     Log.d(TAG, "Inside Loop: " + i);
                     jsonArray.put(obj.getString("device_token"));
 
@@ -266,7 +350,6 @@ public class DashBoardFragment extends Fragment {
     }
 
     private void getLocation() {
-        Log.d(TAG, "getLocation: andr mt ao bahar jao besharam");
         if (ActivityCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -280,8 +363,8 @@ public class DashBoardFragment extends Fragment {
                 double longi = locationGPS.getLongitude();
                 latitude = String.valueOf(lat);
                 longitude = String.valueOf(longi);
-                Log.d(TAG, "getLocation:  " + latitude);
-            } else {
+                Log.d(TAG, "getLocation: current lat  " + latitude);
+                Log.d(TAG, "getLocation: current lng " + longitude);
             }
         }
     }
@@ -292,7 +375,7 @@ public class DashBoardFragment extends Fragment {
         JSONObject params = new JSONObject();
 
         try {
-            params.put("title", "title of notification");
+            params.put("title", "Emergency nearby");
 
             JSONObject data = new JSONObject();
 
@@ -467,16 +550,6 @@ public class DashBoardFragment extends Fragment {
 
                         ArrayList<Booking> bookingList = new ArrayList<>();
                         //TODO yahan se we'll get users, filter out users with type mech (a number) and then add to arraylist
-//                    "_id": "609a4b66980dce0015d316e2",
-//                            "time": "1970-01-19T18:12:04.443Z",
-//                            "latitude": 5,
-//                            "longitude": 7,
-//                            "service": "Emergency",
-//                            "userId": "6097f56c68d5f84a5841c27f",
-//                            "mechanicId": "6098e8d6643e5d00157554e8",
-//                            "createdAt": "2021-05-11T09:16:22.019Z",
-//                            "updatedAt": "2021-05-11T09:16:22.019Z",
-//                            "__v": 0
 
                         Log.d(TAG, "getUserData: response is  " + response.toString());
                         Log.d(TAG, "actionViews: " + response.length());
@@ -558,6 +631,63 @@ public class DashBoardFragment extends Fragment {
 
         dialog.setCancelable(true);
         dialog.show();
+
+    }
+
+    private void initializeLocationManager() {
+
+        if (mLocationManager == null) {
+            mLocationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        }
+    }
+
+    public void startTracking() {
+
+        try {
+
+
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 15, mLocationListener);
+            mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 15, mLocationListener);
+
+        } catch (SecurityException ex) {
+            // Log.i(TAG, "fail to request location update, ignore", ex);
+        }
+    }
+
+
+    private class LocationListener implements android.location.LocationListener {
+        private final String TAG = "LocationListener";
+
+        public LocationListener(String provider) {
+            mLocation = new Location(provider);
+        }
+
+        @Override
+        public void onLocationChanged(@NonNull Location location) {
+            mLocation = location;
+
+            latitude = String.valueOf(location.getLatitude());
+            longitude = String.valueOf(location.getLongitude());
+
+            Log.d(TAG, "getLocation: current lat  " + latitude);
+            Log.d(TAG, "getLocation: current lng " + longitude);
+
+        }
+
+        @Override
+        public void onProviderDisabled(@NonNull String provider) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(@NonNull String provider) {
+            Log.e(TAG, "onProviderEnabled: " + provider);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            Log.e(TAG, "onStatusChanged: " + status);
+        }
 
     }
 

@@ -1,6 +1,12 @@
 package com.fypapplication.fypapp.ui;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,7 +26,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.RemoveMechAdapter;
+import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
 import com.fypapplication.fypapp.databinding.FragmentRemoveMechsBinding;
+import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.User;
 import com.fypapplication.fypapp.sharedprefs.SharedPrefs;
 import com.fypapplication.fypapp.webservices.VolleySingleton;
@@ -29,7 +37,10 @@ import com.fypapplication.fypapp.webservices.WebServices;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.RemoveMechInterface {
 
@@ -38,6 +49,7 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
     Context context;
     ArrayList<User> userArrayList;
     RemoveMechAdapter adapter;
+    ArrayList<String> address;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +66,7 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
 
         context = getContext();
         userArrayList = new ArrayList<>();
+        address = new ArrayList<>();
         actionViews();
 
     }
@@ -92,6 +105,8 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
                             user.lng = userObj.optString("longitude");
                             user.name = userObj.optString("name");
 
+                            address.add(getAddress(Double.parseDouble(user.lat), Double.parseDouble(user.lng)));
+
                             userArrayList.add(user);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -99,7 +114,7 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
 
                     }
 
-                    adapter = new RemoveMechAdapter(context, userArrayList, this);
+                    adapter = new RemoveMechAdapter(context, userArrayList, this, address);
                     binding.serviceRecyclerView.setAdapter(adapter);
 
                 }, error -> {
@@ -114,36 +129,73 @@ public class RemoveMechsFragment extends Fragment implements RemoveMechAdapter.R
 
         VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
+    }
 
+    private String getAddress(double lat, double lng) {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        String add = "";
+        try {
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
+            Address obj = addresses.get(0);
+            add = obj.getAddressLine(0);
+
+            Log.d(TAG, "Address" + add);
+
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return add;
     }
 
     @Override
     public void removeMech(User user) {
         //API to Delete from database
 
-        JSONObject params = new JSONObject();
+        DeleteRoomDialogBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.delete_room_dialog,
+                null, false);
+        final AlertDialog dialog = new AlertDialog.Builder(context)
+                .setView(binding1.getRoot())
+                .create();
+        binding1.text.setText("Are you sure you want to remove the mechanic?");
 
-        String id = user.id;
+        if (dialog.getWindow() != null)
+            dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
 
-        SharedPrefs sharedPrefs = new SharedPrefs(context);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
 
+        binding1.cancelButton.setText("No");
+        binding1.cancelButton.setOnClickListener(view -> {
 
-        Log.d(TAG, "removeMech: " + WebServices.API_REMOVE_MECH + id);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_REMOVE_MECH + id, null,
-                response -> {
+            dialog.dismiss();
+        });
 
-                    Toast.makeText(context, "Mechanic Removed", Toast.LENGTH_SHORT).show();
+        binding1.confirmButton.setText("Yes");
+        binding1.confirmButton.setOnClickListener(v -> {
 
-                }, error -> {
+            String id = user.id;
 
-            Log.e(TAG, "removeMech: ", error);
+            Log.d(TAG, "removeMech: " + WebServices.API_REMOVE_MECH + id);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_REMOVE_MECH + id, null,
+                    response -> {
+
+                        Toast.makeText(context, "Mechanic Removed", Toast.LENGTH_SHORT).show();
+
+                    }, error -> {
+
+                Log.e(TAG, "removeMech: ", error);
+
+            });
+
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
         });
 
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(2000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-
-        VolleySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 }

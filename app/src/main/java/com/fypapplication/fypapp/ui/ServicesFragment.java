@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.ServicesAdapter;
@@ -92,22 +93,27 @@ public class ServicesFragment extends Fragment {
 
         service = new Services();
         service.service = "Truck Towing";
+        service.vehicleType = Global.VEHICLE_CAR;
         servicesArrayList.add(service);
 
         service = new Services();
         service.service = "Brake Service";
+        service.vehicleType = Global.VEHICLE_CAR;
         servicesArrayList.add(service);
 
         service = new Services();
         service.service = "Oil Change";
+        service.vehicleType = Global.VEHICLE_CAR;
         servicesArrayList.add(service);
 
         service = new Services();
         service.service = "Filter Change";
+        service.vehicleType = Global.VEHICLE_CAR;
         servicesArrayList.add(service);
 
         service = new Services();
         service.service = "Fuel Pump Replacement";
+        service.vehicleType = Global.VEHICLE_CAR;
         servicesArrayList.add(service);
 
     }
@@ -120,18 +126,22 @@ public class ServicesFragment extends Fragment {
 
         service = new Services();
         service.service = "Basic Tuning";
+        service.vehicleType = Global.VEHICLE_RICKSHAW;
         servicesArrayList.add(service);
 
         service = new Services();
+        service.vehicleType = Global.VEHICLE_RICKSHAW;
         service.service = "Engine Repair";
         servicesArrayList.add(service);
 
         service = new Services();
+        service.vehicleType = Global.VEHICLE_RICKSHAW;
         service.service = "Wiring";
         servicesArrayList.add(service);
 
         service = new Services();
         service.service = "Clutch And Pressure Plates";
+        service.vehicleType = Global.VEHICLE_RICKSHAW;
         servicesArrayList.add(service);
 
     }
@@ -143,26 +153,32 @@ public class ServicesFragment extends Fragment {
         servicesArrayList.add(service);
 
         service = new Services();
+        service.vehicleType = Global.VEHICLE_BIKE;
         service.service = "Basic Tuning";
         servicesArrayList.add(service);
 
         service = new Services();
         service.service = "Head Repairing";
+        service.vehicleType = Global.VEHICLE_BIKE;
         servicesArrayList.add(service);
 
         service = new Services();
         service.service = "Engine Repairing";
+        service.vehicleType = Global.VEHICLE_BIKE;
         servicesArrayList.add(service);
 
         service = new Services();
+        service.vehicleType = Global.VEHICLE_BIKE;
         service.service = "Wiring";
         servicesArrayList.add(service);
 
         service = new Services();
+        service.vehicleType = Global.VEHICLE_BIKE;
         service.service = "Clutch And Pressure Plates";
         servicesArrayList.add(service);
 
         service = new Services();
+        service.vehicleType = Global.VEHICLE_BIKE;
         service.service = "Engine Over Hauling";
         servicesArrayList.add(service);
     }
@@ -233,20 +249,25 @@ public class ServicesFragment extends Fragment {
 
 
         binding.nextBtn.setOnClickListener(v -> {
-            Log.d(TAG, "actionViews: "+servicesAdapter.getCheckedServicesArrayList().size());
+            Log.d(TAG, "actionViews: " + servicesAdapter.getCheckedServicesArrayList().size());
 
             Services[] x = new Services[servicesAdapter.getCheckedServicesArrayList().size()];
 
-            for (int i = 0; i<x.length; i++){
+            for (int i = 0; i < x.length; i++) {
                 x[i] = servicesAdapter.getCheckedServicesArrayList().get(i);
             }
 
-            ServicesFragmentDirections.ActionServicesFragmentToScheduleBookingFragment action =
-                    ServicesFragmentDirections.actionServicesFragmentToScheduleBookingFragment(x);
+            if (x.length > 0) {
+                ServicesFragmentDirections.ActionServicesFragmentToScheduleBookingFragment action =
+                        ServicesFragmentDirections.actionServicesFragmentToScheduleBookingFragment(x);
 
-            action.setVehicleType(vehicleType);
+                action.setVehicleType(vehicleType);
 
-            Navigation.createNavigateOnClickListener(action).onClick(binding.nextBtn);
+                Navigation.createNavigateOnClickListener(action).onClick(binding.nextBtn);
+            } else {
+                Toast.makeText(context, "Please select a service", Toast.LENGTH_SHORT).show();
+            }
+
 
         });
 

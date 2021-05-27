@@ -44,7 +44,7 @@ public class ChangesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         ChangesDue changesDue = changesDueArrayList.get(position);
-        ((ChangesViewHolder) holder).setBinding(changesDue);
+            ((ChangesViewHolder) holder).setBinding(changesDue);
 
         ((ChangesViewHolder) holder).binding.deleteChangeDue.setOnClickListener(v -> {
             changeInterface.deleteService(changesDue);

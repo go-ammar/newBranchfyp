@@ -3,6 +3,8 @@ package com.fypapplication.fypapp.ui;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,6 +29,7 @@ import com.fypapplication.fypapp.R;
 import com.fypapplication.fypapp.adapters.MechServicesAdapter;
 import com.fypapplication.fypapp.databinding.AddChangeDialogBinding;
 import com.fypapplication.fypapp.databinding.AddServiceDialogBinding;
+import com.fypapplication.fypapp.databinding.DeleteRoomDialogBinding;
 import com.fypapplication.fypapp.databinding.FragmentMyServicesBinding;
 import com.fypapplication.fypapp.helper.Global;
 import com.fypapplication.fypapp.models.ChangesDue;
@@ -227,34 +230,56 @@ public class MyServicesFragment extends Fragment implements MechServicesAdapter.
     @Override
     public void deleteService(MechServices mechServices) {
 
-        for (int i = 0; i < mechServicesArrayList.size(); i++) {
-            MechServices cd = mechServicesArrayList.get(i);
 
-            if (cd.vehicleType.equals(mechServices.vehicleType) && cd.service.equals(mechServices.service)) {
-                mechServicesArrayList.remove(i);
-            }
-        }
+        DeleteRoomDialogBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.delete_room_dialog,
+                null, false);
+        final AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setView(binding1.getRoot())
+                .create();
+        binding1.text.setText("Are you sure you want to remove the Service?");
 
-        sharedPrefs.putMechServicesList(mechServicesArrayList);
+        if (dialog.getWindow() != null)
+            dialog.getWindow().getAttributes().windowAnimations = R.style.alert_dialog;
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_DELETE_SERVICES + mechServices.id, null, res -> {
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
 
-            Toast.makeText(mContext, "Service Added", Toast.LENGTH_SHORT).show();
+        binding1.cancelButton.setText("No");
+        binding1.cancelButton.setOnClickListener(view -> {
 
-        }, error -> {
-
-            Log.e(TAG, "loginApi: ", error);
-
+            dialog.dismiss();
         });
 
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        binding1.confirmButton.setText("Yes");
+        binding1.confirmButton.setOnClickListener(v -> {
+            for (int i = 0; i < mechServicesArrayList.size(); i++) {
+                MechServices cd = mechServicesArrayList.get(i);
 
-        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+                if (cd.vehicleType.equals(mechServices.vehicleType) && cd.service.equals(mechServices.service)) {
+                    mechServicesArrayList.remove(i);
+                }
+            }
 
-        //TODO API WHERE DELETE STUFF HAPPENS IN DB
+            sharedPrefs.putMechServicesList(mechServicesArrayList);
 
-        adapter.notifyDataSetChanged();
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, WebServices.API_DELETE_SERVICES + mechServices.id, null, res -> {
+
+                Toast.makeText(mContext, "Service Added", Toast.LENGTH_SHORT).show();
+
+            }, error -> {
+
+                Log.e(TAG, "loginApi: ", error);
+
+            });
+
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+            VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+
+            adapter.notifyDataSetChanged();
+        });
+
     }
 }

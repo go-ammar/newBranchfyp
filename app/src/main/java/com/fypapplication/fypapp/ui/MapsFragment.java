@@ -52,6 +52,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -425,11 +428,17 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
 
         try {
 
+            Gson gson = new Gson();
+            String data = gson.toJson(servicesArrayList);
+            JsonArray jsonArray = new JsonParser().parse(data).getAsJsonArray();
+
+            JSONArray array = new JSONArray(servicesArrayList);
+            Log.d(TAG, "Bookings : size "+servicesArrayList.size());
             params.put("latitude", user.lat);
             params.put("longitude", user.lng);
             params.put("userId", sharedPrefs.getUser().id);
             params.put("mechanicId", user.id);
-            params.put("service", servicesArrayList.toString());
+            params.put("service", jsonArray.toString());
             params.put("time", date);
 
             Log.d(TAG, "Bookings : " + params);
@@ -481,9 +490,11 @@ public class MapsFragment extends Fragment implements MechanicPriceAdapter.MySer
                 obj.put("service", servicesArrayList.get(i).service);
                 obj.put("vehicleType", servicesArrayList.get(i).vehicleType);
 
+
                 array.put(obj);
             }
 
+            Log.d(TAG, "apiSendTokensEmergency: " + array.toString());
             data.put("service", array.toString());
 
 

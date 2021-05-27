@@ -69,6 +69,8 @@ public class MyAccountFragment extends Fragment implements MechMyAccountAdapter.
         adapter = new MechMyAccountAdapter(context, mechMyAccountArrayList, this);
         binding.changesRecyclerView.setAdapter(adapter);
 
+        getTotal();
+
         binding.addCostbtn.setOnClickListener(view -> {
             AddMechAccDialogBinding binding1 = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.add_mech_acc_dialog,
                     null, false);
@@ -130,6 +132,19 @@ public class MyAccountFragment extends Fragment implements MechMyAccountAdapter.
 
             alertDialog.show();
         });
+
+
+    }
+
+    private void getTotal() {
+
+        int cost = 0;
+        for (int i = 0; i < mechMyAccountArrayList.size(); i++) {
+            cost += mechMyAccountArrayList.get(i).cost;
+        }
+
+        binding.setTotal(String.valueOf(cost));
+
     }
 
     @Override

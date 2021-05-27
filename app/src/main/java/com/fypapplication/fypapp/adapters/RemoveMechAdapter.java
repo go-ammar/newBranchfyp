@@ -27,12 +27,14 @@ public class RemoveMechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     Context context;
     ArrayList<User> userArrayList;
     RemoveMechInterface removeMechInterface;
+    ArrayList<String> address;
 
 
-    public RemoveMechAdapter(Context context, ArrayList<User> userArrayList, RemoveMechInterface removeMechInterface) {
+    public RemoveMechAdapter(Context context, ArrayList<User> userArrayList, RemoveMechInterface removeMechInterface, ArrayList<String> address) {
         this.context = context;
         this.userArrayList = userArrayList;
         this.removeMechInterface = removeMechInterface;
+        this.address = address;
     }
 
     @NonNull
@@ -50,7 +52,7 @@ public class RemoveMechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         User user = userArrayList.get(position);
 
 //        String address = getAddress(Long.parseLong(user.lat), Long.parseLong(user.lng));
-        String address = "Address";
+        String address = this.address.get(position);
         ((RemoveMechViewHolder) holder).setBinding(user, address);
         Log.d(TAG, "onBindViewHolder: "+user.id);
 
@@ -61,21 +63,6 @@ public class RemoveMechAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     }
 
-    private String getAddress(double lat, double lng) {
-        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(lat, lng, 1);
-            Address obj = addresses.get(0);
-            String add = obj.getAddressLine(0);
-
-            return add;
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     @Override
     public int getItemCount() {
